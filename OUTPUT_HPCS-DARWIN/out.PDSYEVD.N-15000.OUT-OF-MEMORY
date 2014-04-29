@@ -1,0 +1,1546 @@
+[1,0]<stdout>:Read the input
+[1,0]<stdout>:(large jobs for hot ch4)
+[1,0]<stdout>:
+[1,0]<stdout>:GEN-MAT 150000
+[1,0]<stdout>:DIAGONALIZER pdsyevd (needs to be stated)
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>:...done!
+[1,0]<stdout>:Run out of memory
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>: Memory Report (   0)
+[1,0]<stdout>: Active Arrays                                        size (Gb)
+[1,14]<stdout>:Run out of memory
+[1,14]<stdout>:
+[1,14]<stdout>:
+[1,15]<stdout>:Run out of memory
+[1,15]<stdout>:
+[1,15]<stdout>:
+[1,15]<stdout>: Memory Report (  15)
+[1,15]<stdout>: Active Arrays                                        size (Gb)
+[1,3]<stdout>:Run out of memory
+[1,3]<stdout>:
+[1,3]<stdout>:
+[1,3]<stdout>: Memory Report (   3)
+[1,3]<stdout>: Active Arrays                                        size (Gb)
+[1,3]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,3]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,3]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,3]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,3]<stdout>:
+[1,3]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,3]<stdout>:
+[1,4]<stdout>:Run out of memory
+[1,4]<stdout>:
+[1,4]<stdout>:
+[1,5]<stdout>:Run out of memory
+[1,5]<stdout>:
+[1,5]<stdout>:
+[1,2]<stdout>:Run out of memory
+[1,2]<stdout>:
+[1,2]<stdout>:
+[1,2]<stdout>: Memory Report (   2)
+[1,2]<stdout>: Active Arrays                                        size (Gb)
+[1,4]<stdout>: Memory Report (   4)
+[1,4]<stdout>: Active Arrays                                        size (Gb)
+[1,6]<stdout>:Run out of memory
+[1,6]<stdout>:
+[1,6]<stdout>:
+[1,7]<stdout>:Run out of memory
+[1,7]<stdout>:
+[1,7]<stdout>:
+[1,9]<stdout>:Run out of memory
+[1,9]<stdout>:
+[1,9]<stdout>:
+[1,10]<stdout>:Run out of memory
+[1,10]<stdout>:
+[1,10]<stdout>:
+[1,10]<stdout>: Memory Report (  10)
+[1,10]<stdout>: Active Arrays                                        size (Gb)
+[1,11]<stdout>:Run out of memory
+[1,11]<stdout>:
+[1,11]<stdout>:
+[1,11]<stdout>: Memory Report (  11)
+[1,11]<stdout>: Active Arrays                                        size (Gb)
+[1,0]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,0]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,0]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,0]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,0]<stdout>:
+[1,0]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,0]<stdout>:
+[1,14]<stdout>: Memory Report (  14)
+[1,14]<stdout>: Active Arrays                                        size (Gb)
+[1,5]<stdout>: Memory Report (   5)
+[1,5]<stdout>: Active Arrays                                        size (Gb)
+[1,9]<stdout>: Memory Report (   9)
+[1,9]<stdout>: Active Arrays                                        size (Gb)
+[1,6]<stdout>: Memory Report (   6)
+[1,6]<stdout>: Active Arrays                                        size (Gb)
+[1,15]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,15]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,15]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,15]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,15]<stdout>:
+[1,15]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,15]<stdout>:
+[1,8]<stdout>:Run out of memory
+[1,8]<stdout>:
+[1,8]<stdout>:
+[1,13]<stdout>:Run out of memory
+[1,13]<stdout>:
+[1,13]<stdout>:
+[1,1]<stdout>:Run out of memory
+[1,1]<stdout>:
+[1,1]<stdout>:
+[1,10]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,10]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,10]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,10]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,10]<stdout>:
+[1,10]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,10]<stdout>:
+[1,14]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,14]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,14]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,14]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,14]<stdout>:
+[1,14]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,14]<stdout>:
+[1,9]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,9]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,9]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,9]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,9]<stdout>:
+[1,9]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,9]<stdout>:
+[1,8]<stdout>: Memory Report (   8)
+[1,8]<stdout>: Active Arrays                                        size (Gb)
+[1,13]<stdout>: Memory Report (  13)
+[1,13]<stdout>: Active Arrays                                        size (Gb)
+[1,6]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,6]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,6]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,6]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,6]<stdout>:
+[1,6]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,6]<stdout>:
+[1,7]<stdout>: Memory Report (   7)
+[1,7]<stdout>: Active Arrays                                        size (Gb)
+[1,1]<stdout>: Memory Report (   1)
+[1,1]<stdout>: Active Arrays                                        size (Gb)
+[1,12]<stdout>:Run out of memory
+[1,12]<stdout>:
+[1,12]<stdout>:
+[1,78]<stdout>:Run out of memory
+[1,78]<stdout>:
+[1,78]<stdout>:
+[1,2]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,2]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,2]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,2]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,2]<stdout>:
+[1,2]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,2]<stdout>:
+[1,4]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,4]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,4]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,4]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,4]<stdout>:
+[1,4]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,4]<stdout>:
+[1,5]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,5]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,5]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,5]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,5]<stdout>:
+[1,5]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,5]<stdout>:
+[1,12]<stdout>: Memory Report (  12)
+[1,12]<stdout>: Active Arrays                                        size (Gb)
+[1,79]<stdout>:Run out of memory
+[1,79]<stdout>:
+[1,79]<stdout>:
+[1,79]<stdout>: Memory Report (  79)
+[1,79]<stdout>: Active Arrays                                        size (Gb)
+[1,11]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,11]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,11]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,11]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,11]<stdout>:
+[1,11]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,11]<stdout>:
+[1,66]<stdout>:Run out of memory
+[1,66]<stdout>:
+[1,66]<stdout>:
+[1,66]<stdout>: Memory Report (  66)
+[1,66]<stdout>: Active Arrays                                        size (Gb)
+[1,8]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,8]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,8]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,8]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,8]<stdout>:
+[1,8]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,8]<stdout>:
+[1,13]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,13]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,13]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,13]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,13]<stdout>:
+[1,13]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,13]<stdout>:
+[1,7]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,7]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,7]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,7]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,7]<stdout>:
+[1,7]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,7]<stdout>:
+[1,1]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,1]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,1]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,1]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,1]<stdout>:
+[1,1]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,1]<stdout>:
+[1,67]<stdout>:Run out of memory
+[1,67]<stdout>:
+[1,67]<stdout>:
+[1,67]<stdout>: Memory Report (  67)
+[1,67]<stdout>: Active Arrays                                        size (Gb)
+[1,12]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,12]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,12]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,12]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,12]<stdout>:
+[1,12]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,12]<stdout>:
+[1,69]<stdout>:Run out of memory
+[1,69]<stdout>:
+[1,69]<stdout>:
+[1,69]<stdout>: Memory Report (  69)
+[1,69]<stdout>: Active Arrays                                        size (Gb)
+[1,70]<stdout>:Run out of memory
+[1,70]<stdout>:
+[1,70]<stdout>:
+[1,70]<stdout>: Memory Report (  70)
+[1,70]<stdout>: Active Arrays                                        size (Gb)
+[1,71]<stdout>:Run out of memory
+[1,71]<stdout>:
+[1,71]<stdout>:
+[1,71]<stdout>: Memory Report (  71)
+[1,71]<stdout>: Active Arrays                                        size (Gb)
+[1,48]<stdout>:Run out of memory
+[1,48]<stdout>:
+[1,48]<stdout>:
+[1,90]<stdout>:Run out of memory
+[1,90]<stdout>:
+[1,90]<stdout>:
+[1,90]<stdout>: Memory Report (  90)
+[1,90]<stdout>: Active Arrays                                        size (Gb)
+[1,72]<stdout>:Run out of memory
+[1,72]<stdout>:
+[1,72]<stdout>:
+[1,72]<stdout>: Memory Report (  72)
+[1,72]<stdout>: Active Arrays                                        size (Gb)
+[1,91]<stdout>:Run out of memory
+[1,91]<stdout>:
+[1,91]<stdout>:
+[1,91]<stdout>: Memory Report (  91)
+[1,91]<stdout>: Active Arrays                                        size (Gb)
+[1,34]<stdout>:Run out of memory
+[1,34]<stdout>:
+[1,34]<stdout>:
+[1,73]<stdout>:Run out of memory
+[1,73]<stdout>:
+[1,73]<stdout>:
+[1,73]<stdout>: Memory Report (  73)
+[1,73]<stdout>: Active Arrays                                        size (Gb)
+[1,51]<stdout>:Run out of memory
+[1,51]<stdout>:
+[1,51]<stdout>:
+[1,93]<stdout>:Run out of memory
+[1,93]<stdout>:
+[1,93]<stdout>:
+[1,93]<stdout>: Memory Report (  93)
+[1,93]<stdout>: Active Arrays                                        size (Gb)
+[1,34]<stdout>: Memory Report (  34)
+[1,34]<stdout>: Active Arrays                                        size (Gb)
+[1,74]<stdout>:Run out of memory
+[1,74]<stdout>:
+[1,74]<stdout>:
+[1,74]<stdout>: Memory Report (  74)
+[1,74]<stdout>: Active Arrays                                        size (Gb)
+[1,53]<stdout>:Run out of memory
+[1,53]<stdout>:
+[1,53]<stdout>:
+[1,80]<stdout>:Run out of memory
+[1,80]<stdout>:
+[1,80]<stdout>:
+[1,36]<stdout>:Run out of memory
+[1,36]<stdout>:
+[1,36]<stdout>:
+[1,75]<stdout>:Run out of memory
+[1,75]<stdout>:
+[1,75]<stdout>:
+[1,75]<stdout>: Memory Report (  75)
+[1,75]<stdout>: Active Arrays                                        size (Gb)
+[1,55]<stdout>:Run out of memory
+[1,55]<stdout>:
+[1,55]<stdout>:
+[1,81]<stdout>:Run out of memory
+[1,81]<stdout>:
+[1,81]<stdout>:
+[1,81]<stdout>: Memory Report (  81)
+[1,81]<stdout>: Active Arrays                                        size (Gb)
+[1,38]<stdout>:Run out of memory
+[1,38]<stdout>:
+[1,38]<stdout>:
+[1,38]<stdout>: Memory Report (  38)
+[1,38]<stdout>: Active Arrays                                        size (Gb)
+[1,75]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,75]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,75]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,75]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,75]<stdout>:
+[1,75]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,75]<stdout>:
+[1,57]<stdout>:Run out of memory
+[1,57]<stdout>:
+[1,57]<stdout>:
+[1,83]<stdout>:Run out of memory
+[1,83]<stdout>:
+[1,83]<stdout>:
+[1,83]<stdout>: Memory Report (  83)
+[1,83]<stdout>: Active Arrays                                        size (Gb)
+[1,39]<stdout>:Run out of memory
+[1,39]<stdout>:
+[1,39]<stdout>:
+[1,39]<stdout>: Memory Report (  39)
+[1,39]<stdout>: Active Arrays                                        size (Gb)
+[1,65]<stdout>:Run out of memory
+[1,65]<stdout>:
+[1,65]<stdout>:
+[1,65]<stdout>: Memory Report (  65)
+[1,65]<stdout>: Active Arrays                                        size (Gb)
+[1,60]<stdout>:Run out of memory
+[1,60]<stdout>:
+[1,60]<stdout>:
+[1,84]<stdout>:Run out of memory
+[1,84]<stdout>:
+[1,84]<stdout>:
+[1,84]<stdout>: Memory Report (  84)
+[1,84]<stdout>: Active Arrays                                        size (Gb)
+[1,41]<stdout>:Run out of memory
+[1,41]<stdout>:
+[1,41]<stdout>:
+[1,68]<stdout>:Run out of memory
+[1,68]<stdout>:
+[1,68]<stdout>:
+[1,61]<stdout>:Run out of memory
+[1,61]<stdout>:
+[1,61]<stdout>:
+[1,88]<stdout>:Run out of memory
+[1,88]<stdout>:
+[1,88]<stdout>:
+[1,88]<stdout>: Memory Report (  88)
+[1,88]<stdout>: Active Arrays                                        size (Gb)
+[1,42]<stdout>:Run out of memory
+[1,42]<stdout>:
+[1,42]<stdout>:
+[1,42]<stdout>: Memory Report (  42)
+[1,42]<stdout>: Active Arrays                                        size (Gb)
+[1,67]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,67]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,67]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,67]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,67]<stdout>:
+[1,67]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,67]<stdout>:
+[1,63]<stdout>:Run out of memory
+[1,63]<stdout>:
+[1,63]<stdout>:
+[1,89]<stdout>:Run out of memory
+[1,89]<stdout>:
+[1,89]<stdout>:
+[1,89]<stdout>: Memory Report (  89)
+[1,89]<stdout>: Active Arrays                                        size (Gb)
+[1,43]<stdout>:Run out of memory
+[1,43]<stdout>:
+[1,43]<stdout>:
+[1,77]<stdout>:Run out of memory
+[1,77]<stdout>:
+[1,77]<stdout>:
+[1,77]<stdout>: Memory Report (  77)
+[1,77]<stdout>: Active Arrays                                        size (Gb)
+[1,56]<stdout>:Run out of memory
+[1,56]<stdout>:
+[1,56]<stdout>:
+[1,44]<stdout>:Run out of memory
+[1,44]<stdout>:
+[1,44]<stdout>:
+[1,44]<stdout>: Memory Report (  44)
+[1,44]<stdout>: Active Arrays                                        size (Gb)
+[1,54]<stdout>:Run out of memory
+[1,54]<stdout>:
+[1,54]<stdout>:
+[1,45]<stdout>:Run out of memory
+[1,45]<stdout>:
+[1,45]<stdout>:
+[1,62]<stdout>:Run out of memory
+[1,62]<stdout>:
+[1,62]<stdout>:
+[1,47]<stdout>:Run out of memory
+[1,47]<stdout>:
+[1,47]<stdout>:
+[1,77]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,77]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,77]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,77]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,77]<stdout>:
+[1,77]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,77]<stdout>:
+[1,50]<stdout>:Run out of memory
+[1,50]<stdout>:
+[1,50]<stdout>:
+[1,33]<stdout>:Run out of memory
+[1,33]<stdout>:
+[1,33]<stdout>:
+[1,33]<stdout>: Memory Report (  33)
+[1,33]<stdout>: Active Arrays                                        size (Gb)
+[1,64]<stdout>:Run out of memory
+[1,64]<stdout>:
+[1,64]<stdout>:
+[1,52]<stdout>:Run out of memory
+[1,52]<stdout>:
+[1,52]<stdout>:
+[1,35]<stdout>:Run out of memory
+[1,35]<stdout>:
+[1,35]<stdout>:
+[1,76]<stdout>:Run out of memory
+[1,76]<stdout>:
+[1,76]<stdout>:
+[1,58]<stdout>:Run out of memory
+[1,58]<stdout>:
+[1,58]<stdout>:
+[1,37]<stdout>:Run out of memory
+[1,37]<stdout>:
+[1,37]<stdout>:
+[1,71]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,71]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,71]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,71]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,71]<stdout>:
+[1,71]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,71]<stdout>:
+[1,61]<stdout>: Memory Report (  61)
+[1,61]<stdout>: Active Arrays                                        size (Gb)
+[1,87]<stdout>:Run out of memory
+[1,87]<stdout>:
+[1,87]<stdout>:
+[1,36]<stdout>: Memory Report (  36)
+[1,36]<stdout>: Active Arrays                                        size (Gb)
+[1,78]<stdout>: Memory Report (  78)
+[1,78]<stdout>: Active Arrays                                        size (Gb)
+[1,88]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,88]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,88]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,88]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,88]<stdout>:
+[1,88]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,88]<stdout>:
+[1,40]<stdout>:Run out of memory
+[1,40]<stdout>:
+[1,40]<stdout>:
+[1,66]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,66]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,66]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,66]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,66]<stdout>:
+[1,66]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,66]<stdout>:
+[1,80]<stdout>: Memory Report (  80)
+[1,80]<stdout>: Active Arrays                                        size (Gb)
+[1,43]<stdout>: Memory Report (  43)
+[1,43]<stdout>: Active Arrays                                        size (Gb)
+[1,68]<stdout>: Memory Report (  68)
+[1,68]<stdout>: Active Arrays                                        size (Gb)
+[1,53]<stdout>: Memory Report (  53)
+[1,53]<stdout>: Active Arrays                                        size (Gb)
+[1,82]<stdout>:Run out of memory
+[1,82]<stdout>:
+[1,82]<stdout>:
+[1,46]<stdout>:Run out of memory
+[1,46]<stdout>:
+[1,46]<stdout>:
+[1,70]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,70]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,70]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,70]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,70]<stdout>:
+[1,70]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,70]<stdout>:
+[1,48]<stdout>: Memory Report (  48)
+[1,48]<stdout>: Active Arrays                                        size (Gb)
+[1,83]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,83]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,83]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,83]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,83]<stdout>:
+[1,83]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,83]<stdout>:
+[1,45]<stdout>: Memory Report (  45)
+[1,45]<stdout>: Active Arrays                                        size (Gb)
+[1,73]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,73]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,73]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,73]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,73]<stdout>:
+[1,73]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,73]<stdout>:
+[1,59]<stdout>:Run out of memory
+[1,59]<stdout>:
+[1,59]<stdout>:
+[1,86]<stdout>:Run out of memory
+[1,86]<stdout>:
+[1,86]<stdout>:
+[1,32]<stdout>:Run out of memory
+[1,32]<stdout>:
+[1,32]<stdout>:
+[1,32]<stdout>: Memory Report (  32)
+[1,32]<stdout>: Active Arrays                                        size (Gb)
+[1,65]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,65]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,65]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,65]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,65]<stdout>:
+[1,65]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,65]<stdout>:
+[1,57]<stdout>: Memory Report (  57)
+[1,57]<stdout>: Active Arrays                                        size (Gb)
+[1,40]<stdout>: Memory Report (  40)
+[1,40]<stdout>: Active Arrays                                        size (Gb)
+[1,51]<stdout>: Memory Report (  51)
+[1,51]<stdout>: Active Arrays                                        size (Gb)
+[1,46]<stdout>: Memory Report (  46)
+[1,46]<stdout>: Active Arrays                                        size (Gb)
+[1,63]<stdout>: Memory Report (  63)
+[1,63]<stdout>: Active Arrays                                        size (Gb)
+[1,41]<stdout>: Memory Report (  41)
+[1,41]<stdout>: Active Arrays                                        size (Gb)
+[1,69]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,69]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,69]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,69]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,69]<stdout>:
+[1,69]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,69]<stdout>:
+[1,55]<stdout>: Memory Report (  55)
+[1,55]<stdout>: Active Arrays                                        size (Gb)
+[1,34]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,34]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,34]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,34]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,34]<stdout>:
+[1,34]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,34]<stdout>:
+[1,74]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,74]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,74]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,74]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,74]<stdout>:
+[1,74]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,74]<stdout>:
+[1,60]<stdout>: Memory Report (  60)
+[1,60]<stdout>: Active Arrays                                        size (Gb)
+[1,35]<stdout>: Memory Report (  35)
+[1,35]<stdout>: Active Arrays                                        size (Gb)
+[1,64]<stdout>: Memory Report (  64)
+[1,64]<stdout>: Active Arrays                                        size (Gb)
+[1,54]<stdout>: Memory Report (  54)
+[1,54]<stdout>: Active Arrays                                        size (Gb)
+[1,43]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,43]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,43]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,43]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,43]<stdout>:
+[1,43]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,43]<stdout>:
+[1,56]<stdout>: Memory Report (  56)
+[1,56]<stdout>: Active Arrays                                        size (Gb)
+[1,37]<stdout>: Memory Report (  37)
+[1,37]<stdout>: Active Arrays                                        size (Gb)
+[1,76]<stdout>: Memory Report (  76)
+[1,76]<stdout>: Active Arrays                                        size (Gb)
+[1,42]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,42]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,42]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,42]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,42]<stdout>:
+[1,42]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,42]<stdout>:
+[1,72]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,72]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,72]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,72]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,72]<stdout>:
+[1,72]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,72]<stdout>:
+[1,47]<stdout>: Memory Report (  47)
+[1,47]<stdout>: Active Arrays                                        size (Gb)
+[1,40]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,40]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,40]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,40]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,40]<stdout>:
+[1,40]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,40]<stdout>:
+[1,79]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,79]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,79]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,79]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,79]<stdout>:
+[1,79]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,79]<stdout>:
+[1,39]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,39]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,39]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,39]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,39]<stdout>:
+[1,39]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,39]<stdout>:
+[1,36]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,36]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,36]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,36]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,36]<stdout>:
+[1,36]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,36]<stdout>:
+[1,78]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,78]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,78]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,78]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,78]<stdout>:
+[1,78]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,78]<stdout>:
+[1,35]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,35]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,35]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,35]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,35]<stdout>:
+[1,35]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,35]<stdout>:
+[1,38]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,38]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,38]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,38]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,38]<stdout>:
+[1,38]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,38]<stdout>:
+[1,68]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,68]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,68]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,68]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,68]<stdout>:
+[1,68]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,68]<stdout>:
+[1,33]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,33]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,33]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,33]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,33]<stdout>:
+[1,33]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,33]<stdout>:
+[1,32]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,32]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,32]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,32]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,32]<stdout>:
+[1,32]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,32]<stdout>:
+[1,64]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,64]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,64]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,64]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,64]<stdout>:
+[1,64]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,64]<stdout>:
+[1,76]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,76]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,76]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,76]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,76]<stdout>:
+[1,76]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,76]<stdout>:
+[1,59]<stdout>: Memory Report (  59)
+[1,59]<stdout>: Active Arrays                                        size (Gb)
+[1,41]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,41]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,41]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,41]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,41]<stdout>:
+[1,41]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,41]<stdout>:
+[1,58]<stdout>: Memory Report (  58)
+[1,58]<stdout>: Active Arrays                                        size (Gb)
+[1,49]<stdout>:Run out of memory
+[1,49]<stdout>:
+[1,49]<stdout>:
+[1,62]<stdout>: Memory Report (  62)
+[1,62]<stdout>: Active Arrays                                        size (Gb)
+[1,86]<stdout>: Memory Report (  86)
+[1,86]<stdout>: Active Arrays                                        size (Gb)
+[1,50]<stdout>: Memory Report (  50)
+[1,50]<stdout>: Active Arrays                                        size (Gb)
+[1,37]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,37]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,37]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,37]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,37]<stdout>:
+[1,37]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,37]<stdout>:
+[1,52]<stdout>: Memory Report (  52)
+[1,52]<stdout>: Active Arrays                                        size (Gb)
+[1,46]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,46]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,46]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,46]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,46]<stdout>:
+[1,46]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,46]<stdout>:
+[1,45]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,45]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,45]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,45]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,45]<stdout>:
+[1,45]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,45]<stdout>:
+[1,44]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,44]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,44]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,44]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,44]<stdout>:
+[1,44]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,44]<stdout>:
+[1,94]<stdout>:Run out of memory
+[1,94]<stdout>:
+[1,94]<stdout>:
+[1,47]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,47]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,47]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,47]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,47]<stdout>:
+[1,47]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,47]<stdout>:
+[1,95]<stdout>:Run out of memory
+[1,95]<stdout>:
+[1,95]<stdout>:
+[1,93]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,93]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,93]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,93]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,93]<stdout>:
+[1,93]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,93]<stdout>:
+[1,82]<stdout>: Memory Report (  82)
+[1,82]<stdout>: Active Arrays                                        size (Gb)
+[1,87]<stdout>: Memory Report (  87)
+[1,87]<stdout>: Active Arrays                                        size (Gb)
+[1,91]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,91]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,91]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,91]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,91]<stdout>:
+[1,91]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,91]<stdout>:
+[1,84]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,84]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,84]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,84]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,84]<stdout>:
+[1,84]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,84]<stdout>:
+[1,85]<stdout>:Run out of memory
+[1,85]<stdout>:
+[1,85]<stdout>:
+[1,90]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,90]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,90]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,90]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,90]<stdout>:
+[1,90]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,90]<stdout>:
+[1,92]<stdout>:Run out of memory
+[1,92]<stdout>:
+[1,92]<stdout>:
+[1,89]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,89]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,89]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,89]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,89]<stdout>:
+[1,89]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,89]<stdout>:
+[1,49]<stdout>: Memory Report (  49)
+[1,49]<stdout>: Active Arrays                                        size (Gb)
+[1,56]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,56]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,56]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,56]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,56]<stdout>:
+[1,56]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,56]<stdout>:
+[1,94]<stdout>: Memory Report (  94)
+[1,94]<stdout>: Active Arrays                                        size (Gb)
+[1,95]<stdout>: Memory Report (  95)
+[1,95]<stdout>: Active Arrays                                        size (Gb)
+[1,55]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,55]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,55]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,55]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,55]<stdout>:
+[1,55]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,55]<stdout>:
+[1,85]<stdout>: Memory Report (  85)
+[1,85]<stdout>: Active Arrays                                        size (Gb)
+[1,60]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,60]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,60]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,60]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,60]<stdout>:
+[1,60]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,60]<stdout>:
+[1,59]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,59]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,59]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,59]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,59]<stdout>:
+[1,59]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,59]<stdout>:
+[1,80]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,80]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,80]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,80]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,80]<stdout>:
+[1,80]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,80]<stdout>:
+[1,81]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,81]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,81]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,81]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,81]<stdout>:
+[1,81]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,81]<stdout>:
+[1,58]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,58]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,58]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,58]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,58]<stdout>:
+[1,58]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,58]<stdout>:
+[1,52]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,52]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,52]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,52]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,52]<stdout>:
+[1,52]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,52]<stdout>:
+[1,92]<stdout>: Memory Report (  92)
+[1,92]<stdout>: Active Arrays                                        size (Gb)
+[1,53]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,53]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,53]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,53]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,53]<stdout>:
+[1,53]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,53]<stdout>:
+[1,62]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,62]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,62]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,62]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,62]<stdout>:
+[1,62]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,62]<stdout>:
+[1,57]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,57]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,57]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,57]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,57]<stdout>:
+[1,57]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,57]<stdout>:
+[1,87]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,87]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,87]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,87]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,87]<stdout>:
+[1,87]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,87]<stdout>:
+[1,54]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,54]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,54]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,54]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,54]<stdout>:
+[1,54]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,54]<stdout>:
+[1,82]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,82]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,82]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,82]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,82]<stdout>:
+[1,82]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,82]<stdout>:
+[1,86]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,86]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,86]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,86]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,86]<stdout>:
+[1,86]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,86]<stdout>:
+[1,61]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,61]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,61]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,61]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,61]<stdout>:
+[1,61]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,61]<stdout>:
+[1,95]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,95]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,95]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,95]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,95]<stdout>:
+[1,95]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,95]<stdout>:
+[1,51]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,51]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,51]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,51]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,51]<stdout>:
+[1,51]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,51]<stdout>:
+[1,63]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,63]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,63]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,63]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,63]<stdout>:
+[1,63]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,63]<stdout>:
+[1,85]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,85]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,85]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,85]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,85]<stdout>:
+[1,85]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,85]<stdout>:
+[1,50]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,50]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,50]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,50]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,50]<stdout>:
+[1,50]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,50]<stdout>:
+[1,94]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,94]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,94]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,94]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,94]<stdout>:
+[1,94]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,94]<stdout>:
+[1,48]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,48]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,48]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,48]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,48]<stdout>:
+[1,48]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,48]<stdout>:
+[1,92]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,92]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,92]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,92]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,92]<stdout>:
+[1,92]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,92]<stdout>:
+[1,49]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,49]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,49]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,49]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,49]<stdout>:
+[1,49]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,49]<stdout>:
+[1,101]<stdout>:Run out of memory
+[1,101]<stdout>:
+[1,101]<stdout>:
+[1,103]<stdout>:Run out of memory
+[1,103]<stdout>:
+[1,103]<stdout>:
+[1,102]<stdout>:Run out of memory
+[1,102]<stdout>:
+[1,102]<stdout>:
+[1,104]<stdout>:Run out of memory
+[1,104]<stdout>:
+[1,104]<stdout>:
+[1,105]<stdout>:Run out of memory
+[1,105]<stdout>:
+[1,105]<stdout>:
+[1,106]<stdout>:Run out of memory
+[1,106]<stdout>:
+[1,106]<stdout>:
+[1,107]<stdout>:Run out of memory
+[1,107]<stdout>:
+[1,107]<stdout>:
+[1,108]<stdout>:Run out of memory
+[1,108]<stdout>:
+[1,108]<stdout>:
+[1,109]<stdout>:Run out of memory
+[1,109]<stdout>:
+[1,109]<stdout>:
+[1,110]<stdout>:Run out of memory
+[1,110]<stdout>:
+[1,110]<stdout>:
+[1,111]<stdout>:Run out of memory
+[1,111]<stdout>:
+[1,111]<stdout>:
+[1,99]<stdout>:Run out of memory
+[1,99]<stdout>:
+[1,99]<stdout>:
+[1,96]<stdout>:Run out of memory
+[1,96]<stdout>:
+[1,96]<stdout>:
+[1,97]<stdout>:Run out of memory
+[1,97]<stdout>:
+[1,97]<stdout>:
+[1,98]<stdout>:Run out of memory
+[1,98]<stdout>:
+[1,98]<stdout>:
+[1,100]<stdout>:Run out of memory
+[1,100]<stdout>:
+[1,100]<stdout>:
+[1,123]<stdout>:Run out of memory
+[1,123]<stdout>:
+[1,123]<stdout>:
+[1,124]<stdout>:Run out of memory
+[1,124]<stdout>:
+[1,124]<stdout>:
+[1,125]<stdout>:Run out of memory
+[1,125]<stdout>:
+[1,125]<stdout>:
+[1,126]<stdout>:Run out of memory
+[1,126]<stdout>:
+[1,126]<stdout>:
+[1,127]<stdout>:Run out of memory
+[1,127]<stdout>:
+[1,127]<stdout>:
+[1,112]<stdout>:Run out of memory
+[1,112]<stdout>:
+[1,112]<stdout>:
+[1,113]<stdout>:Run out of memory
+[1,113]<stdout>:
+[1,113]<stdout>:
+[1,114]<stdout>:Run out of memory
+[1,114]<stdout>:
+[1,114]<stdout>:
+[1,115]<stdout>:Run out of memory
+[1,115]<stdout>:
+[1,115]<stdout>:
+[1,116]<stdout>:Run out of memory
+[1,116]<stdout>:
+[1,116]<stdout>:
+[1,117]<stdout>:Run out of memory
+[1,117]<stdout>:
+[1,117]<stdout>:
+[1,118]<stdout>:Run out of memory
+[1,118]<stdout>:
+[1,118]<stdout>:
+[1,119]<stdout>:Run out of memory
+[1,119]<stdout>:
+[1,119]<stdout>:
+[1,120]<stdout>:Run out of memory
+[1,120]<stdout>:
+[1,120]<stdout>:
+[1,121]<stdout>:Run out of memory
+[1,121]<stdout>:
+[1,121]<stdout>:
+[1,122]<stdout>:Run out of memory
+[1,122]<stdout>:
+[1,122]<stdout>:
+[1,24]<stdout>:Run out of memory
+[1,24]<stdout>:
+[1,24]<stdout>:
+[1,25]<stdout>:Run out of memory
+[1,25]<stdout>:
+[1,25]<stdout>:
+[1,26]<stdout>:Run out of memory
+[1,26]<stdout>:
+[1,26]<stdout>:
+[1,27]<stdout>:Run out of memory
+[1,27]<stdout>:
+[1,27]<stdout>:
+[1,28]<stdout>:Run out of memory
+[1,28]<stdout>:
+[1,28]<stdout>:
+[1,29]<stdout>:Run out of memory
+[1,29]<stdout>:
+[1,29]<stdout>:
+[1,30]<stdout>:Run out of memory
+[1,30]<stdout>:
+[1,30]<stdout>:
+[1,31]<stdout>:Run out of memory
+[1,31]<stdout>:
+[1,31]<stdout>:
+[1,16]<stdout>:Run out of memory
+[1,16]<stdout>:
+[1,16]<stdout>:
+[1,17]<stdout>:Run out of memory
+[1,17]<stdout>:
+[1,17]<stdout>:
+[1,18]<stdout>:Run out of memory
+[1,18]<stdout>:
+[1,18]<stdout>:
+[1,19]<stdout>:Run out of memory
+[1,19]<stdout>:
+[1,19]<stdout>:
+[1,20]<stdout>:Run out of memory
+[1,20]<stdout>:
+[1,20]<stdout>:
+[1,21]<stdout>:Run out of memory
+[1,21]<stdout>:
+[1,21]<stdout>:
+[1,22]<stdout>:Run out of memory
+[1,22]<stdout>:
+[1,22]<stdout>:
+[1,23]<stdout>:Run out of memory
+[1,23]<stdout>:
+[1,23]<stdout>:
+[1,100]<stdout>: Memory Report ( 100)
+[1,100]<stdout>: Active Arrays                                        size (Gb)
+[1,122]<stdout>: Memory Report ( 122)
+[1,122]<stdout>: Active Arrays                                        size (Gb)
+[1,23]<stdout>: Memory Report (  23)
+[1,23]<stdout>: Active Arrays                                        size (Gb)
+[1,31]<stdout>: Memory Report (  31)
+[1,31]<stdout>: Active Arrays                                        size (Gb)
+[1,99]<stdout>: Memory Report (  99)
+[1,99]<stdout>: Active Arrays                                        size (Gb)
+[1,127]<stdout>: Memory Report ( 127)
+[1,127]<stdout>: Active Arrays                                        size (Gb)
+[1,96]<stdout>: Memory Report (  96)
+[1,96]<stdout>: Active Arrays                                        size (Gb)
+[1,113]<stdout>: Memory Report ( 113)
+[1,113]<stdout>: Active Arrays                                        size (Gb)
+[1,16]<stdout>: Memory Report (  16)
+[1,16]<stdout>: Active Arrays                                        size (Gb)
+[1,97]<stdout>: Memory Report (  97)
+[1,97]<stdout>: Active Arrays                                        size (Gb)
+[1,114]<stdout>: Memory Report ( 114)
+[1,114]<stdout>: Active Arrays                                        size (Gb)
+[1,17]<stdout>: Memory Report (  17)
+[1,17]<stdout>: Active Arrays                                        size (Gb)
+[1,111]<stdout>: Memory Report ( 111)
+[1,111]<stdout>: Active Arrays                                        size (Gb)
+[1,115]<stdout>: Memory Report ( 115)
+[1,115]<stdout>: Active Arrays                                        size (Gb)
+[1,18]<stdout>: Memory Report (  18)
+[1,18]<stdout>: Active Arrays                                        size (Gb)
+[1,98]<stdout>: Memory Report (  98)
+[1,98]<stdout>: Active Arrays                                        size (Gb)
+[1,117]<stdout>: Memory Report ( 117)
+[1,117]<stdout>: Active Arrays                                        size (Gb)
+[1,19]<stdout>: Memory Report (  19)
+[1,19]<stdout>: Active Arrays                                        size (Gb)
+[1,103]<stdout>: Memory Report ( 103)
+[1,103]<stdout>: Active Arrays                                        size (Gb)
+[1,118]<stdout>: Memory Report ( 118)
+[1,118]<stdout>: Active Arrays                                        size (Gb)
+[1,20]<stdout>: Memory Report (  20)
+[1,20]<stdout>: Active Arrays                                        size (Gb)
+[1,120]<stdout>: Memory Report ( 120)
+[1,120]<stdout>: Active Arrays                                        size (Gb)
+[1,21]<stdout>: Memory Report (  21)
+[1,21]<stdout>: Active Arrays                                        size (Gb)
+[1,101]<stdout>: Memory Report ( 101)
+[1,101]<stdout>: Active Arrays                                        size (Gb)
+[1,102]<stdout>: Memory Report ( 102)
+[1,102]<stdout>: Active Arrays                                        size (Gb)
+[1,121]<stdout>: Memory Report ( 121)
+[1,121]<stdout>: Active Arrays                                        size (Gb)
+[1,22]<stdout>: Memory Report (  22)
+[1,22]<stdout>: Active Arrays                                        size (Gb)
+[1,104]<stdout>: Memory Report ( 104)
+[1,104]<stdout>: Active Arrays                                        size (Gb)
+[1,123]<stdout>: Memory Report ( 123)
+[1,123]<stdout>: Active Arrays                                        size (Gb)
+[1,24]<stdout>: Memory Report (  24)
+[1,24]<stdout>: Active Arrays                                        size (Gb)
+[1,25]<stdout>: Memory Report (  25)
+[1,25]<stdout>: Active Arrays                                        size (Gb)
+[1,105]<stdout>: Memory Report ( 105)
+[1,105]<stdout>: Active Arrays                                        size (Gb)
+[1,124]<stdout>: Memory Report ( 124)
+[1,124]<stdout>: Active Arrays                                        size (Gb)
+[1,106]<stdout>: Memory Report ( 106)
+[1,106]<stdout>: Active Arrays                                        size (Gb)
+[1,125]<stdout>: Memory Report ( 125)
+[1,125]<stdout>: Active Arrays                                        size (Gb)
+[1,26]<stdout>: Memory Report (  26)
+[1,26]<stdout>: Active Arrays                                        size (Gb)
+[1,107]<stdout>: Memory Report ( 107)
+[1,107]<stdout>: Active Arrays                                        size (Gb)
+[1,126]<stdout>: Memory Report ( 126)
+[1,126]<stdout>: Active Arrays                                        size (Gb)
+[1,27]<stdout>: Memory Report (  27)
+[1,27]<stdout>: Active Arrays                                        size (Gb)
+[1,108]<stdout>: Memory Report ( 108)
+[1,108]<stdout>: Active Arrays                                        size (Gb)
+[1,116]<stdout>: Memory Report ( 116)
+[1,116]<stdout>: Active Arrays                                        size (Gb)
+[1,28]<stdout>: Memory Report (  28)
+[1,28]<stdout>: Active Arrays                                        size (Gb)
+[1,109]<stdout>: Memory Report ( 109)
+[1,109]<stdout>: Active Arrays                                        size (Gb)
+[1,112]<stdout>: Memory Report ( 112)
+[1,112]<stdout>: Active Arrays                                        size (Gb)
+[1,29]<stdout>: Memory Report (  29)
+[1,29]<stdout>: Active Arrays                                        size (Gb)
+[1,30]<stdout>: Memory Report (  30)
+[1,30]<stdout>: Active Arrays                                        size (Gb)
+[1,110]<stdout>: Memory Report ( 110)
+[1,110]<stdout>: Active Arrays                                        size (Gb)
+[1,119]<stdout>: Memory Report ( 119)
+[1,119]<stdout>: Active Arrays                                        size (Gb)
+[1,23]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,23]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,23]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,23]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,23]<stdout>:
+[1,23]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,23]<stdout>:
+[1,109]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,109]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,109]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,109]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,109]<stdout>:
+[1,109]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,109]<stdout>:
+[1,121]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,121]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,121]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,121]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,121]<stdout>:
+[1,121]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,121]<stdout>:
+[1,31]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,31]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,31]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,31]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,31]<stdout>:
+[1,31]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,31]<stdout>:
+[1,110]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,110]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,110]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,110]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,110]<stdout>:
+[1,110]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,110]<stdout>:
+[1,123]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,123]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,123]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,123]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,123]<stdout>:
+[1,123]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,123]<stdout>:
+[1,16]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,16]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,16]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,16]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,16]<stdout>:
+[1,16]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,16]<stdout>:
+[1,100]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,100]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,100]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,100]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,100]<stdout>:
+[1,100]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,100]<stdout>:
+[1,124]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,124]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,124]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,124]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,124]<stdout>:
+[1,124]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,124]<stdout>:
+[1,17]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,17]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,17]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,17]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,17]<stdout>:
+[1,17]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,17]<stdout>:
+[1,99]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,99]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,99]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,99]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,99]<stdout>:
+[1,99]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,99]<stdout>:
+[1,125]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,125]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,125]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,125]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,125]<stdout>:
+[1,125]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,125]<stdout>:
+[1,18]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,18]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,18]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,18]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,18]<stdout>:
+[1,18]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,18]<stdout>:
+[1,96]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,96]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,96]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,96]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,96]<stdout>:
+[1,96]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,96]<stdout>:
+[1,119]<stdout>: diag_scalapack:a_loc                                  0.1311E+01                
+[1,119]<stdout>: diag_scalapack:z_loc                                  0.1311E+01                
+[1,119]<stdout>: Total memory   =                                     5.25432861 Gb
+[1,119]<stdout>: Maximal memory =                                     5.25432861 Gb (             3.8)
+[1,119]<stdout>:
+[1,119]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,119]<stdout>:
+[1,19]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,19]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,19]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,19]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,19]<stdout>:
+[1,19]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,19]<stdout>:
+[1,97]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,97]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,97]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,97]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,97]<stdout>:
+[1,97]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,97]<stdout>:
+[1,122]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,122]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,122]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,122]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,122]<stdout>:
+[1,122]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,122]<stdout>:
+[1,20]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,20]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,20]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,20]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,20]<stdout>:
+[1,20]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,20]<stdout>:
+[1,111]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,111]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,111]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,111]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,111]<stdout>:
+[1,111]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,111]<stdout>:
+[1,116]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,116]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,116]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,116]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,116]<stdout>:
+[1,116]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,116]<stdout>:
+[1,21]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,21]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,21]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,21]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,21]<stdout>:
+[1,21]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,21]<stdout>:
+[1,98]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,98]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,98]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,98]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,98]<stdout>:
+[1,98]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,98]<stdout>:
+[1,127]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,127]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,127]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,127]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,127]<stdout>:
+[1,127]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,127]<stdout>:
+[1,22]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,22]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,22]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,22]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,22]<stdout>:
+[1,22]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,22]<stdout>:
+[1,103]<stdout>: diag_scalapack:a_loc                                  0.1312E+01                
+[1,103]<stdout>: diag_scalapack:z_loc                                  0.1312E+01                
+[1,103]<stdout>: Total memory   =                                     5.25880706 Gb
+[1,103]<stdout>: Maximal memory =                                     5.25880706 Gb (             3.8)
+[1,103]<stdout>:
+[1,103]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,103]<stdout>:
+[1,113]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,113]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,113]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,113]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,113]<stdout>:
+[1,113]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,113]<stdout>:
+[1,101]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,101]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,101]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,101]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,101]<stdout>:
+[1,101]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,101]<stdout>:
+[1,114]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,114]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,114]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,114]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,114]<stdout>:
+[1,114]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,114]<stdout>:
+[1,24]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,24]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,24]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,24]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,24]<stdout>:
+[1,24]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,24]<stdout>:
+[1,25]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,25]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,25]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,25]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,25]<stdout>:
+[1,25]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,25]<stdout>:
+[1,102]<stdout>: diag_scalapack:a_loc                                  0.1314E+01                
+[1,102]<stdout>: diag_scalapack:z_loc                                  0.1314E+01                
+[1,102]<stdout>: Total memory   =                                     5.26774871 Gb
+[1,102]<stdout>: Maximal memory =                                     5.26774871 Gb (             3.8)
+[1,102]<stdout>:
+[1,102]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,102]<stdout>:
+[1,126]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,126]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,126]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,126]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,126]<stdout>:
+[1,126]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,126]<stdout>:
+[1,104]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,104]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,104]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,104]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,104]<stdout>:
+[1,104]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,104]<stdout>:
+[1,115]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,115]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,115]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,115]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,115]<stdout>:
+[1,115]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,115]<stdout>:
+[1,26]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,26]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,26]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,26]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,26]<stdout>:
+[1,26]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,26]<stdout>:
+[1,105]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,105]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,105]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,105]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,105]<stdout>:
+[1,105]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,105]<stdout>:
+[1,117]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,117]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,117]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,117]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,117]<stdout>:
+[1,117]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,117]<stdout>:
+[1,27]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,27]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,27]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,27]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,27]<stdout>:
+[1,27]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,27]<stdout>:
+[1,28]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,28]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,28]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,28]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,28]<stdout>:
+[1,28]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,28]<stdout>:
+[1,106]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,106]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,106]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,106]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,106]<stdout>:
+[1,106]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,106]<stdout>:
+[1,112]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,112]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,112]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,112]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,112]<stdout>:
+[1,112]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,112]<stdout>:
+[1,118]<stdout>: diag_scalapack:a_loc                                  0.1313E+01                
+[1,118]<stdout>: diag_scalapack:z_loc                                  0.1313E+01                
+[1,118]<stdout>: Total memory   =                                     5.26326263 Gb
+[1,118]<stdout>: Maximal memory =                                     5.26326263 Gb (             3.8)
+[1,118]<stdout>:
+[1,118]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,118]<stdout>:
+[1,29]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,29]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,29]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,29]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,29]<stdout>:
+[1,29]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,29]<stdout>:
+[1,107]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,107]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,107]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,107]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,107]<stdout>:
+[1,107]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,107]<stdout>:
+[1,30]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,30]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,30]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,30]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,30]<stdout>:
+[1,30]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,30]<stdout>:
+[1,108]<stdout>: diag_scalapack:a_loc                                  0.1305E+01                
+[1,108]<stdout>: diag_scalapack:z_loc                                  0.1305E+01                
+[1,108]<stdout>: Total memory   =                                     5.23198211 Gb
+[1,108]<stdout>: Maximal memory =                                     5.23198211 Gb (             3.8)
+[1,108]<stdout>:
+[1,108]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,108]<stdout>:
+[1,120]<stdout>: diag_scalapack:a_loc                                  0.1304E+01                
+[1,120]<stdout>: diag_scalapack:z_loc                                  0.1304E+01                
+[1,120]<stdout>: Total memory   =                                     5.22752655 Gb
+[1,120]<stdout>: Maximal memory =                                     5.22752655 Gb (             3.8)
+[1,120]<stdout>:
+[1,120]<stdout>: (        2 arrays contributing less than 1% are not shown)
+[1,120]<stdout>:

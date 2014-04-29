@@ -1,0 +1,25 @@
+[1,0]<stdout>:Read the input
+[1,0]<stdout>:(large jobs for hot ch4)
+[1,0]<stdout>:
+[1,0]<stdout>:GEN-MAT 10000
+[1,0]<stdout>:DIAGONALIZER pdsyevd (needs to be stated)
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>:...done!
+[1,0]<stdout>:
+[1,0]<stdout>:Starting pdsyevd...
+[1,0]<stdout>:
+[1,0]<stdout>:Diagonalization finished successfully!
+[1,0]<stdout>:
+[1,0]<stdout>:Time to diagonalize matrix is    12.174572 sec
+[1,0]<stdout>:
+[1,0]<stdout>:
+[1,0]<stdout>: Memory Report (   0)
+[1,0]<stdout>: Active Arrays                                        size (Gb)
+[1,0]<stdout>: Total memory   =                                     0.00000000 Gb
+[1,0]<stdout>: Maximal memory =                                     0.02534588 Gb (             3.8)
+[1,0]<stdout>:
+[1,0]<stdout>: (        5 arrays contributing less than 1% are not shown)
+[1,0]<stdout>:
