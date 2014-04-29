@@ -10,6 +10,7 @@ PLAT   = _elpa-gpu_darwin
 FC    = mpif90
 
 # NOTE: ELPA-GPU has to be compiled manually !
+# ./configure LDFLAGS="-L$(MKLROOT)/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lmkl_blacs_intelmpi_lp64 -lpthread -lm" FCFLAGS="-O3 -xAVX" --prefix=/usr/local/Cluster-Users/fs395/elpa/2013.11-v8/intel-mvapich --with-avx-sandybridge
 ELPA_GPU_SRC=/home/fs395/scratch/ELPA/ELPA_development_version_GPU/test
 OBJ_ELPA=${ELPA_GPU_SRC}/elpa1.o ${ELPA_GPU_SRC}/elpa2.o ${ELPA_GPU_SRC}/elpa2_kernels.o ${ELPA_GPU_SRC}/ev_tridi_band_gpu_c.o ${ELPA_GPU_SRC}/elpa_pdgeqrf.o ${ELPA_GPU_SRC}/tum_utils.o ${ELPA_GPU_SRC}/elpa_pdlarfb.o ${ELPA_GPU_SRC}/elpa_qrkernels.o
 
