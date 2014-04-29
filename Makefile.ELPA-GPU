@@ -1,0 +1,45 @@
+# HPCS -- Works with MVAPICH2 2.0rc1 using ELPA-GPU & BLACS from ScaLAPACK (Intel MPI MKL), PGI 14.3 required
+#
+# module purge
+# module load default-wilkes
+# module unload intel/impi
+# module load pgi/14.3
+# module load fs395/mvapich2-2.0rc1/pgi
+
+PLAT   = _elpa-gpu_darwin
+FC    = mpif90
+
+# NOTE: ELPA-GPU has to be compiled manually !
+ELPA_GPU_SRC=/home/fs395/scratch/ELPA/ELPA_development_version_GPU/test
+OBJ_ELPA=${ELPA_GPU_SRC}/elpa1.o ${ELPA_GPU_SRC}/elpa2.o ${ELPA_GPU_SRC}/elpa2_kernels.o ${ELPA_GPU_SRC}/ev_tridi_band_gpu_c.o ${ELPA_GPU_SRC}/elpa_pdgeqrf.o ${ELPA_GPU_SRC}/tum_utils.o ${ELPA_GPU_SRC}/elpa_pdlarfb.o ${ELPA_GPU_SRC}/elpa_qrkernels.o
+
+FFLAGS = -g -O3 -fast -Mpreprocess -Minline -I${MKLROOT}/include/intel64/lp64 -ta=nvidia,cuda5.5,cc35 -Mcuda=ptxinfo -Minfo=accel -I$(ELPA_GPU_SRC) -I${CUDA_INSTALL_PATH}/include
+#FFLAGS += -D__2STAGE
+
+LIB = -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -L${CUDA_INSTALL_PATH}/lib64 -lcublas -lcuda -lpthread -lm 
+
+OBJ = accuracy.o timer.o input.o pdlaprnt_local.o ${OBJ_ELPA}
+
+default:   diag$(PLAT).x
+
+diag$(PLAT).x:  $(OBJ) diag_pdsyev.o
+	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) diag_pdsyev.o $(LIB)
+
+diag_pdsyev.o:  diag_pdsyev.f90 $(OBJ) 
+	$(FC) -c diag_pdsyev.f90 $(FFLAGS)
+
+pdlaprnt_local.o: pdlaprnt_local.f
+	$(FC) -c pdlaprnt_local.f $(FFLAGS)
+
+accuracy.o:  accuracy.f90
+	$(FC) -c accuracy.f90 $(FFLAGS)
+
+timer.o:  timer.f90 accuracy.o
+	$(FC) -c timer.f90 $(FFLAGS)
+
+input.o:  input.f90 accuracy.o
+	$(FC) -c input.f90 $(FFLAGS)
+
+clean:
+	rm -f *.mod *.o *.x
+
