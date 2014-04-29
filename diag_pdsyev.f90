@@ -11,7 +11,8 @@ module d_module
   public FLReadInput
 
   !
-  integer(ik),parameter:: verbose = 4
+!  integer(ik),parameter:: verbose = 4
+  integer(ik),parameter:: verbose = 2
   integer, parameter :: trk        = selected_real_kind(12)
   character(len=cl)    :: matrix_file='matrix'
   !
@@ -199,6 +200,14 @@ program diag_pdsyev
   use accuracy
   use d_module
   use timer
+#if defined(__ELPA)
+  use elpa1
+#if defined(__2STAGE)
+  use elpa2
+#endif
+#endif
+  use mpi
+
   implicit none
 
   !integer(ik) :: verbose=6
@@ -214,7 +223,7 @@ program diag_pdsyev
     real(rk), allocatable ::    a_temp(:), a_loc(:,:)   
     real(rk) ::                 thresh=30000.0_rk, zpe, energy_thresh, coef_thresh
     ! Related to diagonalization
-    integer(ik)  ::     nroots
+    integer(ik)  ::     nroots, nsolv
     ! Parameters
     integer(ik)         lwork, liwork
     double precision    zero, t1, t2, work_(10)
@@ -225,6 +234,9 @@ program diag_pdsyev
     parameter           ( mone = -1.0d0, maxprocs = 512 )
     ! Local Scalars
     integer(ik)         context, iam, m, mycol, myrow, nb, npcol, nprocs, nprow, nz, trilwmin, proc_row, proc_col,iwork_(10),l_nrows, l_ncols, l_eigvec, iprow, ipcol
+#if defined(__ELPA)
+    integer(ik)         mpi_comm_rows, mpi_comm_cols
+#endif
     ! Local Arrays
     integer(ik)                      desca(50), descz(50), irecl
     integer(ik), allocatable ::      iwork(:)
@@ -238,8 +250,8 @@ program diag_pdsyev
     logical   :: sparse = .false.
     !
     integer(ik), external :: numroc, iceil
-    real(rk), external ::    MPI_Wtime, pdlamch
-    !real(rk), external ::    pdlamch
+    !real(rk), external ::    MPI_Wtime, pdlamch
+    real(rk), external ::    pdlamch
     !
     character(len=1)   :: range
     !
@@ -269,6 +281,15 @@ program diag_pdsyev
     call blacs_gridinit( context, 'r', nprow, npcol )
     call blacs_gridinfo( context, nprow, npcol, myrow, mycol )
     !
+
+#if defined(__ELPA)
+    if (iam == 0) then
+        write(out,"(/'get_elpa_row_col_comms...')")
+    endif
+
+    call get_elpa_row_col_comms(MPI_COMM_WORLD, myrow, mycol, mpi_comm_rows, mpi_comm_cols)
+#endif
+
     if (verbose>=4) then
       !
       do i=0,nprocs-1
@@ -658,7 +679,31 @@ program diag_pdsyev
       !
       !lwork = 10 ; liwork = 10
       !
+#if defined(__ELPA)
+      if (iam == 0) then
+#if defined(__2STAGE)
+        write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
+#else
+        write(out,"(/'Starting ELPA solve_evp_real...')")
+#endif
+      endif
+
+      ! How many eigenvalues/eigenvectors ?
+      nsolv=dimen_s      
+      !
+#if defined(__2STAGE)
+      call solve_evp_real_2stage(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb, mpi_comm_rows, mpi_comm_cols, mpi_comm_world)
+#else
+      call solve_evp_real(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb,mpi_comm_rows, mpi_comm_cols)
+#endif
+      info = 0
+#else
+      if (iam == 0) then
+        write(out,"(/'Starting pdsyevd...')")
+      endif
+
       call pdsyevd('V', 'L', dimen_s, a_loc, 1, 1, desca, w, z_loc, 1, 1, descz, work, lwork, iwork, liwork, info)
+#endif
       !
       nvals = dimen_s
       !
@@ -700,6 +745,11 @@ program diag_pdsyev
       !  write(out,"(/'lwork =  ', i16, 'liwork = ', i16, 'lda = ', i16, 'loc_r = ', i16, 'loc_c = ', i16)") lwork, liwork, lda, loc_r, loc_c
       !endif
       !
+      
+      if (iam == 0) then
+        write(out,"(/'Starting pdsyevx...')")
+      endif
+
       call pdsyevx('V', range, 'L', dimen_s, a_loc, 1, 1, desca, vl, vu, il,iu, abstol, nvals, nvects, w, orfac, z_loc, 1, 1, descz, & 
                    work, lwork, iwork, liwork, ifail, iclustr, gap,  info)
       !
@@ -721,11 +771,20 @@ program diag_pdsyev
     ! do tests on convergence if any !
     ! ------------------------------ !
     !
-    if (iam == 0.and.verbose>=3) then
-      write(out,"(/'info = ', i8)") info
+!    if (iam == 0 .and.verbose>=3) then
+    if (iam == 0) then
+!      write(out,"(/'info = ', i8)") info
       if (info .eq. 0) then
         write(out,"(/'Diagonalization finished successfully!')")
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,' sec'
+
+#if defined(__ELPA)
+        print *,'Time tridiag_real     :',time_evp_fwd
+        print *,'Time solve_tridi      :',time_evp_solve
+        print *,'Time trans_ev_real    :',time_evp_back
+        print *,'Total time (sum above):',time_evp_back+time_evp_solve+time_evp_fwd
+#endif
+
       else if (info .lt. 0) then
         write(out,"(/'Info is less than zero. Info is equal to ', i8)") info
       else
@@ -737,6 +796,8 @@ program diag_pdsyev
     ! Print or store eigenvalues and eigenvectors !
     ! ------------------------------------------- !
     !
+#if defined(__DUMP_EIGENVALUES)
+
     if (iam == 0 .and. info == 0) then
       !
       write(out,"(/'Computed eigenvalues:')")
@@ -750,6 +811,9 @@ program diag_pdsyev
       enddo
       !
     endif
+#endif
+
+#if defined(__DUMP_MATRIX)
     !
     ! -------------------------------- !
     ! Print eigenvectors with PDLAPRNT !
@@ -774,7 +838,7 @@ program diag_pdsyev
 	    !
 	    !
 	    write(jchar, '(i4)') jrot
-	    write(symchar, '(i4)') gamma
+	    write(symchar, '(i6)') gamma
 	    filename = 'solution_'//trim(adjustl(jchar))//'_'//trim(adjustl(symchar))//'_'//trim(adjustl(str_row))//'_'//trim(adjustl(str_col))//'.chk'
 
 
@@ -951,7 +1015,7 @@ program diag_pdsyev
     
     else
     	    t1 = MPI_Wtime()
-    	    write(jchar, '(i4)') mat_len
+    	    write(jchar, '(i6)') mat_len
     	    call blacs_barrier(context, 'a')
     	    
     	    allocate(local_vecs(1:dimen_s))
@@ -1010,6 +1074,8 @@ program diag_pdsyev
     	
      endif  
     
+#endif
+
     call blacs_barrier(context, 'a')
     t2 = MPI_Wtime()
     !   
@@ -1026,7 +1092,10 @@ program diag_pdsyev
     !
     ! Exit BLACS
     !
-    if (verbose>=3) call MemoryReport(context,iam,memory_now,memory_max)
+    !if (verbose>=3) call MemoryReport(context,iam,memory_now,memory_max)
+    if (iam == 0) then
+       call MemoryReport(context,iam,memory_now,memory_max)
+    endif
     !
 
     call blacs_gridexit(context)
