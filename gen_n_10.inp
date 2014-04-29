@@ -1,0 +1,10 @@
+(large jobs for hot ch4)
+GEN-MAT 10
+J 43 (will be ignored)
+gamma 2 (will be ignored)
+DIAGONALIZER pdsyevd (needs to be stated)
+ENERGY_THRESH  18000.0 (ignored)
+COEF_THRESH    1e-24 (ignored)
+ZPE 0.0 (ignored)
+
+
