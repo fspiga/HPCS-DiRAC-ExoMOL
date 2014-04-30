@@ -11,7 +11,9 @@ PLAT   = _elpa_darwin
 FC    = mpif90
 
 FFLAGS = -fpp -D__ELPA -O3 -ipo -xHost -traceback -g -I$(ELPA_HOME)/include/elpa/modules
-FFLAGS += -D__2STAGE
+
+# 2-stage ELPA routines disabled, slow runtime noticed
+#FFLAGS += -D__2STAGE
 
 LIB = -L$(ELPA_HOME)/lib -I$(ELPA_HOME)/include -lelpa -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -mavx
 
