@@ -1,0 +1,608 @@
+ Data for JOB [59362,1] offset 0
+
+ ========================   JOB MAP   ========================
+
+ Data for node: sand-1-53	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 0
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 1
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 2
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 3
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 4
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 5
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 6
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 7
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 8
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 9
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 10
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 11
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 12
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 13
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 14
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 15
+
+ Data for node: sand-2-46	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 17
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 18
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 19
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 20
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 21
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 22
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 23
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 24
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 25
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 26
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 27
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 28
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 29
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 30
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 31
+
+ Data for node: sand-4-26	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 32
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 33
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 34
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 35
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 36
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 37
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 38
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 39
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 40
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 41
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 42
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 43
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 44
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 45
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 46
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 47
+
+ Data for node: sand-4-28	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 48
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 49
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 50
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 51
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 52
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 53
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 54
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 55
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 56
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 57
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 58
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 59
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 60
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 61
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 62
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 63
+
+ Data for node: sand-4-40	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 64
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 65
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 66
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 67
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 68
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 69
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 70
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 71
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 72
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 73
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 74
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 75
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 76
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 77
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 78
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 79
+
+ Data for node: sand-4-42	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 80
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 81
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 82
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 83
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 84
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 85
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 86
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 87
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 88
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 89
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 90
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 91
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 92
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 93
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 94
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 95
+
+ Data for node: sand-4-49	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 96
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 97
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 98
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 99
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 100
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 101
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 102
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 103
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 104
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 105
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 106
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 107
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 108
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 109
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 110
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 111
+
+ Data for node: sand-4-52	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 112
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 113
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 114
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 115
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 116
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 117
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 118
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 119
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 120
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 121
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 122
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 123
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 124
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 125
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 126
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 127
+
+ Data for node: sand-5-36	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 128
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 129
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 130
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 131
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 132
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 133
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 134
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 135
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 136
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 137
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 138
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 139
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 140
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 141
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 142
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 143
+
+ Data for node: sand-6-10	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 144
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 145
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 146
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 147
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 148
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 149
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 150
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 151
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 152
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 153
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 154
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 155
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 156
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 157
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 158
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 159
+
+ Data for node: sand-6-15	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 160
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 161
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 162
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 163
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 164
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 165
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 166
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 167
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 168
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 169
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 170
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 171
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 172
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 173
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 174
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 175
+
+ Data for node: sand-6-21	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 176
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 177
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 178
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 179
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 180
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 181
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 182
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 183
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 184
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 185
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 186
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 187
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 188
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 189
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 190
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 191
+
+ Data for node: sand-6-52	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 192
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 193
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 194
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 195
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 196
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 197
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 198
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 199
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 200
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 201
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 202
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 203
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 204
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 205
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 206
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 207
+
+ Data for node: sand-6-53	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 208
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 209
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 210
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 211
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 212
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 213
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 214
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 215
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 216
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 217
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 218
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 219
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 220
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 221
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 222
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 223
+
+ Data for node: sand-6-68	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 224
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 225
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 226
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 227
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 228
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 229
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 230
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 231
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 232
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 233
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 234
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 235
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 236
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 237
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 238
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 239
+
+ Data for node: sand-6-76	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 240
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 241
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 242
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 243
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 244
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 245
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 246
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 247
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 248
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 249
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 250
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 251
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 252
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 253
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 254
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 255
+
+ Data for node: sand-6-79	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 256
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 257
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 258
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 259
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 260
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 261
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 262
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 263
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 264
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 265
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 266
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 267
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 268
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 269
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 270
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 271
+
+ Data for node: sand-7-6	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 272
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 273
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 274
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 275
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 276
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 277
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 278
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 279
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 280
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 281
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 282
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 283
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 284
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 285
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 286
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 287
+
+ Data for node: sand-7-11	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 288
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 289
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 290
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 291
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 292
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 293
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 294
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 295
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 296
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 297
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 298
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 299
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 300
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 301
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 302
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 303
+
+ Data for node: sand-7-18	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 304
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 305
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 306
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 307
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 308
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 309
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 310
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 311
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 312
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 313
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 314
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 315
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 316
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 317
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 318
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 319
+
+ Data for node: sand-7-26	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 320
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 321
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 322
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 323
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 324
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 325
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 326
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 327
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 328
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 329
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 330
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 331
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 332
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 333
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 334
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 335
+
+ Data for node: sand-7-29	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 336
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 337
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 338
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 339
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 340
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 341
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 342
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 343
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 344
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 345
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 346
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 347
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 348
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 349
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 350
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 351
+
+ Data for node: sand-7-30	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 352
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 353
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 354
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 355
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 356
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 357
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 358
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 359
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 360
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 361
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 362
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 363
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 364
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 365
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 366
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 367
+
+ Data for node: sand-7-31	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 368
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 369
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 370
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 371
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 372
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 373
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 374
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 375
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 376
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 377
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 378
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 379
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 380
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 381
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 382
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 383
+
+ Data for node: sand-7-32	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 384
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 385
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 386
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 387
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 388
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 389
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 390
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 391
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 392
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 393
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 394
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 395
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 396
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 397
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 398
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 399
+
+ Data for node: sand-7-33	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 400
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 401
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 402
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 403
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 404
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 405
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 406
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 407
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 408
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 409
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 410
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 411
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 412
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 413
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 414
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 415
+
+ Data for node: sand-7-35	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 416
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 417
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 418
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 419
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 420
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 421
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 422
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 423
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 424
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 425
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 426
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 427
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 428
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 429
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 430
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 431
+
+ Data for node: sand-7-38	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 432
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 433
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 434
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 435
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 436
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 437
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 438
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 439
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 440
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 441
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 442
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 443
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 444
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 445
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 446
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 447
+
+ Data for node: sand-7-48	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 448
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 449
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 450
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 451
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 452
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 453
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 454
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 455
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 456
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 457
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 458
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 459
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 460
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 461
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 462
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 463
+
+ Data for node: sand-7-49	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 464
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 465
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 466
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 467
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 468
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 469
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 470
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 471
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 472
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 473
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 474
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 475
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 476
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 477
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 478
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 479
+
+ Data for node: sand-7-62	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 480
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 481
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 482
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 483
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 484
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 485
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 486
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 487
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 488
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 489
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 490
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 491
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 492
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 493
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 494
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 495
+
+ Data for node: sand-7-63	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 496
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 497
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 498
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 499
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 500
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 501
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 502
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 503
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 504
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 505
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 506
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 507
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 508
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 509
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 510
+ 	Process OMPI jobid: [59362,1] App: 0 Process rank: 511
+
+ =============================================================
+
+get_elpa_row_col_comms...
+Read the input
+(large jobs for hot ch4)
+
+GEN-MAT 100000
+DIAGONALIZER PDSYEVD (needs to be stated)
+...done!
+
+Starting ELPA solve_evp_real...
+
+Diagonalization finished successfully!
+
+Time to diagonalize matrix is  1329.636926 sec
+ Time tridiag_real     :   914.635951995850     
+ Time solve_tridi      :   144.658401012421     
+ Time trans_ev_real    :   270.338000059128     
+ Total time (sum above):   1329.63235306740     
+
+
+ Memory Report (   0)
+ Active Arrays                                        size (Gb)
+ Total memory   =                                     0.00000000 Gb
+ Maximal memory =                                     0.59549583 Gb (             3.8)
+
+ (        5 arrays contributing less than 1% are not shown)
+
