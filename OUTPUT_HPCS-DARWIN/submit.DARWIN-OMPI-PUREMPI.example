@@ -75,3 +75,5 @@ eval $CMD
 
 rm gen.inp
 
+echo "Time: `date`"
+

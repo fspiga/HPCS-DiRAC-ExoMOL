@@ -1,0 +1,87 @@
+ Data for JOB [42714,1] offset 0
+
+ ========================   JOB MAP   ========================
+
+ Data for node: sand-2-6	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 0
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 1
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 2
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 3
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 4
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 5
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 6
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 7
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 8
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 9
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 10
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 11
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 12
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 13
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 14
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 15
+
+ Data for node: sand-2-7	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 16
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 17
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 18
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 19
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 20
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 21
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 22
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 23
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 24
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 25
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 26
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 27
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 28
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 29
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 30
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 31
+
+ Data for node: sand-2-49	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 32
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 33
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 34
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 35
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 36
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 37
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 38
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 39
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 40
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 41
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 42
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 43
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 44
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 45
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 46
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 47
+
+ Data for node: sand-6-33	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 48
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 49
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 50
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 51
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 52
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 53
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 54
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 55
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 56
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 57
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 58
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 59
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 60
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 61
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 62
+ 	Process OMPI jobid: [42714,1] App: 0 Process rank: 63
+
+ =============================================================
+
+get_elpa_row_col_comms...
+Read the input
+(large jobs for hot ch4)
+
+GEN-MAT 25000
+DIAGONALIZER PDSYEVD (needs to be stated)
+...done!
+
+Starting ELPA solve_evp_real_2stage...
