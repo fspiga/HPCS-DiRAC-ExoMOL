@@ -1,0 +1,44 @@
+# HPCS -- Works with Open MPI 1.8.0 using ELPA 2013.11-v8 & BLACS from ScaLAPACK (MKL)
+#
+# module purge
+# module load default-wilkes
+# module unload intel/impi cuda intel/mkl
+# module load intel/mkl/11.1.2.144
+# module load fs395/openmpi-1.8.0/intel
+# module load fs395/elpa/2013.11-v8/intel-openmpi
+
+PLAT   = _elpa_darwin
+FC    = mpif90
+
+FFLAGS = -fpp -D__ELPA -O3 -ipo -xHost -traceback -g -I$(ELPA_HOME)/include/elpa/modules
+
+# 2-stage ELPA routines disabled, slow runtime noticed
+#FFLAGS += -D__2STAGE
+
+LIB = -L$(ELPA_HOME)/lib -I$(ELPA_HOME)/include -lelpa -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -mavx
+
+OBJ = accuracy.o timer.o input.o pdlaprnt_local.o  
+
+default:   diag$(PLAT).x
+
+diag$(PLAT).x:  $(OBJ) diag_pdsyev.o
+	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) diag_pdsyev.o $(LIB)
+
+diag_pdsyev.o:  diag_pdsyev.f90 $(OBJ) 
+	$(FC) -c diag_pdsyev.f90 $(FFLAGS)
+
+pdlaprnt_local.o: pdlaprnt_local.f
+	$(FC) -c pdlaprnt_local.f $(FFLAGS)
+
+accuracy.o:  accuracy.f90
+	$(FC) -c accuracy.f90 $(FFLAGS)
+
+timer.o:  timer.f90 accuracy.o
+	$(FC) -c timer.f90 $(FFLAGS)
+
+input.o:  input.f90 accuracy.o
+	$(FC) -c input.f90 $(FFLAGS)
+
+clean:
+	rm -f $(OBJ) *.mod *.o *.x
+
