@@ -1,0 +1,8 @@
+default:   clean
+
+clean:
+	rm -f $(OBJ) *.mod *.o
+
+veryclean: clean
+	rm *.x
+
