@@ -1,0 +1,176 @@
+ Data for JOB [16538,1] offset 0
+
+ ========================   JOB MAP   ========================
+
+ Data for node: sand-2-11	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 0
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 1
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 2
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 3
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 4
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 5
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 6
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 7
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 8
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 9
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 10
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 11
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 12
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 13
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 14
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 15
+
+ Data for node: sand-2-12	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 17
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 18
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 19
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 20
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 21
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 22
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 23
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 24
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 25
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 26
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 27
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 28
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 29
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 30
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 31
+
+ Data for node: sand-2-13	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 32
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 33
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 34
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 35
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 36
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 37
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 38
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 39
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 40
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 41
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 42
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 43
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 44
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 45
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 46
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 47
+
+ Data for node: sand-2-14	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 48
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 49
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 50
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 51
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 52
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 53
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 54
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 55
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 56
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 57
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 58
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 59
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 60
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 61
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 62
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 63
+
+ Data for node: sand-2-15	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 64
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 65
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 66
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 67
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 68
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 69
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 70
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 71
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 72
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 73
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 74
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 75
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 76
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 77
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 78
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 79
+
+ Data for node: sand-2-16	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 80
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 81
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 82
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 83
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 84
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 85
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 86
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 87
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 88
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 89
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 90
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 91
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 92
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 93
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 94
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 95
+
+ Data for node: sand-2-17	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 96
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 97
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 98
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 99
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 100
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 101
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 102
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 103
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 104
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 105
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 106
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 107
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 108
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 109
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 110
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 111
+
+ Data for node: sand-2-18	Num slots: 16	Max slots: 0	Num procs: 16
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 112
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 113
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 114
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 115
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 116
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 117
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 118
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 119
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 120
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 121
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 122
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 123
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 124
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 125
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 126
+ 	Process OMPI jobid: [16538,1] App: 0 Process rank: 127
+
+ =============================================================
+
+get_elpa_row_col_comms...
+Read the input
+(large jobs for hot ch4)
+
+GEN-MAT 50000
+DIAGONALIZER PDSYEVD (needs to be stated)
+...done!
+
+Starting ELPA solve_evp_real...
+
+Diagonalization finished successfully!
+
+Time to diagonalize matrix is   647.833212 sec
+ Time tridiag_real     :   420.722789049149     
+ Time solve_tridi      :   75.4872791767120     
+ Time trans_ev_real    :   151.621482849121     
+ Total time (sum above):   647.831551074982     
+
+
+ Memory Report (   0)
+ Active Arrays                                        size (Gb)
+ Total memory   =                                     0.00000000 Gb
+ Maximal memory =                                     0.59083874 Gb (             3.8)
+
+ (        5 arrays contributing less than 1% are not shown)
+
