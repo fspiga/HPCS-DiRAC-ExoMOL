@@ -689,7 +689,8 @@ program diag_pdsyev
       endif
 
       ! How many eigenvalues/eigenvectors ?
-      nsolv=dimen_s      
+      ! nsolv=dimen_s == requests all eigenstates
+      nsolv=nroots      
       !
 #if defined(__2STAGE)
       call solve_evp_real_2stage(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb, mpi_comm_rows, mpi_comm_cols, mpi_comm_world)
@@ -753,8 +754,8 @@ program diag_pdsyev
       call pdsyevx('V', range, 'L', dimen_s, a_loc, 1, 1, desca, vl, vu, il,iu, abstol, nvals, nvects, w, orfac, z_loc, 1, 1, descz, & 
                    work, lwork, iwork, liwork, ifail, iclustr, gap,  info)
       !
-      if (iam == 0.and.verbose>=4) then
-        write(out,"(/'nvals =  ', i16, 'nvetcs = ', i16)") nvals,nvects
+      if (iam == 0) then
+        write(out,"(/'pdsyevx: nvals =  ', i16, 'nvetcs = ', i16)") nvals,nvects
       endif
       !
     case default
