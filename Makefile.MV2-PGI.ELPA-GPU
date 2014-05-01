@@ -6,7 +6,7 @@
 # module load pgi/14.3
 # module load fs395/mvapich2-2.0rc1/pgi
 
-PLAT   = _elpa-gpu_darwin
+PLAT   = _MV2-PGI_ELPA-GPU
 FC    = mpif90
 
 # NOTE: ELPA-GPU has to be compiled manually !

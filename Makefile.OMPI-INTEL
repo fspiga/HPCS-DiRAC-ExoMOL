@@ -6,12 +6,12 @@
 # module load intel/mkl/11.1.2.144
 # module load fs395/openmpi-1.8.0/intel
 
-PLAT   = _pdsyev_darwin
+PLAT   = _OMPI-INTEL
 FC    = mpif90
 
-FFLAGS = -O3 -ipo -xHost -traceback -g
+FFLAGS = -fpp -O3 -ipo -xHost -traceback -g
 
-LIB = -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
+LIB = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
 
 OBJ = accuracy.o timer.o input.o pdlaprnt_local.o  
 
@@ -36,5 +36,5 @@ input.o:  input.f90 accuracy.o
 	$(FC) -c input.f90 $(FFLAGS)
 
 clean:
-	rm -f $(OBJ) *.mod *.o *.x
+	rm -f $(OBJ) *.mod *.o
 
