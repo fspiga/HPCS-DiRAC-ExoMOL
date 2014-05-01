@@ -1,0 +1,28 @@
+
+get_elpa_row_col_comms...
+Read the input
+(large jobs for hot ch4)
+
+GEN-MAT 25000
+NROOTS 1000
+DIAGONALIZER PDSYEVD (needs to be stated)
+...done!
+
+Starting ELPA solve_evp_real...
+
+Diagonalization finished successfully!
+
+Time to diagonalize matrix is    63.423572 sec
+ Time tridiag_real     :   58.0893530845642     
+ Time solve_tridi      :   4.00876092910767     
+ Time trans_ev_real    :   1.32514214515686     
+ Total time (sum above):   63.4232561588287     
+
+
+ Memory Report (   0)
+ Active Arrays                                        size (Gb)
+ Total memory   =                                     0.00000000 Gb
+ Maximal memory =                                     0.15186493 Gb (             3.8)
+
+ (        5 arrays contributing less than 1% are not shown)
+
