@@ -77,7 +77,7 @@ module d_module
         case("STOP","FINISH","END")
           exit
         case("")
-          print "(1x)"    !  Echo blank lines
+          !print "(1x)"    !  Echo blank lines
           !
         case ("J","JROT")
           !
@@ -184,7 +184,7 @@ module d_module
         !
     end do
     !
-    write(out,"('...done!')")
+    ! write(out,"('...done!')")
     !
   end subroutine FLReadInput
 
@@ -307,8 +307,13 @@ program dirac_exomol_eigen
     ! read input file !
     ! --------------- !
     !
-    ! Usually the input file resides in a shared filesystem. So why broadcast? [NdFilippo]
-    !
+
+    ! Everybody reads the input file...
+
+    call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
+    call blacs_barrier(context,'A')
+
+#if 0
     if (iam==0) then 
       !
       call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
@@ -318,7 +323,6 @@ program dirac_exomol_eigen
       if (verbose>=4) write(out,"(' Only for iam = ',i,' jrot,gamma,nroots,chkpoint ',5i8)"), iam,jrot,gamma,nroots,chkpoint
       !
     endif
-
     !
     !dec$ if (blacs_ > 0)
       !
@@ -365,13 +369,13 @@ program dirac_exomol_eigen
 
       endif
       !
-      if (iam==0.and.verbose>=5) write(out,"(' ...done!')")
+      if (iam==0.and.>=5) write(out,"(' ...done!')")
       !
       !if (sparse==1) blacs_init = .true.
       !
     !dec$ end if
+#endif
 
-    ! We do not care about reading the matrix because we do not dump-it. Generation always on the fly [NdFilippo]
 
     if(gen_mat == .true.) then
 	    
