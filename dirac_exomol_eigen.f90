@@ -278,6 +278,10 @@ program dirac_exomol_eigen
       if(mod(nprocs,i) .eq. 0) nprow = i
     end do
     npcol = nprocs/nprow
+
+    if (iam == 0) then
+        write(out, "('BLACS topology: ',i8,' x ',i8)") nprow, npcol
+    endif
     !
     call blacs_get( -1, 0, context )
     call blacs_gridinit( context, 'r', nprow, npcol )
@@ -400,7 +404,7 @@ program dirac_exomol_eigen
 	    !
 
 	    if (iam == 0) then
-            write(out, "('Local problem size: ',i4,' \times ',i4)") loc_r,loc_c
+            write(out, "('Local problem size: ',i6,' x ',i6)") loc_r, loc_c
         endif
 
 	    allocate(a_loc(loc_r,loc_c),z_loc(loc_r,loc_c),w(dimen_s),stat=info)
