@@ -380,8 +380,8 @@ program dirac_exomol_eigen
     if(gen_mat == .true.) then
 	    
 	    if (iam == 0) then
-            write(out, "('Generating matrix of size        : ',i8)") nroots
-            write(out, "('Number of eigenstates to compute : ',i8)") mat_len
+            write(out, "('Generating matrix of size        : ',i8)") mat_len
+            write(out, "('Number of eigenstates to compute : ',i8)") nroots
         endif
 
         t1 = MPI_Wtime()
