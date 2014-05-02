@@ -49,7 +49,7 @@ module d_module
     !
     logical :: eof
     !
-    write(out,"('Read the input')")
+    !write(out,"('Read the input')")
     !
     sparse = 0
     !
@@ -77,7 +77,7 @@ module d_module
         case("STOP","FINISH","END")
           exit
         case("")
-          !print "(1x)"    !  Echo blank lines
+          print "(1x)"    !  Echo blank lines
           !
         case ("J","JROT")
           !
@@ -310,10 +310,12 @@ program dirac_exomol_eigen
 
     ! Everybody reads the input file...
 
+#if 0
     call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
     call blacs_barrier(context,'A')
 
-#if 0
+#else
+
     if (iam==0) then 
       !
       call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
@@ -369,7 +371,7 @@ program dirac_exomol_eigen
 
       endif
       !
-      if (iam==0.and.>=5) write(out,"(' ...done!')")
+      if (iam==0.and. verbose>=5) write(out,"(' ...done!')")
       !
       !if (sparse==1) blacs_init = .true.
       !
