@@ -61,7 +61,7 @@ module d_module
     nroots = 1e6
     energy_thresh = 1.0d+05
     coef_thresh = 1.0d-16
-    diagonalizer = "PDSYEVD"
+    diagonalizer = "PDSYEVD" ! default
     factor = 1.0_rk
     tol = small_
     sparse = .false.
@@ -307,6 +307,8 @@ program diag_pdsyev
     ! read input file !
     ! --------------- !
     !
+    ! Usually the input file resides in a shared filesystem. So why broadcast? [NdFilippo]
+    !
     if (iam==0) then 
       !
       call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
@@ -369,6 +371,8 @@ program diag_pdsyev
       !
     !dec$ end if
 
+    ! We do not care about reading the matrix because we do not dump-it. Generation always on the fly [NdFilippo]
+
     if(gen_mat == .true.) then
 	    if ( verbose>=4 ) write(out, "('Generating matrix of size ',i4)") mat_len
 	    zpe = 0.0
@@ -400,6 +404,8 @@ program diag_pdsyev
 	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
 	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
 	    
+	    ! This is highly inefficient! I suggest to change this first and then implement a second
+	    !   completely different approach (but still keep both in the source tree) [NdFilippo]
 	    
 	    do i = 1, dimen_s
 	    	seed(i) = 123456789-i-1;
@@ -640,6 +646,9 @@ program diag_pdsyev
     ! define remaining workspace !
     ! -------------------------- !
     !
+    ! I will suggest to call the solvers and probe the sugegsted (hopefully minimum) space required
+    !   by auxiliary *WORK data structures (NdFilipo)
+    !
     select case (eigensolver)
       !
     case (1)
@@ -779,6 +788,8 @@ program diag_pdsyev
       if (info .eq. 0) then
         write(out,"(/'Diagonalization finished successfully!')")
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,' sec'
+
+        ! We can mimic the same timing granularity in ScaLAPACK too by patching the netlib code [NdFilippo]
 
 #if defined(__ELPA)
         print *,'Time tridiag_real     :',time_evp_fwd
