@@ -66,7 +66,7 @@ module d_module
     zpe = -small_
     memory = 256.0_rk
     !
-    call input_options(echo_lines=.true.,error_flag=1)
+    call input_options(echo_lines=.false.,error_flag=1)
     !
     ! read the general input 
     !
@@ -376,7 +376,8 @@ program dirac_exomol_eigen
     if(gen_mat == .true.) then
 	    
 	    if (iam == 0) then
-            write(out, "('Generating matrix of size ',i8)") mat_len
+            write(out, "('Generating matrix of size        : ',i8)") nroots
+            write(out, "('Number of eigenstates to compute : ',i8)") mat_len
         endif
 
         t1 = MPI_Wtime()
