@@ -468,7 +468,7 @@ program dirac_exomol_eigen
      else    
 	    	  
 	    ! There is no reading from file...
-        call blas_abort( context, -1 )
+        call blacs_abort( context, -1 )
 
     endif
     !
