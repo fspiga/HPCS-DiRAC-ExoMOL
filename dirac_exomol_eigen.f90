@@ -371,13 +371,13 @@ program dirac_exomol_eigen
 
     if(gen_mat == .true.) then
 	    
-            if ( verbose>=4 ) write(out, "('Generating matrix of size ',i4)") mat_len
-	    
-            t1 = MPI_Wtime()
+	    if (iam == 0) then
+            write(out, "('Generating matrix of size ',i4)") mat_len
+        endif
 
-            zpe = 0.0
+        t1 = MPI_Wtime()
+        zpe = 0.0
 	    dimen_s = mat_len
-	    
 	    chkptIO = 10+iam
 	    
 	    !
@@ -398,6 +398,11 @@ program dirac_exomol_eigen
    	    call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 	    
 	    !
+
+	    if (iam == 0) then
+            write(out, "('Local problem size: ',i4,' \times ',i4)") loc_r,loc_c
+        endif
+
 	    allocate(a_loc(loc_r,loc_c),z_loc(loc_r,loc_c),w(dimen_s),stat=info)
 	    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
 	    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
@@ -468,8 +473,6 @@ program dirac_exomol_eigen
 	    ! read headings and matrix dimensions from matrix file !
 	    ! ---------------------------------------------------- !
 
-	    if ( verbose>=4 ) write(out, '("j,gamma = ",2i4)') jrot,gamma
-
 	    !
 	    write(jchar, '(i4)') jrot
 	    write(symchar, '(i4)') gamma
@@ -517,8 +520,8 @@ program dirac_exomol_eigen
 	      call dgsum2d( context,'A', 'i-ring',1,1,memory_now,1,0,0)
 	      call dgsum2d( context,'A', 'i-ring',1,1,memory_max,1,0,0)
 	      !
-	      if (verbose>=3.and.iam==0) write (out,"(t2,'Total memory   = ',t47,f18.8,' Gb')") memory_now
-	      if (verbose>=3.and.iam==0) write (out,"(t2,'Maximal memory = ',t47,f18.8,' Gb (',f16.1,')')") memory_max,memory_limit
+	      if ( iam==0 ) write (out,"(t2,'Total memory   = ',t47,f18.8,' Gb')") memory_now
+	      if ( iam==0 ) write (out,"(t2,'Maximal memory = ',t47,f18.8,' Gb (',f16.1,')')") memory_max,memory_limit
 	      !
 	    !dec$ end if
 	    !
@@ -718,6 +721,7 @@ program dirac_exomol_eigen
       !lwork = 10 ; liwork = 10
       !
 #if defined(__ELPA)
+      !
       if (iam == 0) then
 #if defined(__2STAGE)
         write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
@@ -736,12 +740,15 @@ program dirac_exomol_eigen
       call solve_evp_real(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb,mpi_comm_rows, mpi_comm_cols)
 #endif
       info = 0
+      !
 #else
+      !
       if (iam == 0) then
         write(out,"(/'Starting pdsyevd...')")
       endif
 
       call pdsyevd('V', 'L', dimen_s, a_loc, 1, 1, desca, w, z_loc, 1, 1, descz, work, lwork, iwork, liwork, info)
+      !
 #endif
       !
       nvals = dimen_s
