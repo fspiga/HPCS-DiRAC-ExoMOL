@@ -166,10 +166,18 @@ module d_module
             !
             eigensolver = 2
             !
+          case ('ELPA-1STAGE')
+            !
+            eigensolver = 3
+            !
+          case ('ELPA-2STAGE')
+            !
+            eigensolver = 4
+            !
           case default
             !
             write(out,'("Uknown eigensolver = ",a)'), diagonalizer
-            stop "Uknown eigensolver = "
+            stop "Uknown eigensolver"
             !
           end select
           !
@@ -202,9 +210,7 @@ program diag_pdsyev
   use timer
 #if defined(__ELPA)
   use elpa1
-#if defined(__2STAGE)
   use elpa2
-#endif
 #endif
   use mpi
 
@@ -281,12 +287,7 @@ program diag_pdsyev
     call blacs_gridinit( context, 'r', nprow, npcol )
     call blacs_gridinfo( context, nprow, npcol, myrow, mycol )
     !
-
 #if defined(__ELPA)
-    if (iam == 0) then
-        write(out,"(/'get_elpa_row_col_comms...')")
-    endif
-
     call get_elpa_row_col_comms(MPI_COMM_WORLD, myrow, mycol, mpi_comm_rows, mpi_comm_cols)
 #endif
 
