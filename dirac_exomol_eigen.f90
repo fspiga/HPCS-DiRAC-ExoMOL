@@ -27,7 +27,9 @@ module d_module
   !
   logical :: gen_mat = .false.
   integer(ik) :: mat_len
+#if 0
   integer(hik)	::	seed(1000000)
+#endif
   !
   contains
   !
@@ -185,14 +187,15 @@ module d_module
     write(out,"('...done!')")
     !
   end subroutine FLReadInput
-  
+
+#if 0
   integer(hik) function  rrr(i)
   	integer(ik)	::	i
   	seed(i) = mod((1103515245 * seed(i) + 12345),1099511627776);
   	rrr=seed(i)
   	return
   end function rrr
-  
+#endif
   
 
 end module d_module
@@ -220,7 +223,7 @@ program dirac_exomol_eigen
     integer(ik)                 dimen_s, nelem, max_nelem
     integer(ik), allocatable :: bterm(:,:)
     real(rk), allocatable ::    a_temp(:), a_loc(:,:)   
-    real(rk) ::                 thresh=30000.0_rk, zpe, energy_thresh, coef_thresh
+    real(rk) ::                 thresh=30000.0_rk, zpe, energy_thresh, coef_thresh,rrr_value
     ! Related to diagonalization
     integer(ik)  ::     nroots, nsolv
     ! Parameters
@@ -425,38 +428,37 @@ program dirac_exomol_eigen
           !
       	  enddo
       	  enddo
+      	!
 #else
-
-            ! This is highly inefficient! I suggest to change this first and
-            ! then implement a second
-            !   completely different approach (but still keep both in the source
-            !   tree) [NdFilippo]
-            
-            !rrr=123456789 - ( mod((1103515245 * ( 123456789 - i -1 ) +
-            !12345),1099511627776)) -1;
-
+        !
         do j = 1,loc_c
             do i=1,loc_r
-                        !
+                    !    !
                     global_i = indxl2g( i, nb, myrow, mycol, nprow )
                     global_j = indxl2g( j, nb, myrow, mycol, npcol )
                     !
-                    if(global_i>=global_j) a_loc(i,j) =real(rrr(global_i),rk)/real(1099511627776.0,rk)
-                    if(global_i < global_j) a_loc(i,j) =real(rrr(global_j),rk)/real(1099511627776.0,rk)
-                    if(global_i==global_j) a_loc(i,j) = a_loc(i,j) +real(10.0,rk) + real(global_j,rk)
+                    if(global_i >= global_j) then
+                        rrr_value = 123456789 - ( mod((1103515245 * ( 123456789 - global_i -1 ) + 12345),1099511627776)) -1;
+                        if(global_i == global_j) then
+                            rrr_value = rrr_value + real(10.0,rk) + real(global_j,rk)
+                        endif
+                    else
+                        rrr_value = 123456789 - ( mod((1103515245 * ( 123456789 - global_j -1 ) + 12345),1099511627776)) -1;
+                    endif
+                    !
+                    a_loc(i,j) = rrr_value
                     !
             enddo
         enddo
-          
-#endif
-      	  
-      	  call blacs_barrier(context, 'a')
         !
-      t2 = MPI_Wtime()
-        
-      if (iam == 0) then
-         write(out,'(/a,f12.6,a)') 'Time to Initialize the input matrix is',t2-t1,' sec'
-      endif        
+#endif
+      	!
+      	call blacs_barrier(context, 'a')
+        !
+        t2 = MPI_Wtime()
+        if (iam == 0) then
+            write(out,'(/a,f12.6,a)') 'Time to Initialize the input matrix is',t2-t1,' sec'
+        endif
         
      else    
 	    	  
