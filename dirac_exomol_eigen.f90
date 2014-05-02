@@ -229,7 +229,7 @@ program dirac_exomol_eigen
     parameter           ( zero = 0.0d0 )
     integer(ik)         loc_r, loc_c, lda
     double precision    mone
-    integer(ik)         maxprocs
+    integer(ik)         maxprocs,global_i,global_j
     parameter           ( mone = -1.0d0, maxprocs = 512 )
     ! Local Scalars
     integer(ik)         context, iam, m, mycol, myrow, nb, npcol, nprocs, nprow, nz, trilwmin, proc_row, proc_col,iwork_(10),l_nrows, l_ncols, l_eigvec, iprow, ipcol
@@ -248,7 +248,7 @@ program dirac_exomol_eigen
     !
     logical   :: sparse = .false.
     !
-    integer(ik), external :: numroc, iceil
+    integer(ik), external :: numroc, iceil, indxl2g
     !real(rk), external ::    MPI_Wtime, pdlamch
     real(rk), external ::    pdlamch
     !
@@ -367,8 +367,12 @@ program dirac_exomol_eigen
     ! We do not care about reading the matrix because we do not dump-it. Generation always on the fly [NdFilippo]
 
     if(gen_mat == .true.) then
-	    if ( verbose>=4 ) write(out, "('Generating matrix of size ',i4)") mat_len
-	    zpe = 0.0
+	    
+            if ( verbose>=4 ) write(out, "('Generating matrix of size ',i4)") mat_len
+	    
+            t1 = MPI_Wtime()
+
+            zpe = 0.0
 	    dimen_s = mat_len
 	    
 	    chkptIO = 10+iam
@@ -396,7 +400,8 @@ program dirac_exomol_eigen
 	    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
 	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
 	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
-	    
+	   
+#if 0 
 	    ! This is highly inefficient! I suggest to change this first and then implement a second
 	    !   completely different approach (but still keep both in the source tree) [NdFilippo]
 	    
@@ -420,10 +425,38 @@ program dirac_exomol_eigen
           !
       	  enddo
       	  enddo
+#else
+
+            ! This is highly inefficient! I suggest to change this first and
+            ! then implement a second
+            !   completely different approach (but still keep both in the source
+            !   tree) [NdFilippo]
+            
+            !rrr=123456789 - ( mod((1103515245 * ( 123456789 - i -1 ) +
+            !12345),1099511627776)) -1;
+
+        do j = 1,loc_c
+            do i=1,loc_r
+                        !
+                    global_i = indxl2g( i, nb, myrow, mycol, nprow )
+                    global_j = indxl2g( j, nb, myrow, mycol, npcol )
+                    !
+                    if(global_i>=global_j) a_loc(i,j) =real(rrr(global_i),rk)/real(1099511627776.0,rk)
+                    if(global_i < global_j) a_loc(i,j) =real(rrr(global_j),rk)/real(1099511627776.0,rk)
+                    if(global_i==global_j) a_loc(i,j) = a_loc(i,j) +real(10.0,rk) + real(global_j,rk)
+                    !
+            enddo
+        enddo
+          
+#endif
       	  
       	  call blacs_barrier(context, 'a')
         !
+      t2 = MPI_Wtime()
         
+      if (iam == 0) then
+         write(out,'(/a,f12.6,a)') 'Time to Initialize the input matrix is',t2-t1,' sec'
+      endif        
         
      else    
 	    	  
