@@ -1,8 +1,0 @@
---------------------------------------------------------------------------
-There are not enough slots available in the system to satisfy the 16 slots 
-that were requested by the application:
-  ./diag_pdsyev_darwin.x
-
-Either request fewer slots for your application, or make more slots available
-for use.
---------------------------------------------------------------------------
