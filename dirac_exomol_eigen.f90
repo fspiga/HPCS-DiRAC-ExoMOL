@@ -307,15 +307,6 @@ program dirac_exomol_eigen
     ! read input file !
     ! --------------- !
     !
-
-    ! Everybody reads the input file...
-
-#if 0
-    call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
-    call blacs_barrier(context,'A')
-
-#else
-
     if (iam==0) then 
       !
       call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
@@ -376,8 +367,6 @@ program dirac_exomol_eigen
       !if (sparse==1) blacs_init = .true.
       !
     !dec$ end if
-#endif
-
 
     if(gen_mat == .true.) then
 	    
@@ -413,7 +402,7 @@ program dirac_exomol_eigen
 	    call descinit( desca, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
    	    call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 	    
-#if defined (__DEBUG)
+#if defined(__DEBUG)
             write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
 #endif
 
@@ -423,11 +412,13 @@ program dirac_exomol_eigen
 	    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
 	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
 	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
+
+            do i = 1, dimen_s
+                seed(i) = 123456789-i-1;
+            enddo
 	   
-            do j = 1,loc_r
-                do i=1,loc_c
-                    !
-                    rrr_value = 0.0
+            do j = 1,loc_c
+                do i=1,loc_r
                     !
                     global_i = indxl2g( i, nb, myrow, 0, nprow )
                     global_j = indxl2g( j, nb, mycol, 0, npcol )
