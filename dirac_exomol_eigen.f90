@@ -280,7 +280,7 @@ program dirac_exomol_eigen
     npcol = nprocs/nprow
 
     if (iam == 0) then
-        write(out, "('BLACS topology: ',i8,' x ',i8)") nprow, npcol
+        write(out, "('BLACS topology: ',i8,' x ',i8,' (',i8,' processors over ',i8,' involved)')") nprow, npcol,nprow*npcol,nprocs
     endif
     !
     call blacs_get( -1, 0, context )
@@ -381,7 +381,7 @@ program dirac_exomol_eigen
 
     if(gen_mat == .true.) then
 	    
-	    if (iam == 0) then
+	if (iam == 0) then
             write(out, "('Generating matrix of size        : ',i8)") mat_len
             write(out, "('Number of eigenstates to compute : ',i8)") nroots
         endif
@@ -399,76 +399,54 @@ program dirac_exomol_eigen
 	    nb = min ( dimen_s/nprow, dimen_s/npcol )
 	    nb = min ( nb, 64 )
 	    nb = max(nb,1)    	
+
+#if defined(__DEBUG)
+            if (iam == 0) then
+               write(out, "('NB : ',i3)") nb
+            endif
+#endif
 	    
-			!
-	    loc_r = numroc(dimen_s,nb,myrow,0,nprow)
+            loc_r = numroc(dimen_s,nb,myrow,0,nprow)
 	    loc_c = numroc(dimen_s,nb,mycol,0,npcol)
 	    lda = max (1,loc_r)
 	    
 	    call descinit( desca, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
    	    call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 	    
-	    !
-
-	    if (iam == 0) then
-            write(out, "('Local problem size: ',i6,' x ',i6)") loc_r, loc_c
-        endif
+#if defined (__DEBUG)
+            write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
+#endif
 
 	    allocate(a_loc(loc_r,loc_c),z_loc(loc_r,loc_c),w(dimen_s),stat=info)
 	    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+
 	    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
 	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
 	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
 	   
-#if 1 
-	    ! This is highly inefficient! I suggest to change this first and then implement a second
-	    !   completely different approach (but still keep both in the source tree) [NdFilippo]
-	    
-	    do i = 1, dimen_s
-	    	seed(i) = 123456789-i-1;
-	    enddo
-	    
-	    
-    	    do j = 1,dimen_s
-    	    	do i=1,dimen_s
-          	!
-          	call infog2l(i, j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
-          	!
-           	if (myrow == proc_row .and. mycol == proc_col) then
-           		if(i>=j) a_loc(i_loc,j_loc) = real(rrr(i),rk)/real(1099511627776.0,rk)
-           		if(i < j) a_loc(i_loc,j_loc) = real(rrr(j),rk)/real(1099511627776.0,rk)
-           		if(i==j) a_loc(i_loc,j_loc) = a_loc(i_loc,j_loc) + real(10.0,rk) + real(j,rk)
-           	endif
-          !
-          !if (j == i .and. a_temp(j) <= thresh) nroots = nroots + 1
-          !
-      	  enddo
-      	  enddo
-      	!
-#else
-        !
-        do j = 1,loc_c
-            do i=1,loc_r
-                    !    !
-                    global_i = indxl2g( i, nb, myrow, mycol, nprow )
-                    global_j = indxl2g( j, nb, myrow, mycol, npcol )
+            do j = 1,loc_r
+                do i=1,loc_c
                     !
-                    if(global_i >= global_j) then
-                        rrr_value = 123456789 - ( mod((1103515245 * ( 123456789 - global_i -1 ) + 12345),1099511627776)) -1;
-                        if(global_i == global_j) then
-                            rrr_value = rrr_value + real(10.0,rk) + real(global_j,rk)
-                        endif
-                    else
-                        rrr_value = 123456789 - ( mod((1103515245 * ( 123456789 - global_j -1 ) + 12345),1099511627776)) -1;
+                    rrr_value = 0.0
+                    !
+                    global_i = indxl2g( i, nb, myrow, 0, nprow )
+                    global_j = indxl2g( j, nb, mycol, 0, npcol )
+                    !
+
+#if defined(__DEBUG)
+                    call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
+                    if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
+                        write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
                     endif
-                    !
-                    a_loc(i,j) = rrr_value
-                    !
-            enddo
-        enddo
-        !
 #endif
-      	!
+
+                    if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
+                    if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
+                    if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+
+                enddo
+            enddo
+        !
       	call blacs_barrier(context, 'a')
         !
         t2 = MPI_Wtime()
