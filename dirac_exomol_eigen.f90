@@ -566,9 +566,11 @@ program dirac_exomol_eigen
       call ArrayStart(context,iam,'diag_scalapack:work',info,size(work),kind(work))
       call ArrayStart(context,iam,'diag_scalapack:iwork',info,size(iwork),kind(iwork))
       !
-      !if (iam == 0) then
-      !  write(out,"(/'lwork =  ', i16, 'liwork = ', i16, 'lda = ', i16, 'loc_r = ', i16, 'loc_c = ', i16)") lwork, liwork, lda, loc_r, loc_c
-      !endif
+#if defined(__DEBUG
+      if (iam == 0) then
+        write(out,"(/'lwork =  ', i16, 'liwork = ', i16, 'lda = ', i16, 'loc_r = ', i16, 'loc_c = ', i16)") lwork, liwork, lda, loc_r, loc_c
+      endif
+#endif
       !
       
       if (iam == 0) then

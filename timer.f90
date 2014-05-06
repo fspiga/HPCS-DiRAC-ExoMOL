@@ -750,9 +750,12 @@ module timer
         !
         !  Output
         !
+#if 0
         write (out,"(t2,a,t50,t55,e11.4)") &
                t%name, t%size
+#endif
       end do scan
+      
       write (out,"(t2,'Total memory   = ',t47,f18.8,' Gb')") memory_now
       write (out,"(t2,'Maximal memory = ',t47,f18.8,' Gb (',f16.1,')')") maxmemory,memory_limit
 
