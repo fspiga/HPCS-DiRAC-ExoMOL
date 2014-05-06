@@ -559,7 +559,9 @@ program dirac_exomol_eigen
       call blacs_barrier(context, 'a')
       t1 = MPI_Wtime()
       !
-      write(out,"(/'Starting ELPA solve_evp_real...')")
+      if (iam == 0) then
+          write(out,"(/'Starting ELPA solve_evp_real...')")
+      endif
       ! How many eigenvalues/eigenvectors ?
       ! nsolv=dimen_s == requests all eigenstates
       nsolv=nroots
@@ -574,7 +576,9 @@ program dirac_exomol_eigen
       call blacs_barrier(context, 'a')
       t1 = MPI_Wtime()
       !
-      write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
+      if (iam == 0) then
+           write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
+      endif
       ! How many eigenvalues/eigenvectors ?
       ! nsolv=dimen_s == requests all eigenstates
       nsolv=nroots
@@ -607,10 +611,12 @@ program dirac_exomol_eigen
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,' sec'
 
 #if defined(__ELPA)
-        print *,'Time tridiag_real     :',time_evp_fwd
-        print *,'Time solve_tridi      :',time_evp_solve
-        print *,'Time trans_ev_real    :',time_evp_back
-        print *,'Total time (sum above):',time_evp_back+time_evp_solve+time_evp_fwd
+        if (eigensolver .ge. 3) then
+           print *,'Time tridiag_real     :',time_evp_fwd
+           print *,'Time solve_tridi      :',time_evp_solve
+           print *,'Time trans_ev_real    :',time_evp_back
+           print *,'Total time (sum above):',time_evp_back+time_evp_solve+time_evp_fwd
+        endif
 #endif
 
       else if (info .lt. 0) then
@@ -622,9 +628,13 @@ program dirac_exomol_eigen
     !
     call blacs_barrier(context, 'a')
     !
-    deallocate(a_loc, z_loc, work, iwork, w)
-    call ArrayStop(context,'diag_scalapack:work')
-    call ArrayStop(context,'diag_scalapack:iwork')
+    if (eigensolver .le. 2 ) then
+        deallocate(work, iwork)
+        call ArrayStop(context,'diag_scalapack:work')
+        call ArrayStop(context,'diag_scalapack:iwork')
+    endif
+
+    deallocate(a_loc, z_loc, w)
     call ArrayStop(context,'diag_scalapack:a_loc')
     call ArrayStop(context,'diag_scalapack:z_loc')
     call ArrayStop(context,'diag_scalapack:w')
@@ -639,8 +649,6 @@ program dirac_exomol_eigen
 
     call blacs_gridexit(context)
     call blacs_exit(0)
-
-
     !
 end program dirac_exomol_eigen
 
