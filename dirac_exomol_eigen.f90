@@ -27,7 +27,7 @@ module d_module
   !
   logical :: gen_mat = .false.
   integer(ik) :: mat_len
-#if 0
+#if 1
   integer(hik)	::	seed(1000000)
 #endif
   !
@@ -188,7 +188,7 @@ module d_module
     !
   end subroutine FLReadInput
 
-#if 0
+#if 1
   integer(hik) function  rrr(i)
   	integer(ik)	::	i
   	seed(i) = mod((1103515245 * seed(i) + 12345),1099511627776);
@@ -420,7 +420,7 @@ program dirac_exomol_eigen
 	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
 	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
 	   
-#if 0 
+#if 1 
 	    ! This is highly inefficient! I suggest to change this first and then implement a second
 	    !   completely different approach (but still keep both in the source tree) [NdFilippo]
 	    
