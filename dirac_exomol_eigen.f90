@@ -611,11 +611,17 @@ program dirac_exomol_eigen
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,' sec'
 
 #if defined(__ELPA)
+         write(out,'(/a)') 'Detailed internal ELPA timing :'
         if (eigensolver .ge. 3) then
-           print *,'Time tridiag_real     :',time_evp_fwd
-           print *,'Time solve_tridi      :',time_evp_solve
-           print *,'Time trans_ev_real    :',time_evp_back
-           print *,'Total time (sum above):',time_evp_back+time_evp_solve+time_evp_fwd
+                if (eigensolver .eq. 4) then
+                        write(out,'(a,a)') '  Time trans_band_real : ','NOT AVAILABLE YET'
+                endif
+                write(out,'(a,f9.2)') '  Time tridiag_real    : ',time_evp_fwd
+                write(out,'(a,f9.2)') '  Time solve_tridi     : ',time_evp_solve
+                write(out,'(a,f9.2)') '  Time trans_ev_real   : ',time_evp_fwd
+                if (eigensolver .eq. 4) then
+                        write(out,'(a,a)') '  Time trans_full_real : ','NOT AVAILABLE YET'
+                endif
         endif
 #endif
 
