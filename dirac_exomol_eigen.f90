@@ -618,7 +618,7 @@ program dirac_exomol_eigen
                         write(out,'(a,f9.2)') '  > trans_band_real    : ',trans_band_real
                 endif
                 write(out,'(a,f9.2)')         '  Time solve_tridi     : ',time_evp_solve
-                write(out,'(a,f9.2)')         '  Time trans_ev_real   : ',time_evp_fwd
+                write(out,'(a,f9.2)')         '  Time trans_ev_real   : ',time_evp_back
                 if (eigensolver .eq. 4) then
                         write(out,'(a,f9.2)') '  > trans_full_real    : ',trans_full_real
                 endif
@@ -634,6 +634,10 @@ program dirac_exomol_eigen
     !
     call blacs_barrier(context, 'a')
     !
+    if (iam == 0) then
+       call MemoryReport(context,iam,memory_now,memory_max)
+    endif
+    !   
     if (eigensolver .le. 2 ) then
         deallocate(work, iwork)
         call ArrayStop(context,'diag_scalapack:work')
@@ -647,12 +651,6 @@ program dirac_exomol_eigen
     !
     ! Exit BLACS
     !
-    !if (verbose>=3) call MemoryReport(context,iam,memory_now,memory_max)
-    if (iam == 0) then
-       call MemoryReport(context,iam,memory_now,memory_max)
-    endif
-    !
-
     call blacs_gridexit(context)
     call blacs_exit(0)
     !
