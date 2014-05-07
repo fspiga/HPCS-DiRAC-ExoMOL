@@ -727,6 +727,10 @@ module timer
       !write (out,"(t2,'Active Arrays',t55,'size (Gb)')")
       !write (out,"()")
       !
+#if defined(__MEM_DETAILED)
+        write (out,"(/t2,'Detailed memory report:')")
+#endif
+
       omitted = 0
       scan: do ord=1,array_count
         pos = array_appear(ord)
@@ -737,7 +741,7 @@ module timer
         end if
         !
 #if defined(__MEM_DETAILED)
-        write (out,"(/t2,'(Processor: ',I6,') Array = ',a,', Total memory = ',f7.4,' GByte')") iam, t%name, t%size
+        write (out,"(t5,'(Processor: ',i6,') Array = ',a25,', Total memory = ',f7.4,' GByte')") iam, TRIM(t%name), t%size
 #endif
         !
         ! Calculate active-array corrections
@@ -757,11 +761,6 @@ module timer
           omitted = omitted + 1
           cycle scan
         end if
-        !
-        !  Output
-        !
-        write (out,"(t2,a,t50,t55,e11.4)") &
-               t%name, t%size
       end do scan
  
       !write (out,"(t2,'Total memory   = ',t47,f18.8,' Gb')") memory_now
