@@ -603,15 +603,13 @@ program dirac_exomol_eigen
     ! do tests on convergence if any !
     ! ------------------------------ !
     !
-!    if (iam == 0 .and.verbose>=3) then
     if (iam == 0) then
-!      write(out,"(/'info = ', i8)") info
+      write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,'sec'
       if (info .eq. 0) then
         write(out,"(/'Diagonalization finished successfully!')")
-        write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,' sec'
 
 #if defined(__ELPA)
-         write(out,'(/a)') 'Detailed internal ELPA timing :'
+        write(out,'(/a)') 'Detailed internal ELPA timing :'
         if (eigensolver .ge. 3) then
                 write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
                 if (eigensolver .eq. 4) then
