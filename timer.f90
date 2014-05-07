@@ -518,8 +518,8 @@ module timer
 
       if (alloc/=0) then
           write(out,"(/' Error ',i8,' trying to allocate array ',a)") alloc,name
-          write(out,"( ' Total memory ',f14.2,' array size =  ',f18.2,' Gb')") array_size,(real(ikind)*real(isize))/real(1024**3)
-          call MemoryReport(comm,iam,memory_now,memory_)
+          !write(out,"( ' Total memory ',f14.2,' array size =  ',f18.2,' Gb')") array_size,(real(ikind)*real(isize))/real(1024**3)
+          !call MemoryReport(comm,iam,memory_now,memory_)
           stop 'ArrayStart - allocation error'
       end if
       !
@@ -531,15 +531,18 @@ module timer
       t   => array_table(pos)
       !
       size_ = (ikind*real(isize))/real(1024**3) ! size in GByte
-      !
       if (present(hsize)) size_ = (ikind*real(hsize))/real(1024**3)
+      !
+#if defined(__MEM_DEBUG)
+      write (out,"(/' Size of array ',a,' contributed of ',f20.8,' GByte')") name, size_
+#endif
       !
       if (size_<0.0_trk) then
           write (out,"(' Size of array ',a,' is negative ',f20.8)") name,size_
           size_ = 1
           call MemoryReport(comm,iam,memory_now,memory_)
           !
-          !stop 'ArrayStart - negative size'
+          stop 'ArrayStart - negative size'
       end if
       !
       if (.not.t%active) then
@@ -554,13 +557,16 @@ module timer
       end if
       !
       array_size   = array_size + size_
+#if defined(__MEM_DEBUG)
+      write (out,"(/' Cumulated memory : ',f20.8,' GByte')") array_size
+#endif
       !
-      maxmemory = max(array_size,maxmemory)
+      !maxmemory = max(array_size,maxmemory)
       !
       if (array_size>memory_limit) then 
         !
         write(out,"('Run out of memory')")
-        call MemoryReport(comm,iam,memory_now,memory_)
+        !call MemoryReport(comm,iam,memory_now,memory_)
         stop 'Run out of memory'
         !
       endif 
@@ -715,10 +721,10 @@ module timer
       !
       memory_max = maxmemory
       !
-      mem_threshold = 0.01_trk * memory_now
+      !mem_threshold = 0.01_trk * memory_now
       !
-      write (out,"(//t2,'Memory Report (',i4,')')") iam
-      write (out,"(t2,'Active Arrays',t55,'size (Gb)')")
+      !write (out,"(//t2,'Memory Report (',i4,')')") iam
+      !write (out,"(t2,'Active Arrays',t55,'size (Gb)')")
       !write (out,"()")
       !
       omitted = 0
@@ -729,6 +735,10 @@ module timer
           write (out,"('Array ',i4,' in slot ',i5,' is defined but unused?!')") ord, pos
           stop 'MemoryReport - logic error'
         end if
+        !
+#if defined(__MEM_DETAILED)
+        write (out,"(/t2,'(Processor: ',I6,') Array = ',a,', Total memory = ',f7.4,' GByte')") iam, t%name, t%size
+#endif
         !
         ! Calculate active-array corrections
         !
@@ -750,21 +760,20 @@ module timer
         !
         !  Output
         !
-#if 0
         write (out,"(t2,a,t50,t55,e11.4)") &
                t%name, t%size
-#endif
       end do scan
-      
-      write (out,"(t2,'Total memory   = ',t47,f18.8,' Gb')") memory_now
-      write (out,"(t2,'Maximal memory = ',t47,f18.8,' Gb (',f16.1,')')") maxmemory,memory_limit
+ 
+      !write (out,"(t2,'Total memory   = ',t47,f18.8,' Gb')") memory_now
+      write (out,"(/t2,'(Processor: ',I6,') Total memory = ',f7.4,' GByte ( ',f5.2,' GByte )')") iam, memory_now, memory_limit
 
-
+#if 0
       if (omitted>0) then
         write (out,"(/' (',i9,' arrays contributing less than 1% are not shown)')") &
                omitted
       end if
       write (out,"()")
+#endif
     end subroutine MemoryReport
 
 
