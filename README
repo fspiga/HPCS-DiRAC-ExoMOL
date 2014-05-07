@@ -1,1 +1,29 @@
-to fill
+CONFIGURE
+---------
+
+ScaLAPACK is required. ELPA is optional (it has to be compiled manually, 
+the flag -D__ELPA has to be specified).
+
+Under "makes/" there are several Makefiles, all related to Darwin (HPCS)
+
+
+INPUT FILE FORMAT
+-----------------
+
+- "GEN-MAT" is the size of the matrix 
+- "NROOTS" is the number of eigen-state to compute, starting from index 1.
+- "DIAGONALIZER" is the type of solver to use. 
+	PDSYEVD (default), PDSYEVX, ELPA-1STAGE, ELPA-2STAGE
+
+NOTE: if PDSYEVD, NROOTS is ignored (by default all the eigen-values and 
+      eigen-vectors are computed)
+      
+      
+KNOWN PROBLEMS
+--------------
+
+- PDSYEVX sometimes fails ( INFO .ne. ZERO) due to not enough workspace
+  allocated to compute the eigen-vectors. Reasons still unknown, it is 
+  related to the number of NROOTS
+- ELPA does not report explicitly any error code (e.g. INFO) back to the 
+  main application.
