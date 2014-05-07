@@ -613,11 +613,10 @@ program dirac_exomol_eigen
 #if defined(__ELPA)
          write(out,'(/a)') 'Detailed internal ELPA timing :'
         if (eigensolver .ge. 3) then
-                write(out,'(a,f9.2)')         '  Time tridiag_real    :',time_evp_fwd
+                write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
                 if (eigensolver .eq. 4) then
                         write(out,'(a,f9.2)') '  > trans_band_real    : ',trans_band_real
                 endif
-                write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
                 write(out,'(a,f9.2)')         '  Time solve_tridi     : ',time_evp_solve
                 write(out,'(a,f9.2)')         '  Time trans_ev_real   : ',time_evp_fwd
                 if (eigensolver .eq. 4) then
