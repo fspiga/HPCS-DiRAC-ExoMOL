@@ -17,3 +17,13 @@ INPUT FILE FORMAT
 
 NOTE: if PDSYEVD, NROOTS is ignored (by default all the eigen-values and 
       eigen-vectors are computed)
+      
+      
+KNOWN PROBLEMS
+--------------
+
+- PDSYEVX sometimes fails ( INFO .ne. ZERO) due to not enough workspace
+  allocated to compute the eigen-vectors. Reasons still unknown, it is 
+  related to the number of NROOTS
+- ELPA does not report explicitly any error code (e.g. INFO) back to the 
+  main application.
