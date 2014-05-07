@@ -1,0 +1,20 @@
+INSTRUCTIONS
+------------
+1. Get ELPA from repository (requires subscription)
+2. Copy patch patch.ELPA_2013.11 in the ELPA main directory
+3. Execute the command
+  $ patch -p1 < patch.ELPA_2013.11
+4. Compile ELPA_2013.11
+
+
+ADDITIONAL NOTES
+----------------
+- The patch can easily adapted to the version donaloadable from the website
+
+
+RESOURCES
+---------
+http://elpa.rzg.mpg.de
+http://elpa.rzg.mpg.de/elpa-tar-archive/elpa-2013-11.006/view) 
+
+

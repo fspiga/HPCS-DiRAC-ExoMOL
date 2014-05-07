@@ -1,0 +1,46 @@
+diff -ur elpa_lib/ELPA_2013.11/src/elpa2.F90 elpa_lib.orig/ELPA_2013.11/src/elpa2.F90
+--- elpa_lib/ELPA_2013.11/src/elpa2.F90	2014-05-07 11:40:58.000000000 +0100
++++ elpa_lib.orig/ELPA_2013.11/src/elpa2.F90	2014-05-07 11:58:05.000000000 +0100
+@@ -83,11 +83,6 @@
+   public :: trans_ev_tridi_to_band_complex
+   public :: trans_ev_band_to_full_complex
+ 
+-  ! Timing results, set by every call to solve_evp_xxx
+-
+-  real*8, public :: trans_band_real ! full -> band
+-  real*8, public :: trans_full_real ! band -> full
+-
+ !-------------------------------------------------------------------------------
+ 
+   ! The following array contains the Householder vectors of the
+@@ -178,7 +173,6 @@
+    ttt1 = MPI_Wtime()
+    if(my_prow==0 .and. my_pcol==0 .and. elpa_print_times) &
+       print 1,'Time bandred_real               :',ttt1-ttt0
+-   trans_band_real = ttt1-ttt0
+ 
+    ! Reduction band -> tridiagonal
+ 
+@@ -204,18 +198,17 @@
+    if(my_prow==0 .and. my_pcol==0 .and. elpa_print_times) &
+       print 1,'Time solve_tridi                :',ttt1-ttt0
+    time_evp_solve = ttt1-ttt0
++   ttts = ttt1
+ 
+    deallocate(e)
+ 
+    ! Backtransform stage 1
+ 
+    ttt0 = MPI_Wtime()
+-   ttts = ttt0
+    call trans_ev_tridi_to_band_real(na, nev, nblk, nbw, q, ldq, mpi_comm_rows, mpi_comm_cols)
+    ttt1 = MPI_Wtime()
+    if(my_prow==0 .and. my_pcol==0 .and. elpa_print_times) &
+       print 1,'Time trans_ev_tridi_to_band_real:',ttt1-ttt0
+-   trans_full_real = ttt1-ttt0
+ 
+    ! We can now deallocate the stored householder vectors
+    deallocate(hh_trans_real)
+Only in elpa_lib.orig/ELPA_development_version_qr/test: Makefile.example
+Only in elpa_lib.orig: .git
+Only in elpa_lib: .project

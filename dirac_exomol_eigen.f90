@@ -456,9 +456,6 @@ program dirac_exomol_eigen
     ! define remaining workspace !
     ! -------------------------- !
     !
-    ! I will suggest to call the solvers and probe the sugegsted (hopefully minimum) space required
-    !   by auxiliary *WORK data structures (NdFilipo)
-    !
     select case (eigensolver)
       !
     case (1)
@@ -497,39 +494,13 @@ program dirac_exomol_eigen
       call blacs_barrier(context, 'a')
       t1 = MPI_Wtime()
       !
-      !lwork = 10 ; liwork = 10
-      !
-#if defined(__ELPA)
-      !
-      if (iam == 0) then
-#if defined(__2STAGE)
-        write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
-#else
-        write(out,"(/'Starting ELPA solve_evp_real...')")
-#endif
-      endif
-
-      ! How many eigenvalues/eigenvectors ?
-      ! nsolv=dimen_s == requests all eigenstates
-      nsolv=nroots      
-      !
-#if defined(__2STAGE)
-      call solve_evp_real_2stage(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb, mpi_comm_rows, mpi_comm_cols, mpi_comm_world)
-#else
-      call solve_evp_real(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb,mpi_comm_rows, mpi_comm_cols)
-#endif
-      info = 0
-      !
-#else
-      !
       if (iam == 0) then
         write(out,"(/'Starting pdsyevd...')")
       endif
-
+      !
       call pdsyevd('V', 'L', dimen_s, a_loc, 1, 1, desca, w, z_loc, 1, 1, descz, work, lwork, iwork, liwork, info)
       !
-#endif
-      !
+      ! ... what is this?
       nvals = dimen_s
       !
     case (2)
@@ -560,8 +531,6 @@ program dirac_exomol_eigen
       lwork = work_(1)*1.3
       liwork = iwork_(1)*1.3
       !
-      if (verbose>=4 ) write(out,"(/'iam = ',i4,' lwork =  ', i16, ' liwork = ', i16, ' lda = ', i16)") iam,lwork, liwork, lda
-      !
       allocate(work(lwork), iwork(liwork), stat=info)
       call ArrayStart(context,iam,'diag_scalapack:work',info,size(work),kind(work))
       call ArrayStart(context,iam,'diag_scalapack:iwork',info,size(iwork),kind(iwork))
@@ -584,6 +553,42 @@ program dirac_exomol_eigen
         write(out,"(/'pdsyevx: nvals =  ', i16, 'nvetcs = ', i16)") nvals,nvects
       endif
       !
+#if defined(__ELPA)
+    case (3)
+      !
+      call blacs_barrier(context, 'a')
+      t1 = MPI_Wtime()
+      !
+      if (iam == 0) then
+          write(out,"(/'Starting ELPA solve_evp_real...')")
+      endif
+      ! How many eigenvalues/eigenvectors ?
+      ! nsolv=dimen_s == requests all eigenstates
+      nsolv=nroots
+      !
+      call solve_evp_real(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb,mpi_comm_rows, mpi_comm_cols)
+      !
+      ! How check if ELPA ended successfully? ... boh!
+      info = 0
+      !
+    case (4)
+      !
+      call blacs_barrier(context, 'a')
+      t1 = MPI_Wtime()
+      !
+      if (iam == 0) then
+           write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
+      endif
+      ! How many eigenvalues/eigenvectors ?
+      ! nsolv=dimen_s == requests all eigenstates
+      nsolv=nroots
+      !
+      call solve_evp_real_2stage(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb, mpi_comm_rows, mpi_comm_cols, mpi_comm_world)
+      !
+      ! How check if ELPA ended successfully? ... boh!
+      info = 0
+      !
+#endif
     case default
       !
       write(out,'("Uknown eigensolver = ",i)'), eigensolver
@@ -605,13 +610,19 @@ program dirac_exomol_eigen
         write(out,"(/'Diagonalization finished successfully!')")
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,' sec'
 
-        ! We can mimic the same timing granularity in ScaLAPACK too by patching the netlib code [NdFilippo]
-
 #if defined(__ELPA)
-        print *,'Time tridiag_real     :',time_evp_fwd
-        print *,'Time solve_tridi      :',time_evp_solve
-        print *,'Time trans_ev_real    :',time_evp_back
-        print *,'Total time (sum above):',time_evp_back+time_evp_solve+time_evp_fwd
+         write(out,'(/a)') 'Detailed internal ELPA timing :'
+        if (eigensolver .ge. 3) then
+                write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
+                if (eigensolver .eq. 4) then
+                        write(out,'(a,f9.2)') '  > trans_band_real    : ',trans_band_real
+                endif
+                write(out,'(a,f9.2)')         '  Time solve_tridi     : ',time_evp_solve
+                write(out,'(a,f9.2)')         '  Time trans_ev_real   : ',time_evp_fwd
+                if (eigensolver .eq. 4) then
+                        write(out,'(a,f9.2)') '  > trans_full_real    : ',trans_full_real
+                endif
+        endif
 #endif
 
       else if (info .lt. 0) then
@@ -622,15 +633,14 @@ program dirac_exomol_eigen
     endif
     !
     call blacs_barrier(context, 'a')
-    t2 = MPI_Wtime()
-    !   
-    !if (iam == 0.and.verbose>=4) then
-    !  write(out,'(/a,f12.6,a)') 'Time to print vectors with PDLAPRNT is ',t2-t1,' sec'
-    !endif
     !
-    deallocate(a_loc, z_loc, work, iwork, w)
-    call ArrayStop(context,'diag_scalapack:work')
-    call ArrayStop(context,'diag_scalapack:iwork')
+    if (eigensolver .le. 2 ) then
+        deallocate(work, iwork)
+        call ArrayStop(context,'diag_scalapack:work')
+        call ArrayStop(context,'diag_scalapack:iwork')
+    endif
+
+    deallocate(a_loc, z_loc, w)
     call ArrayStop(context,'diag_scalapack:a_loc')
     call ArrayStop(context,'diag_scalapack:z_loc')
     call ArrayStop(context,'diag_scalapack:w')
@@ -645,8 +655,6 @@ program dirac_exomol_eigen
 
     call blacs_gridexit(context)
     call blacs_exit(0)
-
-
     !
 end program dirac_exomol_eigen
 

@@ -1,13 +1,16 @@
-# HPCS -- Works with Open MPI 1.8.0 using ScaLAPACK from MKL
+# HPCS -- Works with MVAPICH2 using ScaLAPACK from MKL
 
-PLAT   = _OMPI-INTEL
+PLAT   = _MV2-INTEL_ELPA
 FC    = mpif90
 
-FFLAGS = -fpp -O3 -ipo -xHost -traceback -g
+ELPA_INC = -D__ELPA -I$(ELPA_HOME)/include/elpa/modules
+ELPA_LIB = -L$(ELPA_HOME)/lib -lelpa 
+
+FFLAGS = -fpp $(ELPA_INC) -O3 -ipo -xHost -traceback -g
 FFLAGS_OMP = -openmp $(FFLAGS)
 
-LIB = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
-LIB_MP = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm
+LIB = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
+LIB_MP = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm
 
 OBJ = accuracy.o timer.o input.o pdlaprnt_local.o 
 
@@ -18,7 +21,8 @@ env:
 	module load default-wilkes
 	module unload intel/impi cuda intel/mkl
 	module load intel/mkl/11.1.2.144
-	module load fs395/openmpi-1.8.0/intel
+	module load fs395/mvapich2-2.0rc1/intel
+	module load fs395/elpa/2013.11-v8/intel-mvapich
 
 diag$(PLAT).x:  $(OBJ) dirac_exomol_eigen.o
 	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) dirac_exomol_eigen.o $(LIB)
