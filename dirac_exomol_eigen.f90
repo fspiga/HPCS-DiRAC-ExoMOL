@@ -240,7 +240,7 @@ program dirac_exomol_eigen
     integer(ik)         mpi_comm_rows, mpi_comm_cols
 #endif
     ! Local Arrays
-    integer(ik)                      desca(50), descz(50), irecl
+    integer(ik)                      desca(50), descz(50), descc(50), irecl
     integer(ik), allocatable ::      iwork(:)
     double precision, allocatable :: work(:), w(:), z_loc(:,:), eigvec(:),local_vecs(:)
     !
