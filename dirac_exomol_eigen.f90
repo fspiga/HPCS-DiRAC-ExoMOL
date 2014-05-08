@@ -390,12 +390,12 @@ program dirac_exomol_eigen
 	    nb = max(nb,1)    	
 
 #if defined(__DEBUG)
-            if (iam == 0) then
-               write(out, "('NB : ',i3)") nb
-            endif
+        if (iam == 0) then
+           write(out, "('NB : ',i3)") nb
+        endif
 #endif
 	    
-            loc_r = numroc(dimen_s,nb,myrow,0,nprow)
+        loc_r = numroc(dimen_s,nb,myrow,0,nprow)
 	    loc_c = numroc(dimen_s,nb,mycol,0,npcol)
 	    lda = max (1,loc_r)
 	    
@@ -403,7 +403,7 @@ program dirac_exomol_eigen
    	    call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 	    
 #if defined(__DEBUG)
-            write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
+       write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
 #endif
 
 	    allocate(a_loc(loc_r,loc_c),stat=info)
@@ -434,12 +434,12 @@ program dirac_exomol_eigen
             write(out,"(/'Fill randomly c_loc...')")
         endif
         !
-        call srand(19830607)
+        call RANDOM_SEED   (SIZE=19830607)
         do j = 1,loc_c
             global_j = indxl2g( j, nb, mycol, 0, npcol )
             do i=1,loc_r
                 !
-                c_loc(i,j) = rand()
+                call RANDOM_NUMBER (HARVEST=c_loc(i,j))
                 !
                 ! c = n*I
                 global_i = indxl2g( i, nb, myrow, 0, nprow )
