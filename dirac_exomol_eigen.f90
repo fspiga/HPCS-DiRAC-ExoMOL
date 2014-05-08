@@ -427,54 +427,48 @@ program dirac_exomol_eigen
 
         allocate(c_loc(loc_r,loc_c),stat=info)
         matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
-        call ArrayStart(context,iam,'diag_scalapack:c_loc',info,size(c_loc),kind(c_loc),matsize)
+        call ArrayStart(context,iam,'pdgemm:c_loc',info,size(c_loc),kind(c_loc),matsize)
 
         ! 1)
         if (iam == 0) then
-            write(out,"(/'Fill randomly a_loc...')")
+            write(out,"(/'Fill randomly c_loc...')")
         endif
-        !
-        call blacs_barrier(context, 'a')
-        t3 = MPI_Wtime()
         !
         call srand(19830607)
         do j = 1,loc_c
             global_j = indxl2g( j, nb, mycol, 0, npcol )
             do i=1,loc_r
                 !
-                a_loc(i,j) = rand()
+                c_loc(i,j) = rand()
                 !
                 ! c = n*I
                 global_i = indxl2g( i, nb, myrow, 0, nprow )
                 if(global_i == global_j) then
-                    c_loc(i,j) = dimen_s*1.0d0
+                    a_loc(i,j) = dimen_s*1.0d0
                 else
-                    c_loc(i,j) = 0.0d0
+                    a_loc(i,j) = 0.0d0
                 endif
             enddo
         enddo
         !
-        call blacs_barrier(context, 'a')
-        t4 = MPI_Wtime()
-        if (iam == 0) then
-            write(out,'(/t5a,f12.6,a)') 'a_loc init time',t4-t3,' sec'
-        endif
-        !
         ! 2)
         if (iam == 0) then
-            write(out,"(/'Compute A*A\'...')")
+            write(out,"(/'Compute symmetric positive A from randomly generated C...')")
         endif
         !
         call blacs_barrier(context, 'a')
         t3 = MPI_Wtime()
         !
-        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, a_loc, 1, 1, desca, a_loc, 1, 1, desca, 0.0d0, c_loc, 1, 1, descc)
+        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
         !
         call blacs_barrier(context, 'a')
         t4 = MPI_Wtime()
         if (iam == 0) then
             write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
         endif
+
+        call ArrayStop(context,'pdgemm:c_loc')
+        deallocate (c_loc)
 
 #else
         do i = 1, dimen_s
