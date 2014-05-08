@@ -28,7 +28,7 @@ module d_module
   logical :: gen_mat = .false.
   integer(ik) :: mat_len
 #if 1
-  integer(hik)	::	seed(1000000)
+  integer(hik)	::	seeded_array(1000000)
 #endif
   !
   contains
@@ -191,8 +191,8 @@ module d_module
 #if 1
   integer(hik) function  rrr(i)
   	integer(ik)	::	i
-  	seed(i) = mod((1103515245 * seed(i) + 12345),1099511627776);
-  	rrr=seed(i)
+  	seeded_array(i) = mod((1103515245 * seeded_array(i) + 12345),1099511627776);
+  	rrr=seeded_array(i)
   	return
   end function rrr
 #endif
@@ -476,7 +476,7 @@ program dirac_exomol_eigen
 
 #else
         do i = 1, dimen_s
-            seed(i) = 123456789-i-1;
+            seeded_array(i) = 123456789-i-1;
         enddo
 
         do j = 1,loc_c
