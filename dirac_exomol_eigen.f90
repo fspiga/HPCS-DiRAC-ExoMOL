@@ -459,7 +459,11 @@ program dirac_exomol_eigen
         call blacs_barrier(context, 'a')
         t3 = MPI_Wtime()
         !
+#if defined(__PDGEMM_C_TERM)
+        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
+#else
         PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
+#endif
         !
         call blacs_barrier(context, 'a')
         t4 = MPI_Wtime()
