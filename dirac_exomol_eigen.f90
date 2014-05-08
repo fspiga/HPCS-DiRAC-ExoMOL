@@ -425,23 +425,23 @@ program dirac_exomol_eigen
 
         ! PRACTICE:
 
-        allocate(c_loc(loc_r,loc_c),stat=info)
-        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
-        call ArrayStart(context,iam,'pdgemm:c_loc',info,size(c_loc),kind(c_loc),matsize)
-
-        ! 1)
-        if (iam == 0) then
-            write(out,"(/'Fill randomly c_loc...')")
-        endif
-        !
         ! Init random number generator... in a non entirely random way!
         i = 1
         call RANDOM_SEED(size = i)
         my_seed(1)=19830607
         call RANDOM_SEED(put=my_seed)
         !
+        allocate(c_loc(loc_r,loc_c),stat=info)
+        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+        call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
+
+#if 1
+        ! O(n^3) complexity
+        if (iam == 0) then
+            write(out,"(/'Fill randomly c_loc...')")
+        endif
+        !
         do j = 1,loc_c
-            global_j = indxl2g( j, nb, mycol, 0, npcol )
             do i=1,loc_r
                 !
                 call RANDOM_NUMBER (HARVEST=c_loc(i,j))
@@ -458,7 +458,6 @@ program dirac_exomol_eigen
             enddo
         enddo
         !
-        ! 2)
         if (iam == 0) then
             write(out,"(/'Compute symmetric positive A from randomly generated C...')")
         endif
@@ -478,9 +477,56 @@ program dirac_exomol_eigen
             write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
         endif
 
-        call ArrayStop(context,'pdgemm:c_loc')
-        deallocate (c_loc)
+#else
+        ! O(n^2) complexity
+        if (iam == 0) then
+            write(out,"(/'Fill randomly c_loc...')")
+        endif
+        !
+        do j = 1,loc_c
+            global_j = indxl2g( j, nb, mycol, 0, npcol )
+            do i=1,loc_r
+                !
+                c_loc(i,j) = rand()
+            enddo
+        enddo
+        !
+        if (iam == 0) then
+            write(out,"(/'Transpose C...')")
+        endif
+        !
+        call blacs_barrier(context, 'a')
+        t3 = MPI_Wtime()
+        !
+        call PDTRAN( dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca )
+        !
+        call blacs_barrier(context, 'a')
+        t4 = MPI_Wtime()
+        if (iam == 0) then
+            write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
+        endif
+        !
+        if (iam == 0) then
+            write(out,"(/'Fill A diagonal...')")
+        endif
+        !
+        do j = 1,loc_c
+            global_j = indxl2g( j, nb, mycol, 0, npcol )
+            do i=1,loc_r
+                global_i = indxl2g( i, nb, myrow, 0, nprow )
+                if(global_i == global_j) then
+                    a_loc(i,j) = dimen_s*1.0d0
+                else
+                    a_loc(i,j) = 0.0d0
+                endif
+            enddo
+        enddo
 
+#endif
+        !
+        call ArrayStop(context,'aux:c_loc')
+        deallocate (c_loc)
+        !
 #else
         do i = 1, dimen_s
             seeded_array(i) = 123456789-i-1;
