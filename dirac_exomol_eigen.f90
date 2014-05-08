@@ -222,13 +222,13 @@ program dirac_exomol_eigen
     integer(hik)                matsize
     integer(ik)                 dimen_s, nelem, max_nelem
     integer(ik), allocatable :: bterm(:,:)
-    real(rk), allocatable ::    a_temp(:), a_loc(:,:)   
+    real(rk), allocatable ::    a_temp(:), a_loc(:,:), c_loc(:,:)
     real(rk) ::                 thresh=30000.0_rk, zpe, energy_thresh, coef_thresh,rrr_value
     ! Related to diagonalization
     integer(ik)  ::     nroots, nsolv
     ! Parameters
     integer(ik)         lwork, liwork
-    double precision    zero, t1, t2, work_(10)
+    double precision    zero, t1, t2, t3, t4, work_(10)
     parameter           ( zero = 0.0d0 )
     integer(ik)         loc_r, loc_c, lda
     double precision    mone
@@ -406,16 +406,16 @@ program dirac_exomol_eigen
             write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
 #endif
 
-	    allocate(a_loc(loc_r,loc_c),z_loc(loc_r,loc_c),w(dimen_s),stat=info)
+	    allocate(a_loc(loc_r,loc_c),stat=info)
 	    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
 
 	    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
-	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
-	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
-
 
 #if defined(__WELL_DEFINED_PROBLEM)
 
+        call descinit( descc, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
+
+        ! THEORY:
         ! Generate a dense n x n symmetric, positive definite matrix
         ! 1) A = rand(n,n); % generate a random n x n matrix using [0,1) values
         ! 2) A = A+A' ( O(n^2) complexity )
@@ -423,32 +423,83 @@ program dirac_exomol_eigen
         !    A = A*A' ( O(n^3) complexity )
         ! 3) A = A + n*I ( A symmetric diagonally dominant matrix and symmetric positive definite)
 
+        ! PRACTICE:
+
+        allocate(c_loc(loc_r,loc_c),stat=info)
+        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+        call ArrayStart(context,iam,'diag_scalapack:c_loc',info,size(c_loc),kind(c_loc),matsize)
+
+        ! 1)
+        if (iam == 0) then
+            write(out,"(/'Fill randomly a_loc...')")
+        endif
+        !
+        call blacs_barrier(context, 'a')
+        t3 = MPI_Wtime()
+        !
+        call srand(19830607)
+        do j = 1,loc_c
+            global_j = indxl2g( j, nb, mycol, 0, npcol )
+            do i=1,loc_r
+                !
+                a_loc(i,j) = rand()
+                !
+                ! c = n*I
+                global_i = indxl2g( i, nb, myrow, 0, nprow )
+                if(global_i == global_j) then
+                    c_loc(i,j) = dimen_s*1.0d0
+                else
+                    c_loc(i,j) = 0.0d0
+                endif
+            enddo
+        enddo
+        !
+        call blacs_barrier(context, 'a')
+        t4 = MPI_Wtime()
+        if (iam == 0) then
+            write(out,'(/t5a,f12.6,a)') 'a_loc init time',t4-t3,' sec'
+        endif
+        !
+        ! 2)
+        if (iam == 0) then
+            write(out,"(/'Compute A*A\'...')")
+        endif
+        !
+        call blacs_barrier(context, 'a')
+        t3 = MPI_Wtime()
+        !
+        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, a_loc, 1, 1, desca, a_loc, 1, 1, desca, 0.0d0, c_loc, 1, 1, descc)
+        !
+        call blacs_barrier(context, 'a')
+        t4 = MPI_Wtime()
+        if (iam == 0) then
+            write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
+        endif
 
 #else
-            do i = 1, dimen_s
-                seed(i) = 123456789-i-1;
-            enddo
-	   
-            do j = 1,loc_c
-                do i=1,loc_r
-                    !
-                    global_i = indxl2g( i, nb, myrow, 0, nprow )
-                    global_j = indxl2g( j, nb, mycol, 0, npcol )
-                    !
+        do i = 1, dimen_s
+            seed(i) = 123456789-i-1;
+        enddo
 
+        do j = 1,loc_c
+            do i=1,loc_r
+                !
+                global_i = indxl2g( i, nb, myrow, 0, nprow )
+                global_j = indxl2g( j, nb, mycol, 0, npcol )
+                !
 #if defined(__DEBUG)
-                    call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
-                    if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
-                        write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
-                    endif
+                call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
+                if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
+                    write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
+                endif
 #endif
-
-                    if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
-                    if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
-                    if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
-
-                enddo
+                !
+                if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
+                if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
+                if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+                !
             enddo
+        enddo
 #endif
         !
       	call blacs_barrier(context, 'a')
@@ -465,9 +516,20 @@ program dirac_exomol_eigen
 
     endif
     !
-    ! -------------------------- !
-    ! define remaining workspace !
-    ! -------------------------- !
+    ! --------------------------------- !
+    ! allocate solution data structures !
+    ! --------------------------------- !
+    !
+    allocate(z_loc(loc_r,loc_c),w(dimen_s),stat=info)
+    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+    !
+    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)
+    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
+    !
+    !
+    ! ------------------ !
+    ! start eigensolver  !
+    ! ------------------ !
     !
     select case (eigensolver)
       !
@@ -561,10 +623,6 @@ program dirac_exomol_eigen
 
       call pdsyevx('V', range, 'L', dimen_s, a_loc, 1, 1, desca, vl, vu, il,iu, abstol, nvals, nvects, w, orfac, z_loc, 1, 1, descz, & 
                    work, lwork, iwork, liwork, ifail, iclustr, gap,  info)
-      !
-      if (iam == 0) then
-        write(out,"(/'pdsyevx: nvals =  ', i16, 'nvetcs = ', i16)") nvals,nvects
-      endif
       !
 #if defined(__ELPA)
     case (3)
