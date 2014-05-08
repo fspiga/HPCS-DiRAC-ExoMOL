@@ -413,6 +413,18 @@ program dirac_exomol_eigen
 	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
 	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
 
+
+#if defined(__WELL_DEFINED_PROBLEM)
+
+        ! Generate a dense n x n symmetric, positive definite matrix
+        ! 1) A = rand(n,n); % generate a random n x n matrix using [0,1) values
+        ! 2) A = A+A' ( O(n^2) complexity )
+        !     _ or _
+        !    A = A*A' ( O(n^3) complexity )
+        ! 3) A = A + n*I ( A symmetric diagonally dominant matrix and symmetric positive definite)
+
+
+#else
             do i = 1, dimen_s
                 seed(i) = 123456789-i-1;
             enddo
@@ -437,6 +449,7 @@ program dirac_exomol_eigen
 
                 enddo
             enddo
+#endif
         !
       	call blacs_barrier(context, 'a')
         !
