@@ -240,7 +240,7 @@ program dirac_exomol_eigen
     integer(ik)         mpi_comm_rows, mpi_comm_cols
 #endif
     ! Local Arrays
-    integer(ik)                      desca(9), descz(9), descc(9), irecl
+    integer(ik)                      desca(9), descz(9), descc(9), my_seed(1), irecl
     integer(ik), allocatable ::      iwork(:)
     double precision, allocatable :: work(:), w(:), z_loc(:,:), eigvec(:),local_vecs(:)
     !
@@ -434,7 +434,12 @@ program dirac_exomol_eigen
             write(out,"(/'Fill randomly c_loc...')")
         endif
         !
-        call RANDOM_SEED   (SIZE=19830607)
+        ! Init random number generator... in a non entirely random way!
+        i = 1
+        call RANDOM_SEED(size = i)
+        my_seed(1)=19830607
+        call RANDOM_SEED(put=my_seed)
+        !
         do j = 1,loc_c
             global_j = indxl2g( j, nb, mycol, 0, npcol )
             do i=1,loc_r
@@ -442,12 +447,14 @@ program dirac_exomol_eigen
                 call RANDOM_NUMBER (HARVEST=c_loc(i,j))
                 !
                 ! c = n*I
+#if 0
                 global_i = indxl2g( i, nb, myrow, 0, nprow )
                 if(global_i == global_j) then
                     a_loc(i,j) = dimen_s*1.0d0
                 else
                     a_loc(i,j) = 0.0d0
                 endif
+#endif
             enddo
         enddo
         !
@@ -460,9 +467,9 @@ program dirac_exomol_eigen
         t3 = MPI_Wtime()
         !
 #if defined(__PDGEMM_C_TERM)
-        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
+        call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
 #else
-        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
+        call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
 #endif
         !
         call blacs_barrier(context, 'a')
