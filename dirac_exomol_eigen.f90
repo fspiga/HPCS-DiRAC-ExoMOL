@@ -28,7 +28,7 @@ module d_module
   logical :: gen_mat = .false.
   integer(ik) :: mat_len
 #if 1
-  integer(hik)	::	seed(1000000)
+  integer(hik)	::	seeded_array(1000000)
 #endif
   !
   contains
@@ -191,8 +191,8 @@ module d_module
 #if 1
   integer(hik) function  rrr(i)
   	integer(ik)	::	i
-  	seed(i) = mod((1103515245 * seed(i) + 12345),1099511627776);
-  	rrr=seed(i)
+  	seeded_array(i) = mod((1103515245 * seeded_array(i) + 12345),1099511627776);
+  	rrr=seeded_array(i)
   	return
   end function rrr
 #endif
@@ -222,13 +222,13 @@ program dirac_exomol_eigen
     integer(hik)                matsize
     integer(ik)                 dimen_s, nelem, max_nelem
     integer(ik), allocatable :: bterm(:,:)
-    real(rk), allocatable ::    a_temp(:), a_loc(:,:)   
+    real(rk), allocatable ::    a_temp(:), a_loc(:,:), c_loc(:,:)
     real(rk) ::                 thresh=30000.0_rk, zpe, energy_thresh, coef_thresh,rrr_value
     ! Related to diagonalization
     integer(ik)  ::     nroots, nsolv
     ! Parameters
     integer(ik)         lwork, liwork
-    double precision    zero, t1, t2, work_(10)
+    double precision    zero, t1, t2, t3, t4, work_(10)
     parameter           ( zero = 0.0d0 )
     integer(ik)         loc_r, loc_c, lda
     double precision    mone
@@ -240,7 +240,7 @@ program dirac_exomol_eigen
     integer(ik)         mpi_comm_rows, mpi_comm_cols
 #endif
     ! Local Arrays
-    integer(ik)                      desca(50), descz(50), irecl
+    integer(ik)                      desca(9), descz(9), descc(9), irecl
     integer(ik), allocatable ::      iwork(:)
     double precision, allocatable :: work(:), w(:), z_loc(:,:), eigvec(:),local_vecs(:)
     !
@@ -390,12 +390,12 @@ program dirac_exomol_eigen
 	    nb = max(nb,1)    	
 
 #if defined(__DEBUG)
-            if (iam == 0) then
-               write(out, "('NB : ',i3)") nb
-            endif
+        if (iam == 0) then
+           write(out, "('NB : ',i3)") nb
+        endif
 #endif
 	    
-            loc_r = numroc(dimen_s,nb,myrow,0,nprow)
+        loc_r = numroc(dimen_s,nb,myrow,0,nprow)
 	    loc_c = numroc(dimen_s,nb,mycol,0,npcol)
 	    lda = max (1,loc_r)
 	    
@@ -403,40 +403,102 @@ program dirac_exomol_eigen
    	    call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 	    
 #if defined(__DEBUG)
-            write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
+       write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
 #endif
 
-	    allocate(a_loc(loc_r,loc_c),z_loc(loc_r,loc_c),w(dimen_s),stat=info)
+	    allocate(a_loc(loc_r,loc_c),stat=info)
 	    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
 
 	    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
-	    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)   
-	    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
 
-            do i = 1, dimen_s
-                seed(i) = 123456789-i-1;
+#if defined(__WELL_DEFINED_PROBLEM)
+
+        call descinit( descc, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
+
+        ! THEORY:
+        ! Generate a dense n x n symmetric, positive definite matrix
+        ! 1) A = rand(n,n); % generate a random n x n matrix using [0,1) values
+        ! 2) A = A+A' ( O(n^2) complexity )
+        !     _ or _
+        !    A = A*A' ( O(n^3) complexity )
+        ! 3) A = A + n*I ( A symmetric diagonally dominant matrix and symmetric positive definite)
+
+        ! PRACTICE:
+
+        allocate(c_loc(loc_r,loc_c),stat=info)
+        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+        call ArrayStart(context,iam,'pdgemm:c_loc',info,size(c_loc),kind(c_loc),matsize)
+
+        ! 1)
+        if (iam == 0) then
+            write(out,"(/'Fill randomly c_loc...')")
+        endif
+        !
+        call RANDOM_SEED   (SIZE=19830607)
+        do j = 1,loc_c
+            global_j = indxl2g( j, nb, mycol, 0, npcol )
+            do i=1,loc_r
+                !
+                call RANDOM_NUMBER (HARVEST=c_loc(i,j))
+                !
+                ! c = n*I
+                global_i = indxl2g( i, nb, myrow, 0, nprow )
+                if(global_i == global_j) then
+                    a_loc(i,j) = dimen_s*1.0d0
+                else
+                    a_loc(i,j) = 0.0d0
+                endif
             enddo
-	   
-            do j = 1,loc_c
-                do i=1,loc_r
-                    !
-                    global_i = indxl2g( i, nb, myrow, 0, nprow )
-                    global_j = indxl2g( j, nb, mycol, 0, npcol )
-                    !
-
-#if defined(__DEBUG)
-                    call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
-                    if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
-                        write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
-                    endif
+        enddo
+        !
+        ! 2)
+        if (iam == 0) then
+            write(out,"(/'Compute symmetric positive A from randomly generated C...')")
+        endif
+        !
+        call blacs_barrier(context, 'a')
+        t3 = MPI_Wtime()
+        !
+#if defined(__PDGEMM_C_TERM)
+        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
+#else
+        PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
 #endif
+        !
+        call blacs_barrier(context, 'a')
+        t4 = MPI_Wtime()
+        if (iam == 0) then
+            write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
+        endif
 
-                    if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
-                    if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
-                    if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+        call ArrayStop(context,'pdgemm:c_loc')
+        deallocate (c_loc)
 
-                enddo
+#else
+        do i = 1, dimen_s
+            seeded_array(i) = 123456789-i-1;
+        enddo
+
+        do j = 1,loc_c
+            do i=1,loc_r
+                !
+                global_i = indxl2g( i, nb, myrow, 0, nprow )
+                global_j = indxl2g( j, nb, mycol, 0, npcol )
+                !
+#if defined(__DEBUG)
+                call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
+                if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
+                    write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
+                endif
+#endif
+                !
+                if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
+                if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
+                if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+                !
             enddo
+        enddo
+#endif
         !
       	call blacs_barrier(context, 'a')
         !
@@ -452,9 +514,20 @@ program dirac_exomol_eigen
 
     endif
     !
-    ! -------------------------- !
-    ! define remaining workspace !
-    ! -------------------------- !
+    ! --------------------------------- !
+    ! allocate solution data structures !
+    ! --------------------------------- !
+    !
+    allocate(z_loc(loc_r,loc_c),w(dimen_s),stat=info)
+    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+    !
+    call ArrayStart(context,iam,'diag_scalapack:z_loc',info,size(z_loc),kind(z_loc),matsize)
+    call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
+    !
+    !
+    ! ------------------ !
+    ! start eigensolver  !
+    ! ------------------ !
     !
     select case (eigensolver)
       !
@@ -548,10 +621,6 @@ program dirac_exomol_eigen
 
       call pdsyevx('V', range, 'L', dimen_s, a_loc, 1, 1, desca, vl, vu, il,iu, abstol, nvals, nvects, w, orfac, z_loc, 1, 1, descz, & 
                    work, lwork, iwork, liwork, ifail, iclustr, gap,  info)
-      !
-      if (iam == 0) then
-        write(out,"(/'pdsyevx: nvals =  ', i16, 'nvetcs = ', i16)") nvals,nvects
-      endif
       !
 #if defined(__ELPA)
     case (3)
