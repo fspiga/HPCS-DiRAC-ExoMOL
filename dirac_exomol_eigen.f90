@@ -15,6 +15,7 @@ module d_module
     integer(ik),parameter:: verbose = 2
     integer, parameter :: trk        = selected_real_kind(12)
     character(len=cl)    :: matrix_file='matrix'
+    character(len=cl)    :: diagonalizer
     !
     integer(ik),parameter ::  maxnprocs=1024
     integer(ik)           ::  iterout = 100
@@ -43,7 +44,6 @@ contains
         integer                            :: sparse_
         !
         real(rk),intent(out)               :: factor,tol,memory,zpe,energy_thresh,coef_thresh
-        character(len=cl)                  :: diagonalizer
         !
         character(len=cl) :: w
         !
@@ -525,9 +525,9 @@ program dirac_exomol_eigen
     call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
     !
     !
-    ! ------------------ !
-    ! start eigensolver  !
-    ! ------------------ !
+    ! --------------------------- !
+    ! initialize the eigensolver  !
+    ! --------------------------- !
     !
     select case (eigensolver)
           !
@@ -542,40 +542,12 @@ program dirac_exomol_eigen
             call ArrayStart(context,iam,'diag_scalapack:work',info,size(work),kind(work))
             call ArrayStart(context,iam,'diag_scalapack:iwork',info,size(iwork),kind(iwork))
             !
-            if (iam == 0.and.verbose>=4) then
+#if defined(__DEBUG)
+            if (iam == 0) then
                 write(out,"(/'lwork =  ', i16, ' liwork = ', i16, ' lda = ', i16, ' loc_r = ', i16, ' loc_c = ', i16)") lwork, liwork, lda, loc_r, loc_c
             endif
+#endif
             !
-            if (verbose>=4) call MemoryReport(context,iam,memory_now,memory_max)
-            !
-            ! -------------------------------------------------------------------------------------- !
-            ! do any tests or evaluations here, before calling diagonalization subroutine, if needed !
-            ! -------------------------------------------------------------------------------------- !
-            !
-            !lwork = -1
-            !liwork = -1
-            !call pdsyevd('V', 'U', dimen_s, a_loc, 1, 1, desca, w, z_loc, 1, 1, descz, work, lwork, iwork, liwork, info)
-            !write(out,*) 'computed optimal lwork =  ', work(1), 'liwork = ', iwork(1)
-            !call blacs_gridexit(context)
-            !call blacs_exit(0)
-            !stop
-            !
-            ! ---------------------------------------------- !
-            ! call pdsyevd to compute the eigendecomposition !
-            ! ---------------------------------------------- !
-            !
-            call blacs_barrier(context, 'a')
-            t1 = MPI_Wtime()
-            !
-            if (iam == 0) then
-                write(out,"(/'Starting pdsyevd...')")
-            endif
-            !
-            call pdsyevd('V', 'L', dimen_s, a_loc, 1, 1, desca, w, z_loc, 1, 1, descz, work, lwork, iwork, liwork, info)
-            !
-            ! ... what is this?
-            nvals = dimen_s
-          !
         case (2)
             !
             range = 'I'
@@ -614,55 +586,82 @@ program dirac_exomol_eigen
             endif
 #endif
             !
-      
-            if (iam == 0) then
-                write(out,"(/'Starting pdsyevx...')")
-            endif
-
-            call pdsyevx('V', range, 'L', dimen_s, a_loc, 1, 1, desca, vl, vu, il,iu, abstol, nvals, nvects, w, orfac, z_loc, 1, 1, descz, &
-                work, lwork, iwork, liwork, ifail, iclustr, gap,  info)
-          !
 #if defined(__ELPA)
         case (3)
             !
-            call blacs_barrier(context, 'a')
-            t1 = MPI_Wtime()
-            !
-            if (iam == 0) then
-                write(out,"(/'Starting ELPA solve_evp_real...')")
-            endif
             ! How many eigenvalues/eigenvectors ?
             ! nsolv=dimen_s == requests all eigenstates
             nsolv=nroots
+            !
+        case (4)
+            !
+            ! How many eigenvalues/eigenvectors ?
+            ! nsolv=dimen_s == requests all eigenstates
+            nsolv=nroots
+            !
+#endif
+        case default
+            !
+            write(out,'("Uknown eigensolver = ",a)'), trim(diagonalizer)
+            stop "Uknown eigensolver = "
+            !
+    end select
+    !
+    ! ------------------------ !
+    ! print memory footprint   !
+    ! ------------------------ !
+    !
+    if (iam == 0) then
+        call MemoryReport(context,iam,memory_now,memory_max)
+    endif
+    !
+    ! --------------------- !
+    ! call the eigensolver  !
+    ! --------------------- !
+    !
+    if (iam == 0) then
+        write(out,"(/'Starting ',a,' ...')") trim(diagonalizer)
+    endif
+    !
+    call blacs_barrier(context, 'a')
+    t1 = MPI_Wtime()
+    !
+    select case (eigensolver)
+          !
+        case (1)
+            !
+            call pdsyevd('V', 'L', dimen_s, a_loc, 1, 1, desca, w, z_loc, 1, 1, descz, work, lwork, iwork, liwork, info)
+            !
+            ! ... what is this?
+            nvals = dimen_s
+            !
+        case (2)
+            !
+            !
+            call pdsyevx('V', range, 'L', dimen_s, a_loc, 1, 1, desca, vl, vu, il,iu, abstol, nvals, nvects, w, orfac, z_loc, 1, 1, descz, &
+                work, lwork, iwork, liwork, ifail, iclustr, gap,  info)
+            !
+#if defined(__ELPA)
+        case (3)
             !
             call solve_evp_real(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb,mpi_comm_rows, mpi_comm_cols)
             !
             ! How check if ELPA ended successfully? ... boh!
             info = 0
-          !
+            !
         case (4)
-            !
-            call blacs_barrier(context, 'a')
-            t1 = MPI_Wtime()
-            !
-            if (iam == 0) then
-                write(out,"(/'Starting ELPA solve_evp_real_2stage...')")
-            endif
-            ! How many eigenvalues/eigenvectors ?
-            ! nsolv=dimen_s == requests all eigenstates
-            nsolv=nroots
             !
             call solve_evp_real_2stage(dimen_s, nsolv, a_loc, lda, w, z_loc, lda, nb, mpi_comm_rows, mpi_comm_cols, mpi_comm_world)
             !
             ! How check if ELPA ended successfully? ... boh!
             info = 0
-          !
+            !
 #endif
         case default
             !
-            write(out,'("Uknown eigensolver = ",i)'), eigensolver
+            write(out,'("Uknown eigensolver = ",a)'), trim(diagonalizer)
             stop "Uknown eigensolver = "
-      !
+            !
     end select
     !
     call blacs_barrier(context, 'a')
@@ -700,10 +699,6 @@ program dirac_exomol_eigen
     endif
     !
     call blacs_barrier(context, 'a')
-    !
-    if (iam == 0) then
-        call MemoryReport(context,iam,memory_now,memory_max)
-    endif
     !   
     if (eigensolver .le. 2 ) then
         deallocate(work, iwork)
