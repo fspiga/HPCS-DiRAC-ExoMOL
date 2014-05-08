@@ -1,4 +1,4 @@
-# HPCS -- Works with Open MPI 1.8.0 using ScaLAPACK from MKL
+# HPCS -- Works with Open MPI 1.8.0 using ScaLAPACK
 
 PLAT   = _OMPI-INTEL
 FC    = mpif90
@@ -9,7 +9,7 @@ FFLAGS_OMP = -openmp $(FFLAGS)
 LIB = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
 LIB_MP = -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm
 
-OBJ = accuracy.o timer.o input.o pdlaprnt_local.o 
+OBJ = accuracy.o timer.o input.o 
 
 default:  diag$(PLAT).x diag$(PLAT)_OMP.x
 
@@ -29,9 +29,6 @@ diag$(PLAT)_OMP.x: $(OBJ) dirac_exomol_eigen.o
 dirac_exomol_eigen.o:  dirac_exomol_eigen.f90 $(OBJ) 
 	$(FC) -c dirac_exomol_eigen.f90 $(FFLAGS)
 
-pdlaprnt_local.o: pdlaprnt_local.f
-	$(FC) -c pdlaprnt_local.f $(FFLAGS)
-
 accuracy.o:  accuracy.f90
 	$(FC) -c accuracy.f90 $(FFLAGS)
 
@@ -43,4 +40,7 @@ input.o:  input.f90 accuracy.o
 
 clean:
 	rm -f $(OBJ) *.mod *.o
+
+veryclean: clean
+	rm -f *.x
 

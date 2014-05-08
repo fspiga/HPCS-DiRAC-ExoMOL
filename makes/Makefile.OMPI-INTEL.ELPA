@@ -1,34 +1,37 @@
-# HPCS -- Works with Open MPI 1.8.0 using ELPA 2013.11-v8 & BLACS from ScaLAPACK (MKL)
-#
-# module purge
-# module load default-wilkes
-# module unload intel/impi cuda intel/mkl
-# module load intel/mkl/11.1.2.144
-# module load fs395/openmpi-1.8.0/intel
-# module load fs395/elpa/2013.11-v8/intel-openmpi
+# HPCS -- Works with Open MPI 1.8.0 using ELPA
 
-PLAT   = _OMPI-INTEL_ELPA
+PLAT   = _OMPI-INTEL-ELPA
 FC    = mpif90
 
-FFLAGS = -fpp -D__ELPA -O3 -ipo -xHost -traceback -g -I$(ELPA_HOME)/include/elpa/modules
+ELPA_INC = -D__ELPA -I$(ELPA_HOME)/include/elpa/modules
+ELPA_LIB = -L$(ELPA_HOME)/lib -lelpa 
 
-# 2-stage ELPA routines disabled, slow runtime noticed
-#FFLAGS += -D__2STAGE
+FFLAGS = -fpp $(ELPA_INC) -O3 -ipo -xHost -traceback -g
+FFLAGS_OMP = -openmp $(FFLAGS)
 
-LIB = -L$(ELPA_HOME)/lib -lelpa -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -mavx
+LIB = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
+LIB_MP = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm
 
-OBJ = accuracy.o timer.o input.o pdlaprnt_local.o  
+OBJ = accuracy.o timer.o input.o 
 
-default:   diag$(PLAT).x
+default:  diag$(PLAT).x diag$(PLAT)_OMP.x
 
-diag$(PLAT).x:  $(OBJ) diag_pdsyev.o
-	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) diag_pdsyev.o $(LIB)
+env:
+	module purge
+	module load default-wilkes
+	module unload intel/impi cuda intel/mkl
+	module load intel/mkl/11.1.2.144
+	module load fs395/openmpi-1.8.0/intel
+	module load fs395/elpa/2013.11-v8/intel-openmpi
 
-diag_pdsyev.o:  diag_pdsyev.f90 $(OBJ) 
-	$(FC) -c diag_pdsyev.f90 $(FFLAGS)
+diag$(PLAT).x:  $(OBJ) dirac_exomol_eigen.o
+	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) dirac_exomol_eigen.o $(LIB)
 
-pdlaprnt_local.o: pdlaprnt_local.f
-	$(FC) -c pdlaprnt_local.f $(FFLAGS)
+diag$(PLAT)_OMP.x: $(OBJ) dirac_exomol_eigen.o
+	$(FC) $(FFLAGS_OMP) -o diag$(PLAT)_OMP.x $(OBJ) dirac_exomol_eigen.o $(LIB_MP)
+
+dirac_exomol_eigen.o:  dirac_exomol_eigen.f90 $(OBJ) 
+	$(FC) -c dirac_exomol_eigen.f90 $(FFLAGS)
 
 accuracy.o:  accuracy.f90
 	$(FC) -c accuracy.f90 $(FFLAGS)
@@ -41,4 +44,7 @@ input.o:  input.f90 accuracy.o
 
 clean:
 	rm -f $(OBJ) *.mod *.o
+
+veryclean: clean
+	rm -f *.x
 
