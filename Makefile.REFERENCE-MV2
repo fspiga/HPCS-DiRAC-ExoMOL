@@ -12,7 +12,7 @@ FFLAGS_OMP = -openmp $(FFLAGS)
 LIB = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
 LIB_MP = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm
 
-OBJ = accuracy.o timer.o input.o pdlaprnt_local.o 
+OBJ = accuracy.o timer.o input.o 
 
 default:  diag$(PLAT).x diag$(PLAT)_OMP.x
 
@@ -32,9 +32,6 @@ diag$(PLAT)_OMP.x: $(OBJ) dirac_exomol_eigen.o
 
 dirac_exomol_eigen.o:  dirac_exomol_eigen.f90 $(OBJ) 
 	$(FC) -c dirac_exomol_eigen.f90 $(FFLAGS)
-
-pdlaprnt_local.o: pdlaprnt_local.f
-	$(FC) -c pdlaprnt_local.f $(FFLAGS)
 
 accuracy.o:  accuracy.f90
 	$(FC) -c accuracy.f90 $(FFLAGS)
