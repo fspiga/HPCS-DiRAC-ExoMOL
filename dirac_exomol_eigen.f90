@@ -684,8 +684,8 @@ program dirac_exomol_eigen
             write(out,"(/'Diagonalization finished successfully!')")
 
 #if defined(__ELPA)
-            write(out,'(/a)') 'Detailed internal ELPA timing :'
             if (eigensolver .ge. 3) then
+            write(out,'(/a)') 'Detailed internal ELPA timing :'
                 write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
                 if (eigensolver .eq. 4) then
                     write(out,'(a,f9.2)') '  > trans_band_real    : ',trans_band_real
