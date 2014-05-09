@@ -425,23 +425,31 @@ program dirac_exomol_eigen
 
         ! PRACTICE:
 
-        allocate(c_loc(loc_r,loc_c),stat=info)
-        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
-        call ArrayStart(context,iam,'pdgemm:c_loc',info,size(c_loc),kind(c_loc),matsize)
-
-        ! 1)
-        if (iam == 0) then
-            write(out,"(/'Fill randomly c_loc...')")
-        endif
-        !
         ! Init random number generator... in a non entirely random way!
         i = 1
         call RANDOM_SEED(size = i)
         my_seed(1)=19830607
         call RANDOM_SEED(put=my_seed)
         !
+        allocate(c_loc(loc_r,loc_c),stat=info)
+        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+        call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
+
+#if 1
+        ! O(n^3) complexity
+        if (iam == 0) then
+            write(out,"(/'Fill randomly c_loc...')")
+        endif
+        !
+<<<<<<< HEAD
+        ! Init random number generator... in a non entirely random way!
+        i = 1
+        call RANDOM_SEED(size = i)
+        my_seed(1)=19830607
+        call RANDOM_SEED(put=my_seed)
+        !
+=======
         do j = 1,loc_c
-            global_j = indxl2g( j, nb, mycol, 0, npcol )
             do i=1,loc_r
                 !
                 call RANDOM_NUMBER (HARVEST=c_loc(i,j))
@@ -458,7 +466,6 @@ program dirac_exomol_eigen
             enddo
         enddo
         !
-        ! 2)
         if (iam == 0) then
             write(out,"(/'Compute symmetric positive A from randomly generated C...')")
         endif
@@ -478,9 +485,56 @@ program dirac_exomol_eigen
             write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
         endif
 
-        call ArrayStop(context,'pdgemm:c_loc')
-        deallocate (c_loc)
+#else
+        ! O(n^2) complexity
+        if (iam == 0) then
+            write(out,"(/'Fill randomly c_loc...')")
+        endif
+        !
+        do j = 1,loc_c
+            global_j = indxl2g( j, nb, mycol, 0, npcol )
+            do i=1,loc_r
+                !
+                c_loc(i,j) = rand()
+            enddo
+        enddo
+        !
+        if (iam == 0) then
+            write(out,"(/'Transpose C...')")
+        endif
+        !
+        call blacs_barrier(context, 'a')
+        t3 = MPI_Wtime()
+        !
+        call PDTRAN( dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca )
+        !
+        call blacs_barrier(context, 'a')
+        t4 = MPI_Wtime()
+        if (iam == 0) then
+            write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
+        endif
+        !
+        if (iam == 0) then
+            write(out,"(/'Fill A diagonal...')")
+        endif
+        !
+        do j = 1,loc_c
+            global_j = indxl2g( j, nb, mycol, 0, npcol )
+            do i=1,loc_r
+                global_i = indxl2g( i, nb, myrow, 0, nprow )
+                if(global_i == global_j) then
+                    a_loc(i,j) = dimen_s*1.0d0
+                else
+                    a_loc(i,j) = 0.0d0
+                endif
+            enddo
+        enddo
 
+#endif
+        !
+        call ArrayStop(context,'aux:c_loc')
+        deallocate (c_loc)
+        !
 #else
         do i = 1, dimen_s
             seeded_array(i) = 123456789-i-1;
@@ -535,10 +589,13 @@ program dirac_exomol_eigen
     ! --------------------------- !
     ! initialize the eigensolver  !
     ! --------------------------- !
+<<<<<<< HEAD
     !
 #if defined(__ELPA) && defined (__ELPA_TIMING)
     elpa_print_times = .true.
 #endif
+=======
+>>>>>>> origin/smart-init
     !
     select case (eigensolver)
           !
@@ -686,8 +743,31 @@ program dirac_exomol_eigen
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,'sec'
         if (info .eq. 0) then
             write(out,"(/'Diagonalization finished successfully!')")
+<<<<<<< HEAD
         else
             write(out,"(/'Something went bananas... info = ', i6)") info
+=======
+
+#if defined(__ELPA)
+            if (eigensolver .ge. 3) then
+            write(out,'(/a)') 'Detailed internal ELPA timing :'
+                write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
+                if (eigensolver .eq. 4) then
+                    write(out,'(a,f9.2)') '  > trans_band_real    : ',trans_band_real
+                endif
+                write(out,'(a,f9.2)')         '  Time solve_tridi     : ',time_evp_solve
+                write(out,'(a,f9.2)')         '  Time trans_ev_real   : ',time_evp_back
+                if (eigensolver .eq. 4) then
+                    write(out,'(a,f9.2)') '  > trans_full_real    : ',trans_full_real
+                endif
+            endif
+#endif
+
+        else if (info .lt. 0) then
+            write(out,"(/'Info is less than zero. Info is equal to ', i8)") info
+        else
+            write(out,"(/'Info is larger than zero. Info is equal to ', i8)") info
+>>>>>>> origin/smart-init
         endif
     endif
     !
