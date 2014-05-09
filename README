@@ -12,11 +12,13 @@ INPUT FILE FORMAT
 
 - "GEN-MAT" is the size of the matrix 
 - "NROOTS" is the number of eigen-state to compute, starting from index 1.
-- "DIAGONALIZER" is the type of solver to use. 
+- "DIAGONALIZER" is the type of solver to use
 	PDSYEVD (default), PDSYEVX, ELPA-1STAGE, ELPA-2STAGE
-
-NOTE: if PDSYEVD, NROOTS is ignored (by default all the eigen-values and 
-      eigen-vectors are computed)
+- "GENERATOR" is strategy used to generate the random input matrix 
+	SYM-POSITIVE-O3, SYM-POSITIVE-O2, RANDOM-LOCAL (default)
+	
+NOTE: if PDSYEVD, NROOTS is ignored (by default all the eigenvalues and 
+      eigenvectors are computed)
       
       
 KNOWN PROBLEMS
@@ -26,4 +28,7 @@ KNOWN PROBLEMS
   allocated to compute the eigen-vectors. Reasons still unknown, it is 
   related to the number of NROOTS
 - ELPA does not report explicitly any error code (e.g. INFO) back to the 
-  main application.
+  main application
+- RANDOM-LOCAL is really faster but it is not clear if the resultin matrix 
+  is definite positive or semi-positive. SYM-POSITIVE-O3 is the slowest but
+  should produce an input with N eigen-state

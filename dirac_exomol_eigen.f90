@@ -1,7 +1,4 @@
 module d_module
- 
-    !dec$ define blacs_  = 1
-    !dec$ define mpi_    = 0
 
     use accuracy
     use timer
@@ -235,8 +232,6 @@ program dirac_exomol_eigen
         call FLReadInput(nroots, eigensolver, matrix_generator)
         !
     endif
-    !
-    !dec$ if (blacs_ > 0)
     !
     call blacs_barrier(context,'A')
     !
