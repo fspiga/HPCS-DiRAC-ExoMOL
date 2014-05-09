@@ -309,6 +309,10 @@ program dirac_exomol_eigen
     my_seed(1)=19830607
     call RANDOM_SEED(put=my_seed)
     !
+    if (iam == 0) then
+        write(out,"(/'Generating matrix using ',a,' ...')") trim(generator_str)
+    endif
+    !
     ! Select matrix generator
     select case (matrix_generator)
         !
@@ -471,6 +475,10 @@ program dirac_exomol_eigen
     call ArrayStart(context,iam,'diag_scalapack:w',info,size(w),kind(w))
     !
     !
+    if (iam == 0) then
+        write(out,"(/'Starting ',a,' ...')") trim(diagonalizer)
+    endif
+    !
     ! --------------------------- !
     ! initialize the eigensolver  !
     ! --------------------------- !
@@ -568,10 +576,6 @@ program dirac_exomol_eigen
     ! --------------------- !
     ! call the eigensolver  !
     ! --------------------- !
-    !
-    if (iam == 0) then
-        write(out,"(/'Starting ',a,' ...')") trim(diagonalizer)
-    endif
     !
     call blacs_barrier(context, 'a')
     t1 = MPI_Wtime()
