@@ -26,7 +26,6 @@ contains
         !
         logical :: eof
         !
-        jrot = -1
         nroots = 1e6
         diagonalizer  = "PDSYEVD"      ! default
         generator_str = "RANDOM-LOCAL" ! default
@@ -38,17 +37,20 @@ contains
         do
             call read_line(eof) ; if (eof) exit
             call readu(w)
+            !
             select case(w)
                 case("STOP","FINISH","END")
                     exit
                 case("")
+                    !
                     print "(1x)"    !  Echo blank lines
-                  !
+                    !
                 case ("NROOTS")
                     !
                     call readi(nroots)
                     !
                 case ("GEN-MAT")
+                    !
                     call readi(mat_len)
                     !
                 case ("DIAGONALIZER")
@@ -89,20 +91,20 @@ contains
                         case ('SYM-POSITIVE-O3')
                             !
                             matrix_generator = 1
-                          !
+                            !
                         case ('SYM-POSITIVE-O2')
                             !
                             matrix_generator = 2
-                          !
+                            !
                         case ('RANDOM-LOCAL')
                             !
                             matrix_generator = 3
-                          !
+                            !
                         case default
                             !
                             write(out,'("Unknown matrix generator = ",a)'), generator_str
                             stop "Unknown generator"
-                      !
+                            !
                     end select
                   !
                 case default
@@ -120,7 +122,6 @@ contains
         rrr=seeded_array(i)
         return
     end function rrr
-  
 
 end module d_module
 
@@ -318,7 +319,7 @@ program dirac_exomol_eigen
             call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
             !
             if (iam == 0) then
-                write(out,"(/'Fill randomly c_loc...')")
+                write(out,"(/'Fill randomly C...')")
             endif
             !
             do j = 1,loc_c
@@ -328,6 +329,7 @@ program dirac_exomol_eigen
                     !
                     ! c = n*I
 #if defined(__PDGEMM_C_TERM)
+                    global_j = indxl2g( j, nb, mycol, 0, npcol )
                     global_i = indxl2g( i, nb, myrow, 0, nprow )
                     if(global_i == global_j) then
                         a_loc(i,j) = dimen_s*1.0d0
@@ -368,11 +370,10 @@ program dirac_exomol_eigen
             call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
             !
             if (iam == 0) then
-                write(out,"(/'Fill randomly c_loc...')")
+                write(out,"(/'Fill randomly C...')")
             endif
             !
             do j = 1,loc_c
-                global_j = indxl2g( j, nb, mycol, 0, npcol )
                 do i=1,loc_r
                     !
                     c_loc(i,j) = rand()
@@ -395,7 +396,7 @@ program dirac_exomol_eigen
             endif
             !
             if (iam == 0) then
-                write(out,"(/'Fill A diagonal...')")
+                write(out,"(/'Making A diagonal dominant...')")
             endif
             !
             do j = 1,loc_c
@@ -416,7 +417,7 @@ program dirac_exomol_eigen
         case (3)
             ! "RANDOM-LOCAL" - fast
             !
-            allocate (seeded_array(dimen_s),stat=info)
+            allocate (seeded_array(dimen_s), stat=info)
             !
             do i = 1, dimen_s
                 seeded_array(i) = 123456789-i-1;
@@ -442,7 +443,7 @@ program dirac_exomol_eigen
                 enddo
             enddo
             !
-            deallocate (allocate (seeded_array)
+            deallocate (seeded_array)
             !
         case default
             !
