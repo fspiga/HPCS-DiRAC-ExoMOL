@@ -10,25 +10,10 @@ module d_module
 
     public FLReadInput
 
-    !
-    !  integer(ik),parameter:: verbose = 4
     integer(ik),parameter:: verbose = 2
     integer, parameter :: trk        = selected_real_kind(12)
-    character(len=cl)    :: matrix_file='matrix'
-    !
-    integer(ik),parameter ::  maxnprocs=1024
-    integer(ik)           ::  iterout = 100
-    !
-    logical :: print_vectors = .false.
-    !
-    real(rk) :: walltime=1e7,time_factor = 0.95
-    !
-    real(trk):: rtime
-    !
     integer(ik) :: mat_len
-#if 1
-    integer(hik)	::	seeded_array(1000000)
-#endif
+    integer(hik), allocatable	::	seeded_array(:)
 
 contains
     !
@@ -36,9 +21,9 @@ contains
         !
         use input
         !
-        integer(ik),intent(out)            :: nroots, eigensolver, matrix_generator
-        character(len=cl) :: w, diagonalizer, generator_str
-
+        integer(ik),intent(out) :: nroots, eigensolver, matrix_generator
+        character(len=cl)       :: w, diagonalizer, generator_str
+        !
         logical :: eof
         !
         jrot = -1
@@ -126,18 +111,15 @@ contains
             !
         end do
       !
-      ! write(out,"('...done!')")
-      !
     end subroutine FLReadInput
 
-#if 1
+    ! Shifting pseudo-random function based on MOD
     integer(hik) function  rrr(i)
         integer(ik)	::	i
         seeded_array(i) = mod((1103515245 * seeded_array(i) + 12345),1099511627776);
         rrr=seeded_array(i)
         return
     end function rrr
-#endif
   
 
 end module d_module
@@ -325,10 +307,11 @@ program dirac_exomol_eigen
     my_seed(1)=19830607
     call RANDOM_SEED(put=my_seed)
     !
+    ! Select matrix generator
     select case (matrix_generator)
         !
         case (1)
-            ! O(n^3) complexity
+            ! "SYM-POSITIVE-O3" - O(n^3) complexity
             !
             allocate(c_loc(loc_r,loc_c),stat=info)
             matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
@@ -378,7 +361,7 @@ program dirac_exomol_eigen
             deallocate (c_loc)
             !
         case (2)
-            ! O(n^2) complexity
+            ! "SYM-POSITIVE-O2" - O(n^2) complexity
             !
             allocate(c_loc(loc_r,loc_c),stat=info)
             matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
@@ -431,6 +414,9 @@ program dirac_exomol_eigen
             deallocate (c_loc)
             !
         case (3)
+            ! "RANDOM-LOCAL" - fast
+            !
+            allocate (seeded_array(dimen_s),stat=info)
             !
             do i = 1, dimen_s
                 seeded_array(i) = 123456789-i-1;
@@ -455,6 +441,8 @@ program dirac_exomol_eigen
                     !
                 enddo
             enddo
+            !
+            deallocate (allocate (seeded_array)
             !
         case default
             !
