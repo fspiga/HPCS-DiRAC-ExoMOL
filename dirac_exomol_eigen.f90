@@ -441,14 +441,6 @@ program dirac_exomol_eigen
             write(out,"(/'Fill randomly c_loc...')")
         endif
         !
-<<<<<<< HEAD
-        ! Init random number generator... in a non entirely random way!
-        i = 1
-        call RANDOM_SEED(size = i)
-        my_seed(1)=19830607
-        call RANDOM_SEED(put=my_seed)
-        !
-=======
         do j = 1,loc_c
             do i=1,loc_r
                 !
@@ -589,13 +581,10 @@ program dirac_exomol_eigen
     ! --------------------------- !
     ! initialize the eigensolver  !
     ! --------------------------- !
-<<<<<<< HEAD
     !
 #if defined(__ELPA) && defined (__ELPA_TIMING)
     elpa_print_times = .true.
 #endif
-=======
->>>>>>> origin/smart-init
     !
     select case (eigensolver)
           !
@@ -743,31 +732,8 @@ program dirac_exomol_eigen
         write(out,'(/a,f12.6,a)') 'Time to diagonalize matrix is ',t2-t1,'sec'
         if (info .eq. 0) then
             write(out,"(/'Diagonalization finished successfully!')")
-<<<<<<< HEAD
         else
             write(out,"(/'Something went bananas... info = ', i6)") info
-=======
-
-#if defined(__ELPA)
-            if (eigensolver .ge. 3) then
-            write(out,'(/a)') 'Detailed internal ELPA timing :'
-                write(out,'(a,f9.2)')         '  Time tridiag_real    : ',time_evp_fwd
-                if (eigensolver .eq. 4) then
-                    write(out,'(a,f9.2)') '  > trans_band_real    : ',trans_band_real
-                endif
-                write(out,'(a,f9.2)')         '  Time solve_tridi     : ',time_evp_solve
-                write(out,'(a,f9.2)')         '  Time trans_ev_real   : ',time_evp_back
-                if (eigensolver .eq. 4) then
-                    write(out,'(a,f9.2)') '  > trans_full_real    : ',trans_full_real
-                endif
-            endif
-#endif
-
-        else if (info .lt. 0) then
-            write(out,"(/'Info is less than zero. Info is equal to ', i8)") info
-        else
-            write(out,"(/'Info is larger than zero. Info is equal to ', i8)") info
->>>>>>> origin/smart-init
         endif
     endif
     !
