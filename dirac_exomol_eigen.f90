@@ -25,7 +25,6 @@ module d_module
     !
     real(trk):: rtime
     !
-    logical :: gen_mat = .false.
     integer(ik) :: mat_len
 #if 1
     integer(hik)	::	seeded_array(1000000)
@@ -160,7 +159,7 @@ program dirac_exomol_eigen
     !integer(ik) :: verbose=6
 
     ! Related to matrix reading
-    integer(ik) ::              jrot, gamma, chkptIO, info, i, j, i_loc, j_loc, iroot, idimen, jdimen
+    integer(ik) ::              jrot, gamma, info, i, j, i_loc, j_loc, iroot, idimen, jdimen
     character(cl) ::            jchar, symchar, filename, buf
     integer(hik)                matsize
     integer(ik)                 dimen_s, nelem, max_nelem
@@ -232,15 +231,14 @@ program dirac_exomol_eigen
     call get_elpa_row_col_comms(MPI_COMM_WORLD, myrow, mycol, mpi_comm_rows, mpi_comm_cols)
 #endif
 
-    if (verbose>=4) then
-        !
-        do i=0,nprocs-1
-            call blacs_barrier(context, 'a')
-            if (iam .eq. i) then
-                write(out,"(/'PE = ',i4,':',i4,' Grid-coord (',i4,',',i4,') PROW = ',i4,':',i4,' PCOL = ',i4,':',i4)") iam,nprocs,myrow,mycol,myrow,nprow,mycol,npcol
-            endif
-        enddo
-    endif
+#if 0
+    do i=0,nprocs-1
+        call blacs_barrier(context, 'a')
+        if (iam .eq. i) then
+            write(out,"(/'PE = ',i4,':',i4,' Grid-coord (',i4,',',i4,') PROW = ',i4,':',i4,' PCOL = ',i4,':',i4)") iam,nprocs,myrow,mycol,myrow,nprow,mycol,npcol
+        endif
+    enddo
+#endif
     !
     call blacs_barrier(context, 'a')
     !
@@ -260,229 +258,216 @@ program dirac_exomol_eigen
     !
     if ( (myrow.eq.0) .and. (mycol.eq.0) ) then
         call igebs2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, gen_mat, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, mat_len, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, nroots, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1 )
     else
         call igebr2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, gen_mat, 1 ,0 ,0)
         call igebr2d(context, 'all', 'i-ring', 1, 1, mat_len, 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, nroots, 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1, 0, 0 )
     endif
     !
-    if(gen_mat == .true.) then
-	    
-        if (iam == 0) then
-            write(out, "('Generating matrix of size        : ',i8)") mat_len
-            write(out, "('Number of eigenstates to compute : ',i8)") nroots
-        endif
+    if (iam == 0) then
+        write(out, "('Generating matrix of size        : ',i8)") mat_len
+        write(out, "('Number of eigenstates to compute : ',i8)") nroots
+    endif
 
-        t1 = MPI_Wtime()
-        zpe = 0.0
-        dimen_s = mat_len
-        chkptIO = 10+iam
-	    
-        !
-        ! --------------------- !
-        ! define the block size !
-        ! --------------------- !
-        !
-        nb = min ( dimen_s/nprow, dimen_s/npcol )
-        nb = min ( nb, 64 )
-        nb = max(nb,1)
+    t1 = MPI_Wtime()
+    zpe = 0.0
+    dimen_s = mat_len
+    !
+    ! --------------------- !
+    ! define the block size !
+    ! --------------------- !
+    !
+    nb = min ( dimen_s/nprow, dimen_s/npcol )
+    nb = min ( nb, 64 )
+    nb = max(nb,1)
 
 #if defined(__DEBUG)
-        if (iam == 0) then
-            write(out, "('NB : ',i3)") nb
-        endif
+    if (iam == 0) then
+        write(out, "('NB : ',i3)") nb
+    endif
 #endif
 	    
-        loc_r = numroc(dimen_s,nb,myrow,0,nprow)
-        loc_c = numroc(dimen_s,nb,mycol,0,npcol)
-        lda = max (1,loc_r)
+    loc_r = numroc(dimen_s,nb,myrow,0,nprow)
+    loc_c = numroc(dimen_s,nb,mycol,0,npcol)
+    lda = max (1,loc_r)
 	    
-        call descinit( desca, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
-        call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
+    call descinit( desca, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
+    call descinit( descz, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 	    
 #if defined(__DEBUG)
-        write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
+    write(out, "('I am',I4,', Local problem size: ',i6,' x ',i6)") iam, loc_r, loc_c
 #endif
 
-        allocate(a_loc(loc_r,loc_c),stat=info)
-        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+    allocate(a_loc(loc_r,loc_c),stat=info)
+    matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
 
-        call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
+    call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
 
-        call descinit( descc, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
+    call descinit( descc, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 
-        ! THEORY:
-        ! Generate a dense n x n symmetric, positive definite matrix
-        ! 1) A = rand(n,n); % generate a random n x n matrix using [0,1) values
-        ! 2) A = A+A' ( O(n^2) complexity )
-        !     _ or _
-        !    A = A*A' ( O(n^3) complexity )
-        ! 3) A = A + n*I ( A symmetric diagonally dominant matrix and symmetric positive definite)
+    ! THEORY:
+    ! Generate a dense n x n symmetric, positive definite matrix
+    ! 1) A = rand(n,n); % generate a random n x n matrix using [0,1) values
+    ! 2) A = A+A' ( O(n^2) complexity )
+    !     _ or _
+    !    A = A*A' ( O(n^3) complexity )
+    ! 3) A = A + n*I ( A symmetric diagonally dominant matrix and symmetric positive definite)
 
-        ! PRACTICE:
+    ! PRACTICE:
 
-        ! Init random number generator... in a non entirely random way!
-        i = 1
-        call RANDOM_SEED(size = i)
-        my_seed(1)=19830607
-        call RANDOM_SEED(put=my_seed)
+    ! Init random number generator... in a non entirely random way!
+    i = 1
+    call RANDOM_SEED(size = i)
+    my_seed(1)=19830607
+    call RANDOM_SEED(put=my_seed)
+    !
+    select case (matrix_generator)
         !
-        select case (matrix_generator)
+        case (1)
+            ! O(n^3) complexity
             !
-            case (1)
-                ! O(n^3) complexity
-                !
-                allocate(c_loc(loc_r,loc_c),stat=info)
-                matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
-                call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
-                !
-                if (iam == 0) then
-                    write(out,"(/'Fill randomly c_loc...')")
-                endif
-                !
-                do j = 1,loc_c
-                    do i=1,loc_r
-                        !
-                        call RANDOM_NUMBER (HARVEST=c_loc(i,j))
-                        !
-                        ! c = n*I
+            allocate(c_loc(loc_r,loc_c),stat=info)
+            matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+            call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
+            !
+            if (iam == 0) then
+                write(out,"(/'Fill randomly c_loc...')")
+            endif
+            !
+            do j = 1,loc_c
+                do i=1,loc_r
+                    !
+                    call RANDOM_NUMBER (HARVEST=c_loc(i,j))
+                    !
+                    ! c = n*I
 #if defined(__PDGEMM_C_TERM)
-                        global_i = indxl2g( i, nb, myrow, 0, nprow )
-                        if(global_i == global_j) then
-                            a_loc(i,j) = dimen_s*1.0d0
-                        else
-                            a_loc(i,j) = 0.0d0
-                        endif
+                    global_i = indxl2g( i, nb, myrow, 0, nprow )
+                    if(global_i == global_j) then
+                        a_loc(i,j) = dimen_s*1.0d0
+                    else
+                        a_loc(i,j) = 0.0d0
+                    endif
 #endif
-                    enddo
                 enddo
-                !
-                if (iam == 0) then
-                    write(out,"(/'Compute symmetric positive A from randomly generated C ...')")
-                endif
-                !
-                call blacs_barrier(context, 'a')
-                t3 = MPI_Wtime()
-                !
+            enddo
+            !
+            if (iam == 0) then
+                write(out,"(/'Compute symmetric positive A from randomly generated C ...')")
+            endif
+            !
+            call blacs_barrier(context, 'a')
+            t3 = MPI_Wtime()
+            !
 #if defined(__PDGEMM_C_TERM)
-                call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
+            call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
 #else
-                call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
+            call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
 #endif
-                !
-                call blacs_barrier(context, 'a')
-                t4 = MPI_Wtime()
-                if (iam == 0) then
-                    write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
-                endif
-                !
-                call ArrayStop(context,'aux:c_loc')
-                deallocate (c_loc)
-                !
-            case (2)
-                ! O(n^2) complexity
-                !
-                allocate(c_loc(loc_r,loc_c),stat=info)
-                matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
-                call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
-                !
-                if (iam == 0) then
-                    write(out,"(/'Fill randomly c_loc...')")
-                endif
-                !
-                do j = 1,loc_c
-                    global_j = indxl2g( j, nb, mycol, 0, npcol )
-                    do i=1,loc_r
-                        !
-                        c_loc(i,j) = rand()
-                    enddo
+            !
+            call blacs_barrier(context, 'a')
+            t4 = MPI_Wtime()
+            if (iam == 0) then
+                write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
+            endif
+            !
+            call ArrayStop(context,'aux:c_loc')
+            deallocate (c_loc)
+            !
+        case (2)
+            ! O(n^2) complexity
+            !
+            allocate(c_loc(loc_r,loc_c),stat=info)
+            matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+            call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
+            !
+            if (iam == 0) then
+                write(out,"(/'Fill randomly c_loc...')")
+            endif
+            !
+            do j = 1,loc_c
+                global_j = indxl2g( j, nb, mycol, 0, npcol )
+                do i=1,loc_r
+                    !
+                    c_loc(i,j) = rand()
                 enddo
-                !
-                if (iam == 0) then
-                    write(out,"(/'Transpose C...')")
-                endif
-                !
-                call blacs_barrier(context, 'a')
-                t3 = MPI_Wtime()
-                !
-                call PDTRAN( dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca )
-                !
-                call blacs_barrier(context, 'a')
-                t4 = MPI_Wtime()
-                if (iam == 0) then
-                    write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
-                endif
-                !
-                if (iam == 0) then
-                    write(out,"(/'Fill A diagonal...')")
-                endif
-                !
-                do j = 1,loc_c
-                    global_j = indxl2g( j, nb, mycol, 0, npcol )
-                    do i=1,loc_r
-                        global_i = indxl2g( i, nb, myrow, 0, nprow )
-                        if(global_i == global_j) then
-                            a_loc(i,j) = dimen_s*1.0d0
-                        else
-                            a_loc(i,j) = 0.0d0
-                        endif
-                    enddo
+            enddo
+            !
+            if (iam == 0) then
+                write(out,"(/'Transpose C...')")
+            endif
+            !
+            call blacs_barrier(context, 'a')
+            t3 = MPI_Wtime()
+            !
+            call PDTRAN( dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca )
+            !
+            call blacs_barrier(context, 'a')
+            t4 = MPI_Wtime()
+            if (iam == 0) then
+                write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
+            endif
+            !
+            if (iam == 0) then
+                write(out,"(/'Fill A diagonal...')")
+            endif
+            !
+            do j = 1,loc_c
+                global_j = indxl2g( j, nb, mycol, 0, npcol )
+                do i=1,loc_r
+                    global_i = indxl2g( i, nb, myrow, 0, nprow )
+                    if(global_i == global_j) then
+                        a_loc(i,j) = dimen_s*1.0d0
+                    else
+                        a_loc(i,j) = 0.0d0
+                    endif
                 enddo
-                !
-                call ArrayStop(context,'aux:c_loc')
-                deallocate (c_loc)
-                !
-            case (3)
-                !
-                do i = 1, dimen_s
-                    seeded_array(i) = 123456789-i-1;
-                enddo
+            enddo
+            !
+            call ArrayStop(context,'aux:c_loc')
+            deallocate (c_loc)
+            !
+        case (3)
+            !
+            do i = 1, dimen_s
+                seeded_array(i) = 123456789-i-1;
+            enddo
 
-                do j = 1,loc_c
-                    do i=1,loc_r
-                        !
-                        global_i = indxl2g( i, nb, myrow, 0, nprow )
-                        global_j = indxl2g( j, nb, mycol, 0, npcol )
-                        !
+            do j = 1,loc_c
+                do i=1,loc_r
+                    !
+                    global_i = indxl2g( i, nb, myrow, 0, nprow )
+                    global_j = indxl2g( j, nb, mycol, 0, npcol )
+                    !
 #if defined(__DEBUG)
-                        call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
-                        if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
-                            write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
-                        endif
+                    call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
+                    if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
+                        write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
+                    endif
 #endif
-                        !
-                        if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
-                        if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
-                        if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
-                        !
-                    enddo
+                    !
+                    if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
+                    if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
+                    if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+                    !
                 enddo
-                !
-            case default
-                !
-                write(out,'("Unknown matrix generator = ",i2)'), matrix_generator
-                stop "Unknown eigensolver = "
-                !
-        end select
-        !
-        call blacs_barrier(context, 'a')
-        !
-        t2 = MPI_Wtime()
-        if (iam == 0) then
-            write(out,'(/a,f12.6,a)') 'Time to Initialize the input matrix is',t2-t1,' sec'
-        endif
-        
-    else
-	    	  
-        ! There is no reading from file...
-        call blacs_abort( context, -1 )
-
+            enddo
+            !
+        case default
+            !
+            write(out,'("Unknown matrix generator = ",i2)'), matrix_generator
+            stop "Unknown eigensolver = "
+            !
+    end select
+    !
+    call blacs_barrier(context, 'a')
+    !
+    t2 = MPI_Wtime()
+    if (iam == 0) then
+        write(out,'(/a,f12.6,a)') 'Time to Initialize the input matrix is',t2-t1,' sec'
     endif
     !
     ! --------------------------------- !
