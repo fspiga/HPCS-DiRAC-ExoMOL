@@ -1,7 +1,7 @@
 module d_module
  
-!dec$ define blacs_  = 1
-!dec$ define mpi_    = 0
+    !dec$ define blacs_  = 1
+    !dec$ define mpi_    = 0
 
     use accuracy
     use timer
@@ -15,7 +15,7 @@ module d_module
     integer(ik),parameter:: verbose = 2
     integer, parameter :: trk        = selected_real_kind(12)
     character(len=cl)    :: matrix_file='matrix'
-    character(len=cl)    :: diagonalizer
+    character(len=cl)    :: diagonalizer, generator_str
     !
     integer(ik),parameter ::  maxnprocs=1024
     integer(ik)           ::  iterout = 100
@@ -46,6 +46,7 @@ contains
         real(rk),intent(out)               :: factor,tol,memory,zpe,energy_thresh,coef_thresh
         !
         character(len=cl) :: w
+
         !
         logical :: eof
         !
@@ -79,76 +80,14 @@ contains
                 case("")
                     print "(1x)"    !  Echo blank lines
                   !
-                case ("J","JROT")
-                    !
-                    call readi(jrot)
-                  !
-                case ("GAMMA","SYM","SYMMETRY")
-                    !
-                    call readi(gamma)
-                  !
-                case ("ZPE")
-                    !
-                    call readf(zpe)
-                  !
-                case ("ENERGY_THRESH")
-                    !
-                    call readf(energy_thresh)
-                  !
-                case ("COEF_THRESH")
-                    !
-                    call readf(coef_thresh)
-                  !
-                case ("FACTOR")
-                    !
-                    call readf(factor)
-                  !
-                case ("CHECKPOINT")
-                    !
-                    ! chkpoint :  0 - none, 1 - save, 2  - read
-                    !
-                    call readi(chkpoint)
-                    !
-                    if (chkpoint<0.or.chkpoint>2) then
-                        !
-                        write (out,"(' Illegal checkpoint value = ',i)") chkpoint
-                        stop 'Illegal checkpoint value '
-                     !
-                    endif
-                  !
-                case ("WALLCLOCK","MAXTIME","WALLTIME")
-                    !
-                    call readf(walltime)
-                    !
-                    ! convert to seconds
-                    !
-                    walltime = walltime*3600.0_rk
-                  !
-                case ("MEMORY","MEM")
-                    !
-                    call readf(memory)
-                  !
                 case ("NROOTS")
                     !
                     call readi(nroots)
-                  !
-                case ("ITEROUT")
                     !
-                    call readi(iterout)
-                  !
-                case ("TOL","TOLARENCE")
-                    !
-                    call readf(tol)
-                  !
                 case ("GEN-MAT")
                     call readi(mat_len)
                     gen_mat = .true.
-                case ("SPARSE")
                     !
-                    !call readi(sparse_)
-                    !
-                    sparse = .true.
-                  !
                 case ("DIAGONALIZER")
                     !
                     call readu(diagonalizer)
@@ -173,8 +112,33 @@ contains
                           !
                         case default
                             !
-                            write(out,'("Uknown eigensolver = ",a)'), diagonalizer
-                            stop "Uknown eigensolver"
+                            write(out,'("Unknown eigensolver = ",a)'), diagonalizer
+                            stop "Unknown eigensolver"
+                      !
+                    end select
+                  !
+                case ("GENERATOR")
+                    !
+                    call readu(generator_str)
+                    !
+                    select case ( trim(generator_str) )
+                          !
+                        case ('SYM-POSITIVE-O3')
+                            !
+                            matrix_generator = 1
+                          !
+                        case ('SYM-POSITIVE-O2')
+                            !
+                            matrix_generator = 2
+                          !
+                        case ('RANDOM-LOCAL')
+                            !
+                            matrix_generator = 3
+                          !
+                        case default
+                            !
+                            write(out,'("Unknown matrix generator = ",a)'), generator_str
+                            stop "Unknown generator"
                       !
                     end select
                   !
@@ -236,16 +200,14 @@ program dirac_exomol_eigen
     parameter           ( mone = -1.0d0, maxprocs = 512 )
     ! Local Scalars
     integer(ik)         context, iam, m, mycol, myrow, nb, npcol, nprocs, nprow, nz, trilwmin, proc_row, proc_col,iwork_(10),l_nrows, l_ncols, l_eigvec, iprow, ipcol
-#if defined(__ELPA)
     integer(ik)         mpi_comm_rows, mpi_comm_cols
-#endif
     ! Local Arrays
     integer(ik)                      desca(9), descz(9), descc(9), my_seed(1), irecl
     integer(ik), allocatable ::      iwork(:)
     double precision, allocatable :: work(:), w(:), z_loc(:,:), eigvec(:),local_vecs(:)
     !
     double precision :: vl,vu
-    integer(ik)      :: il,iu,nvals,nvects,nvalsmax,nvals_,nvects_,chkpoint,eigensolver
+    integer(ik)      :: il,iu,nvals,nvects,nvalsmax,nvals_,nvects_,chkpoint,eigensolver,matrix_generator
     !
     real(rk)         :: gfactor,tol,memory_now,memory_max,memory
     !
@@ -327,11 +289,12 @@ program dirac_exomol_eigen
     !
     if ( (myrow.eq.0) .and. (mycol.eq.0) ) then
         call igebs2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1 )
+        call igebs2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, gen_mat, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, mat_len, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, nroots, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, sparse, 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, jrot , 1 )
+        call igebs2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, gamma, 1 )
         call dgebs2d(context, 'all', 'i-ring', 1, 1, walltime, 1 )
         call dgebs2d(context, 'all', 'i-ring', 1, 1, zpe, 1 )
@@ -349,7 +312,7 @@ program dirac_exomol_eigen
         call igebr2d(context, 'all', 'i-ring', 1, 1, mat_len, 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, nroots, 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, sparse , 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, jrot , 1, 0, 0 )
+        call igebr2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, gamma, 1, 0, 0 )
         call dgebr2d(context, 'all', 'i-ring', 1, 1, walltime, 1, 0, 0 )
         call dgebr2d(context, 'all', 'i-ring', 1, 1, zpe, 1, 0, 0 )
@@ -411,8 +374,6 @@ program dirac_exomol_eigen
 
         call ArrayStart(context,iam,'diag_scalapack:a_loc',info,size(a_loc),kind(a_loc),matsize)
 
-#if defined(__WELL_DEFINED_PROBLEM)
-
         call descinit( descc, dimen_s, dimen_s, nb, nb, 0, 0, context, lda, info)
 
         ! THEORY:
@@ -431,128 +392,144 @@ program dirac_exomol_eigen
         my_seed(1)=19830607
         call RANDOM_SEED(put=my_seed)
         !
-        allocate(c_loc(loc_r,loc_c),stat=info)
-        matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
-        call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
-
-#if 1
-        ! O(n^3) complexity
-        if (iam == 0) then
-            write(out,"(/'Fill randomly c_loc...')")
-        endif
-        !
-        do j = 1,loc_c
-            do i=1,loc_r
+        select case (matrix_generator)
+            !
+            case (1)
+                ! O(n^3) complexity
                 !
-                call RANDOM_NUMBER (HARVEST=c_loc(i,j))
+                allocate(c_loc(loc_r,loc_c),stat=info)
+                matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+                call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
                 !
-                ! c = n*I
-#if 0
-                global_i = indxl2g( i, nb, myrow, 0, nprow )
-                if(global_i == global_j) then
-                    a_loc(i,j) = dimen_s*1.0d0
-                else
-                    a_loc(i,j) = 0.0d0
+                if (iam == 0) then
+                    write(out,"(/'Fill randomly c_loc...')")
                 endif
-#endif
-            enddo
-        enddo
-        !
-        if (iam == 0) then
-            write(out,"(/'Compute symmetric positive A from randomly generated C...')")
-        endif
-        !
-        call blacs_barrier(context, 'a')
-        t3 = MPI_Wtime()
-        !
+                !
+                do j = 1,loc_c
+                    do i=1,loc_r
+                        !
+                        call RANDOM_NUMBER (HARVEST=c_loc(i,j))
+                        !
+                        ! c = n*I
 #if defined(__PDGEMM_C_TERM)
-        call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
-#else
-        call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
+                        global_i = indxl2g( i, nb, myrow, 0, nprow )
+                        if(global_i == global_j) then
+                            a_loc(i,j) = dimen_s*1.0d0
+                        else
+                            a_loc(i,j) = 0.0d0
+                        endif
 #endif
-        !
-        call blacs_barrier(context, 'a')
-        t4 = MPI_Wtime()
-        if (iam == 0) then
-            write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
-        endif
-
-#else
-        ! O(n^2) complexity
-        if (iam == 0) then
-            write(out,"(/'Fill randomly c_loc...')")
-        endif
-        !
-        do j = 1,loc_c
-            global_j = indxl2g( j, nb, mycol, 0, npcol )
-            do i=1,loc_r
+                    enddo
+                enddo
                 !
-                c_loc(i,j) = rand()
-            enddo
-        enddo
-        !
-        if (iam == 0) then
-            write(out,"(/'Transpose C...')")
-        endif
-        !
-        call blacs_barrier(context, 'a')
-        t3 = MPI_Wtime()
-        !
-        call PDTRAN( dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca )
-        !
-        call blacs_barrier(context, 'a')
-        t4 = MPI_Wtime()
-        if (iam == 0) then
-            write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
-        endif
-        !
-        if (iam == 0) then
-            write(out,"(/'Fill A diagonal...')")
-        endif
-        !
-        do j = 1,loc_c
-            global_j = indxl2g( j, nb, mycol, 0, npcol )
-            do i=1,loc_r
-                global_i = indxl2g( i, nb, myrow, 0, nprow )
-                if(global_i == global_j) then
-                    a_loc(i,j) = dimen_s*1.0d0
-                else
-                    a_loc(i,j) = 0.0d0
+                if (iam == 0) then
+                    write(out,"(/'Compute symmetric positive A from randomly generated C ...')")
                 endif
-            enddo
-        enddo
-
-#endif
-        !
-        call ArrayStop(context,'aux:c_loc')
-        deallocate (c_loc)
-        !
+                !
+                call blacs_barrier(context, 'a')
+                t3 = MPI_Wtime()
+                !
+#if defined(__PDGEMM_C_TERM)
+                call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 1.0d0, a_loc, 1, 1, desca)
 #else
-        do i = 1, dimen_s
-            seeded_array(i) = 123456789-i-1;
-        enddo
+                call PDGEMM('N', 'T', dimen_s, dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca)
+#endif
+                !
+                call blacs_barrier(context, 'a')
+                t4 = MPI_Wtime()
+                if (iam == 0) then
+                    write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
+                endif
+                !
+                call ArrayStop(context,'aux:c_loc')
+                deallocate (c_loc)
+                !
+            case (2)
+                ! O(n^2) complexity
+                !
+                allocate(c_loc(loc_r,loc_c),stat=info)
+                matsize = int(loc_r,kind=hik)*int(loc_c,kind=hik)
+                call ArrayStart(context,iam,'aux:c_loc',info,size(c_loc),kind(c_loc),matsize)
+                !
+                if (iam == 0) then
+                    write(out,"(/'Fill randomly c_loc...')")
+                endif
+                !
+                do j = 1,loc_c
+                    global_j = indxl2g( j, nb, mycol, 0, npcol )
+                    do i=1,loc_r
+                        !
+                        c_loc(i,j) = rand()
+                    enddo
+                enddo
+                !
+                if (iam == 0) then
+                    write(out,"(/'Transpose C...')")
+                endif
+                !
+                call blacs_barrier(context, 'a')
+                t3 = MPI_Wtime()
+                !
+                call PDTRAN( dimen_s, dimen_s, 1.0d0, c_loc, 1, 1, descc, 0.0d0, a_loc, 1, 1, desca )
+                !
+                call blacs_barrier(context, 'a')
+                t4 = MPI_Wtime()
+                if (iam == 0) then
+                    write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
+                endif
+                !
+                if (iam == 0) then
+                    write(out,"(/'Fill A diagonal...')")
+                endif
+                !
+                do j = 1,loc_c
+                    global_j = indxl2g( j, nb, mycol, 0, npcol )
+                    do i=1,loc_r
+                        global_i = indxl2g( i, nb, myrow, 0, nprow )
+                        if(global_i == global_j) then
+                            a_loc(i,j) = dimen_s*1.0d0
+                        else
+                            a_loc(i,j) = 0.0d0
+                        endif
+                    enddo
+                enddo
+                !
+                call ArrayStop(context,'aux:c_loc')
+                deallocate (c_loc)
+                !
+            case (3)
+                !
+                do i = 1, dimen_s
+                    seeded_array(i) = 123456789-i-1;
+                enddo
 
-        do j = 1,loc_c
-            do i=1,loc_r
-                !
-                global_i = indxl2g( i, nb, myrow, 0, nprow )
-                global_j = indxl2g( j, nb, mycol, 0, npcol )
-                !
+                do j = 1,loc_c
+                    do i=1,loc_r
+                        !
+                        global_i = indxl2g( i, nb, myrow, 0, nprow )
+                        global_j = indxl2g( j, nb, mycol, 0, npcol )
+                        !
 #if defined(__DEBUG)
-                call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
-                if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
-                    write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
-                endif
+                        call infog2l(global_i, global_j, desca, nprow, npcol, myrow, mycol, i_loc, j_loc, proc_row, proc_col)
+                        if (( j_loc .ne. j ) .OR. (i_loc .ne. i )) then
+                            write(out, "('(myrow: ',i4,', mycol: ',i4,') First set:',i4,' x ',i4,', Second set:',i4,' x ',i4)") myrow, mycol, global_i, global_j, i, j
+                        endif
 #endif
+                        !
+                        if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
+                        if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
+                        if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+                        !
+                    enddo
+                enddo
                 !
-                if(global_i >= global_j) a_loc(i,j) = real(rrr(global_i),rk)/real(1099511627776.0,rk)
-                if(global_i <  global_j) a_loc(i,j) = real(rrr(global_j),rk)/real(1099511627776.0,rk)
-                if(global_i == global_j) a_loc(i,j) = a_loc(i,j) + real(10.0,rk) + real(global_j,rk)
+            case default
                 !
-            enddo
-        enddo
-#endif
+                write(out,'("Unknown matrix generator = ",i2)'), matrix_generator
+                stop "Unknown eigensolver = "
                 !
+        end select
+        !
         call blacs_barrier(context, 'a')
         !
         t2 = MPI_Wtime()
@@ -659,7 +636,7 @@ program dirac_exomol_eigen
 #endif
         case default
             !
-            write(out,'("Uknown eigensolver = ",a)'), trim(diagonalizer)
+            write(out,'("Uknown eigensolver = ",i2)'), eigensolver
             stop "Uknown eigensolver = "
             !
     end select
@@ -716,7 +693,7 @@ program dirac_exomol_eigen
 #endif
         case default
             !
-            write(out,'("Uknown eigensolver = ",a)'), trim(diagonalizer)
+            write(out,'("Uknown eigensolver = ",i2)'), eigensolver
             stop "Uknown eigensolver = "
             !
     end select
