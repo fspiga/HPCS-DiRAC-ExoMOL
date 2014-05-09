@@ -15,7 +15,6 @@ module d_module
     integer(ik),parameter:: verbose = 2
     integer, parameter :: trk        = selected_real_kind(12)
     character(len=cl)    :: matrix_file='matrix'
-    character(len=cl)    :: diagonalizer, generator_str
     !
     integer(ik),parameter ::  maxnprocs=1024
     integer(ik)           ::  iterout = 100
@@ -34,38 +33,19 @@ module d_module
 
 contains
     !
-    subroutine FLReadInput(Jrot,gamma,factor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
+    subroutine FLReadInput(nroots, eigensolver, matrix_generator)
         !
         use input
         !
-        integer(ik),intent(out)            :: Jrot,gamma,nroots,chkpoint,eigensolver
-        logical,intent(out)                :: sparse
-        !
-        integer                            :: sparse_
-        !
-        real(rk),intent(out)               :: factor,tol,memory,zpe,energy_thresh,coef_thresh
-        !
-        character(len=cl) :: w
+        integer(ik),intent(out)            :: nroots, eigensolver, matrix_generator
+        character(len=cl) :: w, diagonalizer, generator_str
 
-        !
         logical :: eof
         !
-        !write(out,"('Read the input')")
-        !
-        sparse = 0
-        !
         jrot = -1
-        gamma = -1
         nroots = 1e6
-        energy_thresh = 1.0d+05
-        coef_thresh = 1.0d-16
-        diagonalizer = "PDSYEVD" ! default
-        factor = 1.0_rk
-        tol = small_
-        sparse = .false.
-        walltime = safe_max
-        zpe = -small_
-        memory = 256.0_rk
+        diagonalizer  = "PDSYEVD"      ! default
+        generator_str = "RANDOM-LOCAL" ! default
         !
         call input_options(echo_lines=.false.,error_flag=1)
         !
@@ -86,7 +66,6 @@ contains
                     !
                 case ("GEN-MAT")
                     call readi(mat_len)
-                    gen_mat = .true.
                     !
                 case ("DIAGONALIZER")
                     !
@@ -271,66 +250,28 @@ program dirac_exomol_eigen
     !
     if (iam==0) then 
         !
-        call FLReadInput(Jrot,gamma,gfactor,nroots,tol,sparse,eigensolver,chkpoint,zpe,memory,energy_thresh,coef_thresh)
+        call FLReadInput(nroots, eigensolver, matrix_generator)
         !
-        if (verbose>=4) write (out,"(' iam = ',i8,' gfactor  = ',f20.8)") iam,gfactor
-        !
-        if (verbose>=4) write(out,"(' Only for iam = ',i,' jrot,gamma,nroots,chkpoint ',5i8)"), iam,jrot,gamma,nroots,chkpoint
-      !
     endif
     !
     !dec$ if (blacs_ > 0)
     !
     call blacs_barrier(context,'A')
     !
-    if (iam==0.and.verbose>=5) write(out,"(' destributing parameters...')")
-    !
-    if (verbose>=6) write(out,"(' iam = ',i4)") iam
-    !
     if ( (myrow.eq.0) .and. (mycol.eq.0) ) then
-        call igebs2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, gen_mat, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, mat_len, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, nroots, 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, sparse, 1 )
         call igebs2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, gamma, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, walltime, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, zpe, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, energy_thresh, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, coef_thresh, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, tol, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, gfactor, 1 )
-        call dgebs2d(context, 'all', 'i-ring', 1, 1, memory, 1 )
-         
-    
-
     else
         call igebr2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, gen_mat, 1 ,0 ,0)
         call igebr2d(context, 'all', 'i-ring', 1, 1, mat_len, 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, nroots, 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, sparse , 1, 0, 0 )
         call igebr2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, gamma, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, walltime, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, zpe, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, energy_thresh, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, coef_thresh, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, tol, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, gfactor, 1, 0, 0 )
-        call dgebr2d(context, 'all', 'i-ring', 1, 1, memory, 1, 0, 0 )
-         
-
     endif
     !
-    if (iam==0.and. verbose>=5) write(out,"(' ...done!')")
-      !
-      !if (sparse==1) blacs_init = .true.
-      !
-    !dec$ end if
-
     if(gen_mat == .true.) then
 	    
         if (iam == 0) then
