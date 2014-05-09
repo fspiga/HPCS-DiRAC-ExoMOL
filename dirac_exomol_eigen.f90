@@ -346,7 +346,7 @@ program dirac_exomol_eigen
             enddo
             !
             if (iam == 0) then
-                write(out,"(/'Compute symmetric positive A from randomly generated C ...')")
+                write(out,"(/'Compute symmetric positive A (PDGEMM)... ')", advance='no')
             endif
             !
             call blacs_barrier(context, 'a')
@@ -361,7 +361,7 @@ program dirac_exomol_eigen
             call blacs_barrier(context, 'a')
             t4 = MPI_Wtime()
             if (iam == 0) then
-                write(out,'(/t5a,f12.6,a)') 'PDGEMM time',t4-t3,' sec'
+                write(out,'(f7.2,a)') t4-t3,' sec'
             endif
             !
             call ArrayStop(context,'aux:c_loc')
@@ -386,7 +386,7 @@ program dirac_exomol_eigen
             enddo
             !
             if (iam == 0) then
-                write(out,"(/'Transpose C...')")
+                write(out,"(/'Transpose C (PDTRAN)... ')", advance='no')
             endif
             !
             call blacs_barrier(context, 'a')
@@ -397,7 +397,7 @@ program dirac_exomol_eigen
             call blacs_barrier(context, 'a')
             t4 = MPI_Wtime()
             if (iam == 0) then
-                write(out,'(/t5a,f12.6,a)') 'TRANSPOSE time',t4-t3,' sec'
+                write(out,'(f7.2,a)') t4-t3,' sec'
             endif
             !
             if (iam == 0) then
