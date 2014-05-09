@@ -14,6 +14,7 @@ module d_module
     integer, parameter :: trk        = selected_real_kind(12)
     integer(ik) :: mat_len
     integer(hik), allocatable	::	seeded_array(:)
+    character(len=cl)           :: diagonalizer, generator_str
 
 contains
     !
@@ -22,7 +23,7 @@ contains
         use input
         !
         integer(ik),intent(out) :: nroots, eigensolver, matrix_generator
-        character(len=cl)       :: w, diagonalizer, generator_str
+        character(len=cl)       :: w
         !
         logical :: eof
         !
@@ -376,7 +377,7 @@ program dirac_exomol_eigen
             do j = 1,loc_c
                 do i=1,loc_r
                     !
-                    c_loc(i,j) = rand()
+                    call RANDOM_NUMBER (HARVEST=c_loc(i,j))
                 enddo
             enddo
             !
