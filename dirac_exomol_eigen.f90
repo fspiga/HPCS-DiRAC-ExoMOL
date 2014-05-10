@@ -1,8 +1,5 @@
 module d_module
  
-    !dec$ define blacs_  = 1
-    !dec$ define mpi_    = 0
-
     use accuracy
     use timer
 
@@ -169,7 +166,7 @@ program dirac_exomol_eigen
     double precision, allocatable :: work(:), w(:), z_loc(:,:), eigvec(:),local_vecs(:)
     !
     double precision :: vl,vu
-    integer(ik)      :: il,iu,nvals,nvects,nvalsmax,nvals_,nvects_,chkpoint,eigensolver,matrix_generator
+    integer(ik)      :: il,iu,nvals,nvects,nvalsmax,nvals_,nvects_,chkpoint,eigensolver,matrix_generator,dims(2),ndims
     !
     real(rk)         :: gfactor,tol,memory_now,memory_max,memory
     !
@@ -188,7 +185,11 @@ program dirac_exomol_eigen
     character(len=cl)    :: unitfname
     character(len=4)    :: str_row,str_col
     !
-    !call setrteopts("ufmt_littleendian=10") ! on-the-fly Intel -> IBM binaries conversion
+    ! ------------------ !
+    ! MPI initialization !
+    ! ------------------ !
+    !
+    call MPI_INIT(info)
     !
     ! -------------------- !
     ! setup processor grid !
@@ -196,16 +197,25 @@ program dirac_exomol_eigen
     !
     call blacs_pinfo(iam, nprocs)
     !
-    if ( verbose>=4 ) write(out,"('iam = ',i4)") iam
+    ndims = 2
+    dims  = 0
+    CALL MPI_DIMS_CREATE( nprocs, ndims, dims, info)
+#if 1
+    nprow = dims(1)  !  cartesian direction 0
+    npcol = dims(2)  !  cartesian direction 1
+#else
+    ! Reversed...
+    nprow = dims(2)
+    npcol = dims(1)
+#endif
     !
-    do i=1,int( sqrt( dble(nprocs) ) + 1 )
-        if(mod(nprocs,i) .eq. 0) nprow = i
-    end do
-    npcol = nprocs/nprow
-
     if (iam == 0) then
         write(out, "('BLACS topology: ',i8,' x ',i8,' (',i8,' processors over ',i8,' involved)')") nprow, npcol,nprow*npcol,nprocs
     endif
+    !
+    ! ---------------- !
+    ! initialize BLACS !
+    ! ---------------- !
     !
     call blacs_get( -1, 0, context )
     call blacs_gridinit( context, 'r', nprow, npcol )
@@ -235,8 +245,6 @@ program dirac_exomol_eigen
         call FLReadInput(nroots, eigensolver, matrix_generator)
         !
     endif
-    !
-    !dec$ if (blacs_ > 0)
     !
     call blacs_barrier(context,'A')
     !
@@ -483,7 +491,7 @@ program dirac_exomol_eigen
     ! initialize the eigensolver  !
     ! --------------------------- !
     !
-#if defined(__ELPA) && defined (__ELPA_TIMING)
+#if defined(__ELPA) && defined(__ELPA_TIMING)
     elpa_print_times = .true.
 #endif
     !
