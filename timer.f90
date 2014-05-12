@@ -204,6 +204,7 @@ contains
         !
         !maxmemory = max(array_size,maxmemory)
         !
+#if 0
         if (array_size>memory_limit) then
             !
             write(out,"('Run out of memory')")
@@ -211,6 +212,7 @@ contains
             stop 'Run out of memory'
           !
         endif
+#endif
         !
         if (trim(array_table(pos)%name)==name) then
             !
