@@ -19,6 +19,10 @@ module load fs395/openmpi-1.8.0/intel
 module load fs395/scalapack/2.0.2/intel-ompi
 module load fs395/elpa/2013.11-v8/intel-ompi
 
+# decomment _only_ is compiled with __IPM
+module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
+module load fs395/papi/5.2.0
+
 numnodes=$SLURM_JOB_NUM_NODES
 numprocs=$SLURM_NTASKS
 ppn=$(echo "$SLURM_TASKS_PER_NODE" | sed -e  's/^\([0-9][0-9]*\).*$/\1/')

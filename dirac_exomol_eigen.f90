@@ -132,9 +132,16 @@ program dirac_exomol_eigen
     use elpa1
     use elpa2
 #endif
+
+#if !defined(__IPM)
     use mpi
+#endif
 
     implicit none
+
+#if defined(__IPM)
+    include 'mpif.h'
+#endif
 
     !integer(ik) :: verbose=6
 
@@ -587,6 +594,10 @@ program dirac_exomol_eigen
     call blacs_barrier(context, 'a')
     t1 = MPI_Wtime()
     !
+#if defined(__IPM)
+    call mpi_pcontrol( 1,"solver"//char(0))
+#endif
+    !
     select case (eigensolver)
           !
         case (1)
@@ -625,7 +636,11 @@ program dirac_exomol_eigen
             !
     end select
     !
-    call blacs_barrier(context, 'a')
+#if defined(__IPM)
+    call mpi_pcontrol( -1,"solver"//char(0))
+#endif
+   ! 
+   call blacs_barrier(context, 'a')
     t2 = MPI_Wtime()
     !
     ! ------------------------------ !

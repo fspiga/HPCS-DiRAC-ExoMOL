@@ -27,9 +27,9 @@ ppn=$(echo "$SLURM_TASKS_PER_NODE" | sed -e  's/^\([0-9][0-9]*\).*$/\1/')
 
 JOBID=$SLURM_JOB_ID
 
-export IPM_KEYFILE=$HPCX_IPM_DIR/etc/ipm_key_mpi
+export IPM_KEYFILE=${IPM_HOME}/etc/ipm_key_mpi
 export IPM_LOG=full
-ipm_preload="env LD_PRELOAD=/usr/local/Cluster-Users/fs395/IPM/2.0.3/openmpi-1.8.0_intel/lib/libipm.so"
+ipm_preload="env LD_PRELOAD=${IPM_HOME}/lib/libipm.so"
 
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=$OMP_NUM_THREADS
