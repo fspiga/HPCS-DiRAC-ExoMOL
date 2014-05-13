@@ -24,8 +24,11 @@ contains
         logical :: eof
         !
         nroots = 1e6
-        diagonalizer  = "PDSYEVD"      ! default
-        generator_str = "RANDOM-LOCAL" ! default
+        diagonalizer  = "PDSYEVD"      ! default - name
+        generator_str = "RANDOM-LOCAL" ! default - name
+        !
+        matrix_generator = 3           ! default - code
+        eigensolver = 1                ! default - code
         !
         call input_options(echo_lines=.false.,error_flag=1)
         !
