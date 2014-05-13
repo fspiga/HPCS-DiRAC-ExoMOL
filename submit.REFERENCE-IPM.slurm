@@ -18,12 +18,18 @@ module load intel/mkl/11.1.2.144
 module load fs395/openmpi-1.8.0/intel
 module load fs395/scalapack/2.0.2/intel-ompi
 module load fs395/elpa/2013.11-v8/intel-ompi
+module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
+module load fs395/papi/5.2.0
 
 numnodes=$SLURM_JOB_NUM_NODES
 numprocs=$SLURM_NTASKS
 ppn=$(echo "$SLURM_TASKS_PER_NODE" | sed -e  's/^\([0-9][0-9]*\).*$/\1/')
 
 JOBID=$SLURM_JOB_ID
+
+export IPM_KEYFILE=$HPCX_IPM_DIR/etc/ipm_key_mpi
+export IPM_LOG=full
+ipm_preload="env LD_PRELOAD=/usr/local/Cluster-Users/fs395/IPM/2.0.3/openmpi-1.8.0_intel/lib/libipm.so"
 
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=$OMP_NUM_THREADS
@@ -37,17 +43,16 @@ GENERATOR SYM-POSITIVE-O2
 EOF
 
 application="./diag_OMPI-INTEL.x < gen.inp"
-options="| tee out.TESTING.OMPI.ELPA-1STAGE.SYM-POSITIVE-O2.N-50K.$JOBID"
+options="| tee out.TESTING.OMPI.ELPA-1STAGE.SYM-POSITIVE-O2.N-100K.$JOBID"
 
-common_params=""
 fca_on="-mca coll_fca_enable 1 -mca coll_fca_np 0"
 fca_off="-mca coll_fca_enable 0"
-hcoll_on="-mca coll_hcoll_enable 1 -mca coll_hcoll_np 0"
+hcoll_on="-mca coll_hcoll_enable 1 -mca coll_hcoll_np 0" 
 hcoll_off="-mca coll_hcoll_enable 0"
 mxm_off="-mca mtl ^mxm -mca btl openib,self,sm"
-mxm_on="-mca pml cm -mca mtl mxm -mca mtl_mxm_np 0 -x MXM_TLS=shm,rc,ud,self"
+mxm_on="-mca pml cm -mca mtl mxm -mca mtl_mxm_np 0 -x MXM_TLS=shm,rc,ud,self" 
 mpirun_options="--bind-to core $common_params $fca_off $hcoll_off $mxm_off"
-CMD="mpirun --map-by ppr:$ppn:node -np $numprocs $mpirun_options $application $options"
+CMD="$ipm_preload mpirun --map-by ppr:$ppn:node -np $numprocs $mpirun_options $application $options"
 
 ###############################################################
 ### You should not have to change anything below this line ####
@@ -77,3 +82,4 @@ echo -e "\nExecuting command:\n==================\n$CMD\n"
 eval $CMD 
 
 echo "Time: `date`"
+
