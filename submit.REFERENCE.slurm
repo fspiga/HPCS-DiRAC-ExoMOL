@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH -J DIRAC
+#SBATCH -J DIRAC-BIG-LONG
 #SBATCH -p sandybridge
-#SBATCH --nodes=4
-#SBATCH --ntasks=64
+#SBATCH --nodes=8
+#SBATCH --ntasks=128
 #SBATCH --qos=support
 #SBATCH --account=spiga-dirac
 #SBATCH --time=2:00:00
@@ -17,11 +17,11 @@ module unload intel/impi cuda intel/mkl
 module load intel/mkl/11.1.2.144
 module load fs395/openmpi-1.8.0/intel
 module load fs395/scalapack/2.0.2/intel-ompi
-module load fs395/elpa/2013.11-v8/intel-ompi
-
+#module load fs395/elpa/2013.11-v8/intel-ompi
+module load fs395/elpa/2013.11-v8/intel-ompi-avx
 # decomment _only_ is compiled with __IPM
-module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
-module load fs395/papi/5.2.0
+#module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
+#module load fs395/papi/5.2.0
 
 numnodes=$SLURM_JOB_NUM_NODES
 numprocs=$SLURM_NTASKS
@@ -32,16 +32,21 @@ JOBID=$SLURM_JOB_ID
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=$OMP_NUM_THREADS
 
+export DIRAC_SIZE=10000
+export DIRAC_NROOTS=10000
+export DIRAC_SOLVER=PDSYEVD
+export DIRAC_GENERATOR=SYM-POSITIVE-O2
+
 cat  << 'EOF' > gen.inp
 (large jobs for hot ch4)
-GEN-MAT 50000
-NROOTS 50000
-DIAGONALIZER ELPA-1STAGE (needs to be stated)
+GEN-MAT 10000
+NROOTS 10000
+DIAGONALIZER PDSYEVD (needs to be stated)
 GENERATOR SYM-POSITIVE-O2
 EOF
 
 application="./diag_OMPI-INTEL.x < gen.inp"
-options="| tee out.TESTING.OMPI.ELPA-1STAGE.SYM-POSITIVE-O2.N-50K.$JOBID"
+options="| tee out.TESTING.OMPI.${DIRAC_SOLVER}_${DIRAC_GENERATOR}.N-${DIRAC_SIZE}.ROOTS-${DIRAC_NROOTS}.NODES-$SLURM_JOB_NUM_NODES.$SLURM_JOB_ID"
 
 common_params=""
 fca_on="-mca coll_fca_enable 1 -mca coll_fca_np 0"
