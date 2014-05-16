@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH -J DIRAC-BIG-LONG
+#SBATCH -J DIRAC
 #SBATCH -p sandybridge
-#SBATCH --nodes=8
-#SBATCH --ntasks=128
+#SBATCH --nodes=4
+#SBATCH --ntasks=64
 #SBATCH --qos=support
 #SBATCH --account=spiga-dirac
-#SBATCH --time=2:00:00
+#SBATCH --time=4:00:00
 
 workdir="$SLURM_SUBMIT_DIR"
 cd $workdir
@@ -14,14 +14,16 @@ cd $workdir
 module purge
 module load default-wilkes
 module unload intel/impi cuda intel/mkl
+module switch intel/fce intel/fce/14.0.2.144
+module switch intel/cce intel/cce/14.0.2.144
 module load intel/mkl/11.1.2.144
-module load fs395/openmpi-1.8.0/intel
+module load fs395/hpcx/1.0.0rc1-icc_ompi-1.8 
+#module load fs395/openmpi-1.8.0/intel
 module load fs395/scalapack/2.0.2/intel-ompi
 #module load fs395/elpa/2013.11-v8/intel-ompi
 module load fs395/elpa/2013.11-v8/intel-ompi-avx
-# decomment _only_ is compiled with __IPM
-#module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
-#module load fs395/papi/5.2.0
+module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
+module load fs395/papi/5.2.0
 
 numnodes=$SLURM_JOB_NUM_NODES
 numprocs=$SLURM_NTASKS
@@ -32,30 +34,32 @@ JOBID=$SLURM_JOB_ID
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=$OMP_NUM_THREADS
 
-export DIRAC_SIZE=10000
-export DIRAC_NROOTS=10000
+export DIRAC_SIZE=20000
+export DIRAC_NROOTS=20000
 export DIRAC_SOLVER=PDSYEVD
 export DIRAC_GENERATOR=SYM-POSITIVE-O2
 
 cat  << 'EOF' > gen.inp
 (large jobs for hot ch4)
-GEN-MAT 10000
-NROOTS 10000
+GEN-MAT 20000
+NROOTS 20000
 DIAGONALIZER PDSYEVD (needs to be stated)
 GENERATOR SYM-POSITIVE-O2
 EOF
-
-application="./diag_OMPI-INTEL.x < gen.inp"
-options="| tee out.TESTING.OMPI.${DIRAC_SOLVER}_${DIRAC_GENERATOR}.N-${DIRAC_SIZE}.ROOTS-${DIRAC_NROOTS}.NODES-$SLURM_JOB_NUM_NODES.$SLURM_JOB_ID"
 
 common_params=""
 fca_on="-mca coll_fca_enable 1 -mca coll_fca_np 0"
 fca_off="-mca coll_fca_enable 0"
 hcoll_on="-mca coll_hcoll_enable 1 -mca coll_hcoll_np 0"
 hcoll_off="-mca coll_hcoll_enable 0"
-mxm_off="-mca mtl ^mxm -mca btl openib,self,sm"
-mxm_on="-mca pml cm -mca mtl mxm -mca mtl_mxm_np 0 -x MXM_TLS=shm,rc,ud,self"
+mxm_off="-mca mtl ^mxm " #-mca btl openib,self,sm"
+mxm_on="-mca pml cm -mca mtl mxm -mca mtl_mxm_np 0"
 mpirun_options="--bind-to core $common_params $fca_off $hcoll_off $mxm_off"
+
+application="./diag_OMPI-INTEL.x < gen.inp"
+tag="MXM_ON.NB-128"
+options="| tee out.TESTING.OMPI.NODES-$SLURM_JOB_NUM_NODES.${DIRAC_SOLVER}_${DIRAC_GENERATOR}.N-${DIRAC_SIZE}.ROOTS-${DIRAC_NROOTS}.$tag.$SLURM_JOB_ID"
+
 CMD="mpirun --map-by ppr:$ppn:node -np $numprocs $mpirun_options $application $options"
 
 ###############################################################
@@ -68,6 +72,9 @@ echo -e "JobID: $JOBID\n======"
 echo "Time: `date`"
 echo "Running on master node: `hostname`"
 echo "Current directory: `pwd`"
+
+echo "Environment:"
+module list
 
 if [ "$SLURM_JOB_NODELIST" ]; then
         #! Create a machine file:
