@@ -17,10 +17,9 @@ module unload intel/impi cuda intel/mkl
 module switch intel/fce intel/fce/14.0.2.144
 module switch intel/cce intel/cce/14.0.2.144
 module load intel/mkl/11.1.2.144
-module load fs395/hpcx/1.0.0rc1-icc_ompi-1.8 
-#module load fs395/openmpi-1.8.0/intel
+#module load fs395/hpcx/1.0.0rc1-icc_ompi-1.8 
+module load fs395/openmpi-1.8.0/intel
 module load fs395/scalapack/2.0.2/intel-ompi
-#module load fs395/elpa/2013.11-v8/intel-ompi
 module load fs395/elpa/2013.11-v8/intel-ompi-avx
 module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
 module load fs395/papi/5.2.0

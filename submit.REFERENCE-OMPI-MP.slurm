@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH -J DIRAC
 #SBATCH -p sandybridge
-#SBATCH --nodes=4
-#SBATCH --ntasks=8
+#SBATCH --nodes=16
+#SBATCH --ntasks=32
 #SBATCH --qos=support
 #SBATCH --account=spiga-dirac
 #SBATCH --time=2:00:00

@@ -1,0 +1,48 @@
+# HPCS -- Works with Open MPI 1.8.0 using ScaLAPACK from MKL
+
+PLAT   = _IMPI-INTEL
+FC    = mpif90
+
+#IPM_INC= -D__IPM 
+#IPM_LIB= -L${IPM_HOME}/lib -lipm -L${HOME_PAPI}/lib -lpapi -lpfm
+
+#ELPA_INC = -D__ELPA -D__ELPA_TIMING -I$(ELPA_HOME)/include/elpa/modules
+#ELPA_LIB = -L$(ELPA_HOME)/lib -lelpa
+ELPA_INC =
+ELPA_LIB =
+
+FFLAGS = -fpp $(ELPA_INC) $(IPM_INC) -O3 -xAVX -traceback -g
+
+SCALAPACK_LIB= -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64
+LIB = $(ELPA_LIB) ${SCALAPACK_LIB} -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm $(IPM_LIB)
+
+OBJ = accuracy.o timer.o input.o
+
+default:  diag$(PLAT).x 
+
+env:
+	module purge
+	module load default-wilkes
+	module unload cuda intel/mkl
+	module load intel/mkl/11.1.2.144
+
+diag$(PLAT).x:  $(OBJ) dirac_exomol_eigen.o
+	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) dirac_exomol_eigen.o $(LIB)
+
+dirac_exomol_eigen.o:  dirac_exomol_eigen.f90 $(OBJ) 
+	$(FC) -c dirac_exomol_eigen.f90 $(FFLAGS)
+
+accuracy.o:  accuracy.f90
+	$(FC) -c accuracy.f90 $(FFLAGS)
+
+timer.o:  timer.f90 accuracy.o
+	$(FC) -c timer.f90 $(FFLAGS)
+
+input.o:  input.f90 accuracy.o
+	$(FC) -c input.f90 $(FFLAGS)
+
+clean:
+	rm -f $(OBJ) *.mod *.o
+
+veryclean: clean
+	rm -f *.x
