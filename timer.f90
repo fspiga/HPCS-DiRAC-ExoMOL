@@ -208,7 +208,7 @@ contains
         if (array_size>memory_limit) then
             !
             write(out,"('Run out of memory')")
-            !call MemoryReport(comm,iam,memory_now,memory_)
+            call MemoryReport(comm,iam,memory_now,memory_)
             stop 'Run out of memory'
           !
         endif
