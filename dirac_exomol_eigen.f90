@@ -20,7 +20,8 @@ contains
         !
         logical :: eof
         !
-        nroots = 1e6
+        nroots = 10000
+        mat_len = 10000
         diagonalizer  = "PDSYEVD"      ! default - name
         generator_str = "RANDOM-LOCAL" ! default - name
         !
