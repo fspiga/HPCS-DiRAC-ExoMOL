@@ -77,46 +77,6 @@ module timer
 !
 contains
     !
-    !  Linear insertion with linear search (Algorithm L)
-    !
-    function insert_item(name) result(pos)
-        character(len=*), intent(in) :: name
-        integer(ik)                  :: pos
-        !
-        pos = string_hash(name)
-        search: do
-            if (.not.t_table(pos)%used) then
-                !
-                ! This is a new key, insert it
-                !
-                t_count = t_count + 1
-                if (t_count>=table_size/5) then
-                    write (out,"('Too many timers. Increase table_size in "// &
-                        "timer.f90 to at least ',i5)") t_count*5
-                    stop 'timer%insert_item'
-                end if
-                t_appear(t_count)      = pos
-                t_table(pos)%used      = .true.
-                t_table(pos)%active    = .false.
-                t_table(pos)%name      = name
-                t_table(pos)%calls     = 0
-                t_table(pos)%real_time = 0
-                t_table(pos)%cpu_time  = 0
-                t_table(pos)%real_kids = 0
-                t_table(pos)%cpu_kids  = 0
-                exit search
-            end if
-            if (t_table(pos)%name==name) then
-                !
-                ! This is an existing key, simply return the location
-                !
-                exit search
-            end if
-            pos = 1 + modulo(pos-2,table_size)
-        end do search
-      !
-    end function insert_item
-    !
     integer function string_hash(str) result(h)
         character(len=*), intent(in) :: str
         !
