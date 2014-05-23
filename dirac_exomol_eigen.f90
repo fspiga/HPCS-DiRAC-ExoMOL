@@ -194,6 +194,72 @@ program dirac_exomol_eigen
     character(len=cl)    :: unitfname
     character(len=4)    :: str_row,str_col
     !
+
+    INTEGER*4 :: iargc
+    character*16 arg1, arg2, arg3, arg4
+
+    mat_len = 10000
+    nroots = 10000
+    diagonalizer  = "PDSYEVD"      ! default - name
+    generator_str = "RANDOM-LOCAL" ! default - name
+
+    if (iargc() == 4) then
+       call getarg(1, arg1)
+       call getarg(2, arg2)
+       call getarg(3, arg3)
+       call getarg(4, arg4)
+       read(arg1, *) mat_len
+       read(arg2, *) nroots
+       read(arg3, *) diagonalizer
+       read(arg4, *) generator_str
+    endif
+
+    select case ( trim(diagonalizer) )
+                          !
+                        case ('PDSYEVD')
+                            !
+                            eigensolver = 1
+                          !
+                        case ('PDSYEVX')
+                            !
+                            eigensolver = 2
+                          !
+                        case ('ELPA-1STAGE')
+                            !
+                            eigensolver = 3
+                          !
+                        case ('ELPA-2STAGE')
+                            !
+                            eigensolver = 4
+                          !
+                        case default
+                            !
+                            write(out,'("Unknown eigensolver = ",a)'), diagonalizer
+                            stop "Unknown eigensolver"
+                      !
+    end select
+                  !
+    select case ( trim(generator_str) )
+                          !
+                        case ('SYM-POSITIVE-O3')
+                            !
+                            matrix_generator = 1
+                            !
+                        case ('SYM-POSITIVE-O2')
+                            !
+                            matrix_generator = 2
+                            !
+                        case ('RANDOM-LOCAL')
+                            !
+                            matrix_generator = 3
+                            !
+                        case default
+                            !
+                            write(out,'("Unknown matrix generator = ",a)'), generator_str
+                            stop "Unknown generator"
+                            !
+    end select
+
     ! ------------------ !
     ! MPI initialization !
     ! ------------------ !
@@ -249,6 +315,7 @@ program dirac_exomol_eigen
     ! read input file !
     ! --------------- !
     !
+#if 0
     if (iam==0) then 
         !
         call FLReadInput(nroots, eigensolver, matrix_generator)
@@ -269,6 +336,8 @@ program dirac_exomol_eigen
         call igebr2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1, 0, 0 )
     endif
     !
+#endif
+
     if (iam == 0) then
         write(out, "('Generating matrix of size        : ',i8)") mat_len
         write(out, "('Number of eigenstates to compute : ',i8)") nroots
