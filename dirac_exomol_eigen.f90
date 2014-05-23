@@ -1,11 +1,13 @@
 module d_module
-    use accuracy
     use timer
 
     implicit none
-
-    public FLReadInput
-
+    !public ik, hik, rk, trk, cl, seeded_array
+    !
+    integer, parameter :: ik          = selected_int_kind(8)       ! "Normal" integers. This must map on
+    integer, parameter :: hik         = selected_int_kind(8)       ! "Pointer" integers - sufficient to store
+    integer, parameter :: rk          = selected_real_kind(12,25)  ! "Normal" reals and complex (complexi? :-)
+    integer, parameter :: cl          = 80                         ! Max character string length
     integer(ik),parameter:: verbose = 2
     integer, parameter :: trk        = selected_real_kind(12)
     integer(ik) :: mat_len
@@ -128,7 +130,6 @@ end module d_module
 
 program dirac_exomol_eigen
   
-    use accuracy
     use d_module
     use timer
 #if defined(__ELPA)
