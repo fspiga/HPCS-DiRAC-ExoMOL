@@ -1,11 +1,11 @@
 module timer
     !
     use accuracy
+    !
     implicit none
     private
     public ArrayStart, ArrayStop, MemoryReport, memory_limit
     !
-    integer, parameter :: trk        = selected_real_kind(12)
     integer, parameter :: table_size = 1000 ! Max number of entries to track
     integer, parameter :: tarray_size = 10000 ! Max number of entries to track
     integer, parameter :: name_len   =   40 ! Max length of timer name
