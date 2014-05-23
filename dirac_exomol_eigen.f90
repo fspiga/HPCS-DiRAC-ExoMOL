@@ -4,8 +4,6 @@ module d_module
 
     implicit none
 
-    public FLReadInput
-
     integer(ik),parameter:: verbose = 2
     integer, parameter :: trk        = selected_real_kind(12)
     integer(ik) :: mat_len
@@ -13,108 +11,7 @@ module d_module
     character(len=cl)           :: diagonalizer, generator_str
 
 contains
-    !
-    subroutine FLReadInput(nroots, eigensolver, matrix_generator)
-        !
-        use input
-        !
-        integer(ik),intent(out) :: nroots, eigensolver, matrix_generator
-        character(len=cl)       :: w
-        !
-        logical :: eof
-        !
-        nroots = 1e6
-        diagonalizer  = "PDSYEVD"      ! default - name
-        generator_str = "RANDOM-LOCAL" ! default - name
-        !
-        matrix_generator = 3           ! default - code
-        eigensolver = 1                ! default - code
-        !
-        call input_options(echo_lines=.false.,error_flag=1)
-        !
-        ! read the general input
-        !
-        do
-            call read_line(eof) ; if (eof) exit
-            call readu(w)
-            !
-            select case(w)
-                case("STOP","FINISH","END")
-                    exit
-                case("")
-                    !
-                    print "(1x)"    !  Echo blank lines
-                    !
-                case ("NROOTS")
-                    !
-                    call readi(nroots)
-                    !
-                case ("GEN-MAT")
-                    !
-                    call readi(mat_len)
-                    !
-                case ("DIAGONALIZER")
-                    !
-                    call readu(diagonalizer)
-                    !
-                    select case ( trim(diagonalizer) )
-                          !
-                        case ('PDSYEVD')
-                            !
-                            eigensolver = 1
-                          !
-                        case ('PDSYEVX')
-                            !
-                            eigensolver = 2
-                          !
-                        case ('ELPA-1STAGE')
-                            !
-                            eigensolver = 3
-                          !
-                        case ('ELPA-2STAGE')
-                            !
-                            eigensolver = 4
-                          !
-                        case default
-                            !
-                            write(out,'("Unknown eigensolver = ",a)'), diagonalizer
-                            stop "Unknown eigensolver"
-                      !
-                    end select
-                  !
-                case ("GENERATOR")
-                    !
-                    call readu(generator_str)
-                    !
-                    select case ( trim(generator_str) )
-                          !
-                        case ('SYM-POSITIVE-O3')
-                            !
-                            matrix_generator = 1
-                            !
-                        case ('SYM-POSITIVE-O2')
-                            !
-                            matrix_generator = 2
-                            !
-                        case ('RANDOM-LOCAL')
-                            !
-                            matrix_generator = 3
-                            !
-                        case default
-                            !
-                            write(out,'("Unknown matrix generator = ",a)'), generator_str
-                            stop "Unknown generator"
-                            !
-                    end select
-                  !
-                case default
-                    call report ("Principal keyword "//trim(w)//" not recognized",.true.)
-            end select
-            !
-        end do
-      !
-    end subroutine FLReadInput
-
+    
     ! Shifting pseudo-random function based on MOD
     integer(hik) function  rrr(i)
         integer(ik)	::	i
@@ -194,15 +91,18 @@ program dirac_exomol_eigen
     character(len=cl)    :: unitfname
     character(len=4)    :: str_row,str_col
     !
-
     INTEGER*4 :: iargc
     character*16 arg1, arg2, arg3, arg4
-
-    mat_len = 10000
-    nroots = 10000
+    !
+    ! --------------- !
+    ! read input file !
+    ! --------------- !
+    !
+    mat_len = 10000                ! default
+    nroots = 10000                 ! default
     diagonalizer  = "PDSYEVD"      ! default - name
     generator_str = "RANDOM-LOCAL" ! default - name
-
+    !
     if (iargc() == 4) then
        call getarg(1, arg1)
        call getarg(2, arg2)
@@ -213,7 +113,7 @@ program dirac_exomol_eigen
        read(arg3, *) diagonalizer
        read(arg4, *) generator_str
     endif
-
+    !
     select case ( trim(diagonalizer) )
                           !
                         case ('PDSYEVD')
@@ -259,7 +159,7 @@ program dirac_exomol_eigen
                             stop "Unknown generator"
                             !
     end select
-
+    !
     ! ------------------ !
     ! MPI initialization !
     ! ------------------ !
@@ -309,40 +209,11 @@ program dirac_exomol_eigen
     enddo
 #endif
     !
-    call blacs_barrier(context, 'a')
-    !
-    ! --------------- !
-    ! read input file !
-    ! --------------- !
-    !
-#if 0
-    if (iam==0) then 
-        !
-        call FLReadInput(nroots, eigensolver, matrix_generator)
-        !
-    endif
-    !
-    call blacs_barrier(context,'A')
-    !
-    if ( (myrow.eq.0) .and. (mycol.eq.0) ) then
-        call igebs2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, mat_len, 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, nroots, 1 )
-        call igebs2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1 )
-    else
-        call igebr2d(context, 'all', 'i-ring', 1, 1, eigensolver, 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, mat_len, 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, nroots, 1, 0, 0 )
-        call igebr2d(context, 'all', 'i-ring', 1, 1, matrix_generator , 1, 0, 0 )
-    endif
-    !
-#endif
-
     if (iam == 0) then
         write(out, "('Generating matrix of size        : ',i8)") mat_len
         write(out, "('Number of eigenstates to compute : ',i8)") nroots
     endif
-
+    !
     t1 = MPI_Wtime()
     zpe = 0.0
     dimen_s = mat_len
