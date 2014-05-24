@@ -3,17 +3,19 @@
 PLAT   = _OMPI-INTEL
 FC    = mpif90
 
-IPM_INC= -D__IPM 
-IPM_LIB= -L${IPM_HOME}/lib -lipm -L${HOME_PAPI}/lib -lpapi -lpfm
+#IPM_INC= -D__IPM 
+#IPM_LIB= -L${IPM_HOME}/lib -lipm -L${HOME_PAPI}/lib -lpapi -lpfm
+IPM_INC=
+IPM_LIB=
 
 ELPA_INC = -D__ELPA -D__ELPA_TIMING -I$(ELPA_HOME)/include/elpa/modules
 ELPA_LIB = -L$(ELPA_HOME)/lib -lelpa
 
-FFLAGS = -fpp $(ELPA_INC) $(IPM_INC) -O3 -xAVX -traceback -g
+FFLAGS = -fpp $(ELPA_INC) $(IPM_INC) -traceback -g -assume byterecl 
 
 LIB = $(ELPA_LIB) ${SCALAPACK_HOME}/lib/libscalapack.a -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm $(IPM_LIB)
 
-OBJ = accuracy.o timer.o input.o
+OBJ = accuracy.o timer.o
 
 default:  diag$(PLAT).x 
 
@@ -22,11 +24,12 @@ env:
 	module load default-wilkes
 	module unload intel/impi cuda intel/mkl
 	module load intel/mkl/11.1.2.144
-	module load fs395/openmpi-1.8.0/intel
+	module load fs395/hpcx/1.0.0rc5-icc_ompi-1.8
+	#module load fs395/openmpi-1.8.0/intel
 	module load fs395/scalapack/2.0.2/intel-ompi
-	module load fs395/elpa/2013.11-v8/intel-ompi
-	module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
-	module load fs395/papi/5.2.0
+	module load fs395/elpa/2013.11-v8/intel-ompi-avx
+	#module load fs395/IPM/2.0.3/openmpi-1.8.0_intel
+	#module load fs395/papi/5.2.0
 
 diag$(PLAT).x:  $(OBJ) dirac_exomol_eigen.o
 	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) dirac_exomol_eigen.o $(LIB)
@@ -39,9 +42,6 @@ accuracy.o:  accuracy.f90
 
 timer.o:  timer.f90 accuracy.o
 	$(FC) -c timer.f90 $(FFLAGS)
-
-input.o:  input.f90 accuracy.o
-	$(FC) -c input.f90 $(FFLAGS)
 
 clean:
 	rm -f $(OBJ) *.mod *.o

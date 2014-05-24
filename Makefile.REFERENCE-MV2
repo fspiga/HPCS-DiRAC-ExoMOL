@@ -6,29 +6,28 @@ FC    = mpif90
 ELPA_INC = -D__ELPA -I$(ELPA_HOME)/include/elpa/modules
 ELPA_LIB = -L$(ELPA_HOME)/lib -lelpa 
 
-FFLAGS = -fpp $(ELPA_INC) -O3 -ipo -xHost -traceback -g
-FFLAGS_OMP = -openmp $(FFLAGS)
+FFLAGS = -fpp $(ELPA_INC) -O3 -xAVX -traceback -g
 
-LIB = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
-LIB_MP = $(ELPA_LIB) -lmkl_scalapack_lp64 -lmkl_blacs_intelmpi_lp64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -lpthread -lm
+LIB = $(ELPA_LIB) ${SCALAPACK_HOME}/lib/libscalapack.a -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm
 
-OBJ = accuracy.o timer.o input.o 
+OBJ = accuracy.o timer.o
 
-default:  diag$(PLAT).x diag$(PLAT)_OMP.x
+default:  diag$(PLAT).x
 
 env:
 	module purge
 	module load default-wilkes
-	module unload intel/impi cuda intel/mkl
+	module unload intel/impi cuda intel/mkl intel/cce intel/fce
+	module load intel/fce/14.0.2.144
+	module load intel/cce/14.0.2.144
 	module load intel/mkl/11.1.2.144
+	module load fs395/scalapack/2.0.2/intel-mv2
+	module load fs395/limic2/0.5.6
 	module load fs395/mvapich2-2.0rc1/intel
-	module load fs395/elpa/2013.11-v8/intel-mvapich
+	module load fs395/elpa/2013.11-v8/intel-mv2-avx
 
 diag$(PLAT).x:  $(OBJ) dirac_exomol_eigen.o
 	$(FC) $(FFLAGS) -o diag$(PLAT).x $(OBJ) dirac_exomol_eigen.o $(LIB)
-
-diag$(PLAT)_OMP.x: $(OBJ) dirac_exomol_eigen.o
-	$(FC) $(FFLAGS_OMP) -o diag$(PLAT)_OMP.x $(OBJ) dirac_exomol_eigen.o $(LIB_MP)
 
 dirac_exomol_eigen.o:  dirac_exomol_eigen.f90 $(OBJ) 
 	$(FC) -c dirac_exomol_eigen.f90 $(FFLAGS)
@@ -38,9 +37,6 @@ accuracy.o:  accuracy.f90
 
 timer.o:  timer.f90 accuracy.o
 	$(FC) -c timer.f90 $(FFLAGS)
-
-input.o:  input.f90 accuracy.o
-	$(FC) -c input.f90 $(FFLAGS)
 
 clean:
 	rm -f $(OBJ) *.mod *.o
