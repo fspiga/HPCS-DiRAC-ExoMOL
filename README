@@ -7,8 +7,12 @@ the flag -D__ELPA has to be specified).
 Under "makes/" there are several Makefiles, all related to Darwin (HPCS)
 
 
-INPUT FILE FORMAT
------------------
+INPUT DEFINITION
+----------------
+
+Input parameters are passed as options to the command line, e.g.
+
+./diag_INTEL.x <GEN-MAT> <NROOTS> <DIAGONALIZER> <GENERATOR>
 
 - "GEN-MAT" is the size of the matrix 
 - "NROOTS" is the number of eigen-state to compute, starting from index 1.
